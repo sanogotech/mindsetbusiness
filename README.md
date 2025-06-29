@@ -1,5 +1,8 @@
 # Mindset  Business
 
+##  REX
+- Amadou  FALL:  https://youtu.be/EYL_VC2He9M?si=HCvwyub_H1FjAdWo
+
 # **12 Personnes Qui Ne Réussiront Jamais en Afrique : Comprendre les Freins et Trouver des Solutions**  
 
 ## **Introduction**  
