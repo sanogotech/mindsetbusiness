@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindSet Business - Dashboard Révolutionné</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Dark Blue */
+            --secondary-color: #3498db; /* Bright Blue */
+            --accent-color: #e74c3c; /* Red */
+            --success-color: #2ecc71; /* Green */
+            --warning-color: #f1c40f; /* Yellow */
+            --light-color: #ecf0f1; /* Light Gray */
+            --dark-color: #2c3e50; /* Dark Blue (same as primary for text) */
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+        }
+        
+        .sidebar {
+            background-color: var(--primary-color);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            padding-top: 20px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto; /* Enable scrolling for long content */
+        }
+        
+        .sidebar .nav-link {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 5px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .sidebar .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease; /* Smooth transition for sidebar collapse */
+        }
+        
+        .header {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-weight: 600;
+            border-radius: 10px 10px 0 0 !important;
+            padding: 15px 20px;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        .profile-card {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 5px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+        }
+        
+        .badge-profile {
+            background-color: var(--accent-color); /* Changed for distinction */
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        
+        .profile-stat {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .profile-stat .number {
+            font-weight: 700;
+            font-size: 1.5rem; /* Larger for impact */
+            color: var(--light-color);
+        }
+        
+        .profile-stat .label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-primary {
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Custom styles for MindSetBusiness content */
+        .mindset-card {
+            border-left: 5px solid var(--secondary-color);
+            background-color: white;
+        }
+        
+        .mindset-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .mindset-card .card-body h5 {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+        }
+
+        .mindset-card .card-body h6.text-muted {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #7f8c8d !important;
+        }
+        
+        .impact-card {
+            background-color: #fff7f7; /* Lighter red tint */
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .impact-card h6 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .impact-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .impact-card ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .impact-card ul li:before {
+            content: "\f06a"; /* Font Awesome info-circle icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+        
+        .solution-card {
+            background-color: #f7fef7; /* Lighter green tint */
+            border-left: 4px solid var(--success-color);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .solution-card h6 {
+            color: var(--success-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .solution-card ol, .solution-card ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+            list-style-position: inside;
+        }
+        .solution-card ol li, .solution-card ul li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .solution-card ol li:before {
+            color: var(--success-color);
+        }
+
+        .alert-primary {
+            background-color: #e0f2ff;
+            border-color: #a0d9ff;
+            color: var(--primary-color);
+        }
+        .alert-primary h4 {
+            color: var(--primary-color);
+        }
+
+        .action-icon-circle {
+            background-color: var(--secondary-color);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* End-to-End Case Study specific styles */
+        .case-study-section {
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .case-study-section h4 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+        }
+        .case-study-profile-badge {
+            background-color: var(--warning-color);
+            color: var(--dark-color);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .case-study-step {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 4px solid var(--success-color);
+            background-color: #fafffa;
+            border-radius: 5px;
+        }
+        .case-study-step h5 {
+            color: var(--success-color);
+            margin-bottom: 10px;
+        }
+        .case-study-step ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .case-study-step ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+            color: #444;
+        }
+        .case-study-step ul li:before {
+            content: "\f00c"; /* Font Awesome check icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success-color);
+            font-size: 0.9em;
+            top: 3px;
+        }
+        .case-study-outcome {
+            background-color: #e0f2ff;
+            border: 1px solid #a0d9ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .case-study-outcome h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .case-study-outcome ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .case-study-outcome ul li {
+            margin-bottom: 8px;
+            color: #333;
+            position: relative;
+            padding-left: 25px;
+        }
+        .case-study-outcome ul li:before {
+            content: "\f058"; /* Font Awesome check-circle icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-size: 1em;
+            top: 2px;
+        }
+
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar col-md-3 col-lg-2">
+        <div class="profile-card">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Profile" class="profile-img">
+            <h5>Amadou FALL</h5>
+            <span class="badge badge-profile">Expert Mindset Africain</span>
+            <div class="profile-stats">
+                <div class="profile-stat">
+                    <div class="number">12</div>
+                    <div class="label">Profils Analysés</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="number">36</div>
+                    <div class="label">Solutions Innovantes</div>
+                </div>
+                <div class="profile-stat">
+                    <div class="number">92%</div>
+                    <div class="label">Taux d'Impact Espéré</div>
+                </div>
+            </div>
+        </div>
+        
+        <ul class="nav flex-column profile-menu">
+            <li class="nav-item">
+                <a class="nav-link active" href="#introduction"><i class="fas fa-bullhorn"></i> Introduction</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#enjeux"><i class="fas fa-chart-area"></i> Enjeux & Défis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#profils"><i class="fas fa-users-slash"></i> Les 12 Profils à Éviter</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#solutions"><i class="fas fa-lightbulb"></i> Synthèse des Bonnes Pratiques</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#case-study"><i class="fas fa-cogs"></i> Cas Pratique End-to-End</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#conclusion"><i class="fas fa-trophy"></i> Conclusion & Appel à l'Action</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="https://youtu.be/EYL_VC2He9M?si=Q-pkK8SH1PxKkmos" target="_blank"><i class="fab fa-youtube"></i> Vidéo REX (Exemple)</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="main-content">
+        <div class="header">
+            <h3>MindSet Business Dashboard Révolutionné</h3>
+            <div>
+                <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download"></i> Exporter Rapport</button>
+                <button class="btn btn-primary btn-sm ms-2"><i class="fas fa-share-alt"></i> Partager Connaissances</button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="introduction">
+                    <div class="card-header">
+                        <i class="fas fa-bullhorn me-2"></i> Introduction : Le Potentiel Inexploité de l'Afrique
+                    </div>
+                    <div class="card-body">
+                        <p>L'Afrique est un continent d'une richesse inouïe, non seulement en ressources naturelles, mais surtout en potentiel humain et entrepreneurial. Les dynamiques démographiques, l'innovation technologique et l'émergence d'une classe moyenne ouvrent des perspectives économiques, entrepreneuriales et sociales sans précédent. Pourtant, une part significative de ce potentiel reste inexploitée. Nombre d'individus, malgré leur talent et leur motivation, se retrouvent bloqués dans un cycle de stagnation ou d'échec.</p>
+                        <p>Cette réalité est souvent attribuable à des <strong>mentalités et des comportements autodestructeurs</strong>, profondément enracinés, qui agissent comme des freins invisibles. Ces attitudes, parfois héritées et inconscientes, empêchent l'éclosion de l'esprit d'initiative, la persévérance et l'adaptabilité nécessaires à la réussite dans des environnements complexes.</p>
+                        <p>Ce dashboard interactif a pour mission de décortiquer cette problématique. Nous allons explorer en profondeur <strong>12 profils archétypaux de personnes qui risquent de ne jamais réussir en Afrique</strong>. Pour chaque profil, nous analyserons les causes profondes de ces blocages, les impacts concrets sur les trajectoires individuelles et collectives, et surtout, nous proposerons des <strong>bonnes pratiques et des stratégies de transformation</strong> pour inverser la tendance. L'objectif est de fournir une feuille de route claire pour le développement d'un "MindSet Business" proactif et résilient.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="enjeux">
+                    <div class="card-header">
+                        <i class="fas fa-chart-area me-2"></i> Enjeux & Défis du Contexte Africain
+                    </div>
+                    <div class="card-body">
+                        <p>La compréhension des mentalités doit s'ancrer dans une analyse réaliste du contexte africain, un mélange complexe d'opportunités et d'obstacles. Les défis sont multiformes et exigent une approche holistique pour être surmontés.</p>
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card mindset-card mb-3 h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-users-cog me-2"></i> Contexte Socio-Économique Spécifique</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><i class="fas fa-exclamation-circle me-2 text-danger"></i> **Chômage Massif & Économie Informelle:** Un vaste bassin de main-d'œuvre jeune mais souvent non qualifiée, opérant majoritairement dans un secteur informel précaire qui limite la formalisation et la croissance des entreprises.</li>
+                                            <li class="list-group-item"><i class="fas fa-hand-holding-usd me-2 text-info"></i> **Accès Restreint aux Financements:** Difficultés persistantes à obtenir des prêts bancaires, du capital-risque ou des investissements, poussant beaucoup à la dépendance ou à la stagnation.</li>
+                                            <li class="list-group-item"><i class="fas fa-users me-2 text-warning"></i> **Pression Sociale & Familiale Écrasante:** Le poids des attentes familiales et communautaires peut inciter à la conformité, à l'évitement de l'échec perçu comme une honte collective, ou à la nécessité de subvenir aux besoins de nombreux proches.</li>
+                                            <li class="list-group-item"><i class="fas fa-brain me-2 text-muted"></i> **Mentalités Héréditaires:** Des schémas de pensée liés à la subsistance, au fatalisme ou à une aversion au risque transmises de génération en génération.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mindset-card mb-3 h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-gavel me-2"></i> Obstacles Culturels et Psychologiques</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><i class="fas fa-mask me-2 text-danger"></i> **Peur Dévastatrice de l'Échec:** L'échec n'est pas vu comme une étape d'apprentissage mais comme une faute personnelle, entraînant une forte stigmatisation sociale et un découragement profond.</li>
+                                            <li class="list-group-item"><i class="fas fa-people-carry-box me-2 text-info"></i> **Conformisme & Manque d'Audace:** La tendance à "faire comme tout le monde" ou à rester dans sa zone de confort par peur de se démarquer ou d'essuyer des critiques, bridant l'innovation.</li>
+                                            <li class="list-group-item"><i class="fas fa-frown-open me-2 text-warning"></i> **Manque Persistant de Confiance en Soi:** Une faible estime de soi, souvent nourrie par des échecs passés ou des comparaisons défavorables, qui inhibe la prise d'initiative et la persévérance.</li>
+                                            <li class="list-group-item"><i class="fas fa-comment-dots me-2 text-muted"></i> **Rumeurs et Jalousie Sociale:** Le succès d'autrui peut susciter la jalousie, les critiques infondées ou la médisance, décourageant l'ambition et le partage.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mindset-card mb-3 h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-city me-2"></i> Défis Structurels et Institutionnels</h5>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><i class="fas fa-school me-2 text-danger"></i> **Éducation Inadaptée aux Réalités:** Des systèmes éducatifs qui ne préparent pas suffisamment les jeunes aux compétences entrepreneuriales, technologiques ou de leadership nécessaires sur le marché du travail actuel.</li>
+                                            <li class="list-group-item"><i class="fas fa-handshake-slash me-2 text-info"></i> **Corruption & Bureaucratie Lente:** Des processus administratifs complexes et la corruption peuvent étouffer l'initiative privée et décourager l'investissement.</li>
+                                            <li class="list-group-item"><i class="fas fa-road me-2 text-warning"></i> **Infrastructures Défaillantes:** Manque d'accès fiable à l'électricité, à l'eau, à l'internet haut débit, et à des réseaux de transport efficaces, qui augmentent les coûts et la complexité des affaires.</li>
+                                            <li class="list-group-item"><i class="fas fa-file-invoice me-2 text-muted"></i> **Cadre Légal et Fiscal Volatile:** Des réglementations changeantes ou mal appliquées qui créent de l'incertitude et dissuadent l'investissement à long terme.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="profils">
+                    <div class="card-header">
+                        <i class="fas fa-users-slash me-2"></i> Les 12 Profils à Éviter : Un Catalogue des Blocages Psychologiques
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">Découvrez les archétypes de mentalités qui, si elles ne sont pas maîtrisées, peuvent mener à l'échec. Chaque profil est accompagné d'une description, de ses impacts et de pistes de transformation.</p>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">1</span>
+                                        <h5 class="mb-0">Le Perfectionniste Chronique</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"J'attends le bon moment, je ne suis pas encore prêt(e)..."</h6>
+                                        <p class="card-text">Obsédé par l'idée de la perfection absolue, il retarde indéfiniment le lancement de ses projets, la prise de décision, ou même le simple début d'une action, attendant un idéal qui n'arrive jamais. Cette quête de la perfection est en réalité une forme de peur de l'échec.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-hourglass-half me-2"></i>Impact Économique & Psychologique</h6>
+                                                <ul>
+                                                    <li>Opportunités d'affaires manquées et obsolescence des idées.</li>
+                                                    <li>Coût d'opportunité colossal en termes de temps et d'énergie.</li>
+                                                    <li>Perte de compétitivité face à des acteurs plus agiles.</li>
+                                                    <li>Frustration, anxiété et sentiment d'impuissance.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-rocket me-2"></i>Stratégies de Changement & Action</h6>
+                                                <ol>
+                                                    <li>**Méthode des petits pas (MVP):** Lancer une version minimale viable de son projet pour tester le marché et apprendre.</li>
+                                                    <li>**Fixer des délais impératifs:** Se contraindre à une date limite, quitte à livrer un produit "bon" mais pas "parfait".</li>
+                                                    <li>**Adopter la philosophie "Done is better than perfect":** L'action est toujours préférable à l'inaction.</li>
+                                                    <li>**Accepter l'imperfection:** Comprendre que l'amélioration est un processus continu, pas un état initial.</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">2</span>
+                                        <h5 class="mb-0">L'Accusateur Permanent</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"C'est la faute de l'État, des politiques, de ma famille, du système..."</h6>
+                                        <p class="card-text">Il refuse d'endosser la responsabilité de ses échecs ou de ses difficultés, attribuant systématiquement la cause à des facteurs externes. Cette victimisation le dédouane d'agir pour changer sa situation.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-dizzy me-2"></i>Conséquences Sociétales & Personnelles</h6>
+                                                <ul>
+                                                    <li>Perpétuation d'une mentalité de victimisation et passivité.</li>
+                                                    <li>Démobilisation des énergies individuelles et collectives.</li>
+                                                    <li>Reproduction des schémas d'échec sans apprentissage.</li>
+                                                    <li>Isolement social et relations tendues.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-hand-holding-heart me-2"></i>Pistes de Transformation & Empowerment</h6>
+                                                <ul>
+                                                    <li>**Journal de responsabilisation:** Noter quotidiennement 3 choses sous son contrôle qu'on peut améliorer.</li>
+                                                    <li>**Technique des 5 Pourquoi:** Aller au-delà de la cause première pour trouver les racines de ses problèmes.</li>
+                                                    <li>**S'exposer à des récits de résilience:** S'inspirer de ceux qui ont surmonté des obstacles similaires.</li>
+                                                    <li>**Développer l'auto-compassion:** Reconnaître ses propres limites et apprendre à se pardonner.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">3</span>
+                                        <h5 class="mb-0">L'Influençable (Le Craintif du Jugement)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Que vont dire les gens ? Ça ne se fait pas ici..."</h6>
+                                        <p class="card-text">Sa vie est dictée par la peur du jugement d'autrui. Il hésite à innover, à prendre des risques ou à suivre ses propres convictions, craignant les critiques, la jalousie ou le regard désapprobateur de son entourage.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-comments-slash me-2"></i>Coûts Invisibles & Limitation</h6>
+                                                <ul>
+                                                    <li>Auto-censure des idées audacieuses et de l'innovation.</li>
+                                                    <li>Alignement sur des standards imposés, étouffant la créativité.</li>
+                                                    <li>Dépenses inutiles pour "sauver la face" ou paraître.</li>
+                                                    <li>Vie non authentique et perte de liberté personnelle.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-user-shield me-2"></i>Exercices de Libération & Affirmation</h6>
+                                                <ul>
+                                                    <li>**Liste des 10 choses à arrêter:** Identifier les comportements motivés par la peur du jugement.</li>
+                                                    <li>**Technique du pire scénario:** Visualiser le pire pour dédramatiser les critiques.</li>
+                                                    <li>**Cercle de pairs libérés:** S'entourer de personnes qui valorisent l'authenticité et l'audace.</li>
+                                                    <li>**Pratiquer l'assertivité:** Apprendre à exprimer ses opinions et ses besoins sans agressivité ni passivité.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">4</span>
+                                        <h5 class="mb-0">Le Nostalgique du Passé</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"C'était mieux avant, à notre époque..."</h6>
+                                        <p class="card-text">Il vit dans le passé, idéalisant les méthodes, les structures ou les succès d'antan. Cette réticence à embrasser le présent et le futur le rend incapable de s'adapter aux évolutions rapides du marché et de la société.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-backward me-2"></i>Pièges Économiques & Manque d'Adaptation</h6>
+                                                <ul>
+                                                    <li>Méconnaissance et non-exploitation des opportunités digitales et nouvelles technologies.</li>
+                                                    <li>Attachement rigide à des modèles d'affaires ou de vie obsolètes.</li>
+                                                    <li>Incapacité à comprendre et à servir les besoins des nouvelles générations de consommateurs.</li>
+                                                    <li>Perte de pertinence dans un monde en constante mutation.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-forward me-2"></i>Thérapie Collective & Vision Future</h6>
+                                                <ul>
+                                                    <li>**Ateliers de projection positive:** Visualiser un futur désirable et définir les étapes pour y parvenir.</li>
+                                                    <li>**Valorisation des success stories actuelles:** Mettre en lumière les réussites modernes qui s'inscrivent dans l'innovation.</li>
+                                                    <li>**Réappropriation critique du passé:** Tirer les leçons du passé sans s'y enfermer.</li>
+                                                    <li>**Formation continue:** S'engager activement dans l'apprentissage de nouvelles compétences et tendances.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">5</span>
+                                        <h5 class="mb-0">Le Rêveur Passif</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Un jour, je réussirai... quand toutes les étoiles seront alignées."</h6>
+                                        <p class="card-text">Il a de grandes visions et des rêves ambitieux, mais reste paralysé dans l'action. Il attend que les circonstances idéales se présentent, sans comprendre que le succès est le fruit d'une action délibérée et constante.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-cloud me-2"></i>Conséquences Professionnelles & Émotionnelles</h6>
+                                                <ul>
+                                                    <li>Un portefeuille rempli d'opportunités jamais saisies.</li>
+                                                    <li>Perte de crédibilité auprès des partenaires et investisseurs potentiels.</li>
+                                                    <li>Sentiment d'impuissance et de regret face aux occasions manquées.</li>
+                                                    <li>Épuisement mental par la rumination des rêves non réalisés.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-bullseye me-2"></i>Protocole d'Urgence & Stratégies d'Action</h6>
+                                                <ul>
+                                                    <li>**Méthode 5-4-3-2-1 (Go!):** Compter à rebours et démarrer une action immédiate.</li>
+                                                    <li>**Engagement public:** Partager ses objectifs avec un groupe pour créer une pression positive.</li>
+                                                    <li>**Comptabilité des petites actions:** Suivre et valoriser chaque petite étape franchie.</li>
+                                                    <li>**Découper les grands rêves en micro-objectifs:** Rendre l'action moins intimidante.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">6</span>
+                                        <h5 class="mb-0">Le Chercheur de Solutions Magiques</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Je veux réussir rapidement et sans effort, trouver le secret..."</h6>
+                                        <p class="card-text">Il est constamment à la recherche de raccourcis, de formules miracles ou de "systèmes" qui promettent la richesse instantanée sans travail ni persévérance. Il tombe souvent dans les pièges des arnaques et des illusions.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-hand-holding-usd me-2"></i>Conséquences Financières & Compétences</h6>
+                                                <ul>
+                                                    <li>Perte d'argent et de temps dans des schémas pyramidaux ou arnaques.</li>
+                                                    <li>Absence de développement de compétences réelles et durables.</li>
+                                                    <li>Accumulation de dettes et de désillusions.</li>
+                                                    <li>Cynisme accru face aux opportunités légitimes.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-hammer me-2"></i>Solution : Réalisme & Travail</h6>
+                                                <ul>
+                                                    <li>**Accepter que la réussite demande du temps et des efforts:** Le succès est un marathon, pas un sprint.</li>
+                                                    <li>**Privilégier le développement de compétences réelles:** Investir dans son savoir-faire et son expertise.</li>
+                                                    <li>**Éviter les promesses miracles:** Développer un esprit critique face aux offres trop belles pour être vraies.</li>
+                                                    <li>**Miser sur la valeur ajoutée:** Créer de la valeur durable pour soi et pour les autres.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary btn-lg" id="loadMoreProfiles"><i class="fas fa-chevron-down me-2"></i> Voir les 6 autres profils</button>
+                        </div>
+                        
+                        <div class="row" id="moreProfiles" style="display: none;">
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">7</span>
+                                        <h5 class="mb-0">Le Dépendant Affectif (L'Assisté)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"J'attends que l'État, ma famille ou quelqu'un d'autre m'aide..."</h6>
+                                        <p class="card-text">Il se positionne en attente constante d'une aide extérieure, qu'elle vienne des autorités, de sa famille ou d'une quelconque figure d'autorité. Il refuse de prendre en main son propre destin et sa subsistance.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-hand-holding-medical me-2"></i>Conséquences & Charge Sociale</h6>
+                                                <ul>
+                                                    <li>Reste dans un état de précarité et de vulnérabilité.</li>
+                                                    <li>Devient un fardeau financier et émotionnel pour son entourage.</li>
+                                                    <li>Dépendance psychologique et manque d'autonomie.</li>
+                                                    <li>Perpétuation du cycle de la pauvreté.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-fist-raised me-2"></i>Solution : Autonomie & Proactivité</h6>
+                                                <ul>
+                                                    <li>**Prendre son destin en main:** Changer son mindset de "receveur" à "créateur".</li>
+                                                    <li>**Ne pas compter sur les aides publiques/familiales comme seule solution:** Les voir comme un complément ponctuel.</li>
+                                                    <li>**Explorer des sources de revenus multiples:** Développer son indépendance financière.</li>
+                                                    <li>**Développer des compétences recherchées:** Devenir indispensable sur le marché.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">8</span>
+                                        <h5 class="mb-0">L'Irresponsable Financier</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Je dépense avant de gagner, l'argent est fait pour être dépensé."</h6>
+                                        <p class="card-text">Il gère ses finances de manière impulsive et irréfléchie, dépensant au-delà de ses moyens, sans épargne ni investissement. Il est souvent prisonnier des dettes et des crédits à la consommation.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-money-bill-wave-alt me-2"></i>Conséquences & Précarité Financière</h6>
+                                                <ul>
+                                                    <li>Toujours en manque d'argent, même avec des revenus décents.</li>
+                                                    <li>Impossible de bâtir un patrimoine ou d'investir dans l'avenir.</li>
+                                                    <li>Vivre sous le stress constant des difficultés financières.</li>
+                                                    <li>Vulnérabilité aux imprévus et aux crises.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-piggy-bank me-2"></i>Solution : Discipline & Planification</h6>
+                                                <ul>
+                                                    <li>**Appliquer la règle 50-30-20:** 50% pour les besoins, 30% pour les désirs, 20% pour l'épargne/investissement.</li>
+                                                    <li>**Prioriser les actifs sur les passifs:** Acheter ce qui génère des revenus plutôt que des dettes.</li>
+                                                    <li>**Tenir un budget strict:** Suivre ses dépenses et revenus pour une meilleure visibilité.</li>
+                                                    <li>**Se former en éducation financière:** Comprendre les bases de l'investissement et de la gestion de patrimoine.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">9</span>
+                                        <h5 class="mb-0">Le Jaloux Chronique (Le Saboteur)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Si je ne réussis pas, les autres ne doivent pas réussir non plus."</h6>
+                                        <p class="card-text">Incapable de supporter le succès d'autrui, il cherche souvent à dénigrer, critiquer ou même saboter les efforts des autres. Sa jalousie le consume et l'empêche de se concentrer sur son propre développement.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-user-times me-2"></i>Conséquences & Isolement</h6>
+                                                <ul>
+                                                    <li>Énergie gaspillée dans la négativité au lieu de la construction.</li>
+                                                    <li>Isolement social et professionnel, manque de collaboration.</li>
+                                                    <li>Développement d'un esprit de compétition malsain.</li>
+                                                    <li>Obstacle à l'apprentissage par l'observation et le mentorat.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-handshake me-2"></i>Solution : Collaboration & Inspiration</h6>
+                                                <ul>
+                                                    <li>**Transformer la jalousie en motivation:** S'inspirer du succès des autres pour se dépasser.</li>
+                                                    <li>**Apprendre des succès des autres:** Analyser leurs stratégies et méthodes.</li>
+                                                    <li>**Développer un esprit de collaboration et de réseautage:** Le succès est souvent collectif.</li>
+                                                    <li>**Célébrer les victoires des autres:** Cultiver l'abondance plutôt que la rareté.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">10</span>
+                                        <h5 class="mb-0">Le Résistant au Changement</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"On a toujours fait comme ça ! Pourquoi changer ?"</h6>
+                                        <p class="card-text">Il s'accroche obstinément aux vieilles habitudes, aux méthodes éprouvées et aux traditions, même lorsque le monde autour de lui évolue. Il perçoit le changement comme une menace plutôt qu'une opportunité.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-history me-2"></i>Conséquences & Obsolescence</h6>
+                                                <ul>
+                                                    <li>Perte de compétitivité dans un marché dynamique.</li>
+                                                    <li>Risque de disparition pure et simple de son activité ou de sa pertinence.</li>
+                                                    <li>Difficulté à innover et à saisir les nouvelles tendances.</li>
+                                                    <li>Isolement des réseaux d'innovation et de développement.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-sync-alt me-2"></i>Solution : Flexibilité & Apprentissage Continu</h6>
+                                                <ul>
+                                                    <li>**S'adapter ou mourir:** Reconnaître la nécessité vitale du changement.</li>
+                                                    <li>**Tester de nouvelles approches:** Expérimenter et apprendre de ses erreurs.</li>
+                                                    <li>**Cultiver la curiosité:** S'intéresser aux nouvelles technologies, méthodes et idées.</li>
+                                                    <li>**Adopter une mentalité de croissance:** Croire en sa capacité à apprendre et à évoluer.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">11</span>
+                                        <h5 class="mb-0">Le Pessimiste Incurable</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"De toute façon, rien ne marche ici. C'est toujours la même chose."</h6>
+                                        <p class="card-text">Sa vision du monde est teintée de noirceur. Il anticipe toujours le pire, voit des obstacles partout et se plaint constamment. Son pessimisme est contagieux et décourage toute initiative.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-sad-tear me-2"></i>Conséquences & Toxine Sociale</h6>
+                                                <ul>
+                                                    <li>Aucune prise de risque, figeant toute progression.</li>
+                                                    <li>Création d'une atmosphère toxique et démoralisante pour l'entourage.</li>
+                                                    <li>Manque de reconnaissance des opportunités réelles.</li>
+                                                    <li>Détérioration de la santé mentale et physique.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-smile-beam me-2"></i>Solution : Optimisme & Gratitude</h6>
+                                                <ul>
+                                                    <li>**Pratiquer la gratitude:** Noter chaque jour 3 choses pour lesquelles on est reconnaissant.</li>
+                                                    <li>**S'entourer de personnes positives et motivantes:** Éviter les "sangsues" énergétiques.</li>
+                                                    <li>**Focus sur les solutions, pas les problèmes:** Changer sa perspective.</li>
+                                                    <li>**S'engager dans des actions concrètes:** L'action génère de l'optimisme.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="card h-100 mindset-card">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+                                        <span class="badge mindset-badge">12</span>
+                                        <h5 class="mb-0">L'Autodidacte Fainéant (L'Orgueilleux)</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="text-muted">"Je sais déjà tout, je n'ai pas besoin d'apprendre des autres."</h6>
+                                        <p class="card-text">Il se repose sur ses acquis, parfois limités, et refuse d'apprendre de nouvelles compétences, de chercher des mentors ou de se former. Son orgueil le rend imperméable à l'évolution et à l'expertise d'autrui.</p>
+                                        <div class="card impact-card mb-3">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-stopwatch me-2"></i>Conséquences & Stagnation</h6>
+                                                <ul>
+                                                    <li>Répétition d'erreurs évitables, perte de temps et de ressources.</li>
+                                                    <li>Stagnation professionnelle et personnelle, incapacité à progresser.</li>
+                                                    <li>Isolement intellectuel et manque d'accès aux meilleures pratiques.</li>
+                                                    <li>Perte de crédibilité en tant qu'expert ou leader.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card solution-card">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-book-open me-2"></i>Solution : Humilité & Apprentissage</h6>
+                                                <ul>
+                                                    <li>**Lire et se former continuellement:** Investir dans son capital intellectuel.</li>
+                                                    <li>**Rechercher activement des mentors et des coaches:** Apprendre des expériences des autres.</li>
+                                                    <li>**Rester humble et curieux:** Reconnaître qu'il y a toujours quelque chose de nouveau à apprendre.</li>
+                                                    <li>**Participer à des communautés d'apprentissage:** Échanger et partager les connaissances.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="solutions">
+                    <div class="card-header">
+                        <i class="fas fa-lightbulb me-2"></i> Synthèse des Bonnes Pratiques : La Voie de la Transformation
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">Ce tableau résume les mentalités à abandonner et les attitudes à adopter, avec des actions concrètes pour chaque transformation. C'est votre guide rapide vers un MindSet Business gagnant.</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Mauvaise Mentalité à Éliminer</th>
+                                        <th>Attitude Gagnante à Adopter</th>
+                                        <th>Action Concrète & Immédiate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fas fa-hourglass-half me-2 text-danger"></i> Attendre le bon moment / Perfectionnisme</td>
+                                        <td><i class="fas fa-bolt me-2 text-success"></i> Agir maintenant avec ce qu'on a / Agilité</td>
+                                        <td>Lancer un MVP (produit/service minimum viable) dans les 7 jours.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-dizzy me-2 text-danger"></i> Tout rejeter sur les autres / Victimisation</td>
+                                        <td><i class="fas fa-hand-holding-heart me-2 text-success"></i> Prendre ses responsabilités / Proactivité</td>
+                                        <td>Identifier 3 problèmes personnels/professionnels et les solutions sous mon contrôle.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-comments-slash me-2 text-danger"></i> Craindre le regard des gens / Conformisme</td>
+                                        <td><i class="fas fa-user-shield me-2 text-success"></i> Ignorer les critiques non constructives / Authenticit&eacute;</td>
+                                        <td>Dire NON à une pression sociale ou familiale ce mois-ci.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-money-bill-wave-alt me-2 text-danger"></i> Vouloir des richesses rapides / Illusion</td>
+                                        <td><i class="fas fa-chart-line me-2 text-success"></i> Travailler dur et investir intelligemment / Persévérance</td>
+                                        <td>Établir un plan d'épargne et d'investissement sur 1 an, même modeste.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-wallet me-2 text-danger"></i> Dépenser avant d'investir / Irresponsabilité</td>
+                                        <td><i class="fas fa-piggy-bank me-2 text-success"></i> Épargner et faire croître son argent / Discipline</td>
+                                        <td>Appliquer la règle 50-30-20 (besoins, désirs, épargne) dès le prochain revenu.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-user-times me-2 text-danger"></i> Saboter les autres / Jalousie</td>
+                                        <td><i class="fas fa-handshake me-2 text-success"></i> Collaborer et réseauter / Entraide</td>
+                                        <td>Identifier 3 personnes dans mon domaine pour une collaboration potentielle cette semaine.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-history me-2 text-danger"></i> Résister au changement / Obsolescence</td>
+                                        <td><i class="fas fa-sync-alt me-2 text-success"></i> S'adapter et innover / Flexibilité</td>
+                                        <td>S'abonner à une newsletter ou un blog sur les nouvelles tendances de mon secteur.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-sad-tear me-2 text-danger"></i> Pessimisme incurable / Négativité</td>
+                                        <td><i class="fas fa-smile-beam me-2 text-success"></i> Voir les opportunités et agir / Optimisme constructif</td>
+                                        <td>Écrire chaque soir 3 choses positives de ma journée.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-book-reader me-2 text-danger"></i> Orgueil intellectuel / Stagnation</td>
+                                        <td><i class="fas fa-graduation-cap me-2 text-success"></i> Apprentissage continu / Humilité</td>
+                                        <td>Terminer un cours en ligne gratuit ou lire un livre sur un sujet nouveau.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-exclamation me-2 text-danger"></i> Manque de vision claire / Flou</td>
+                                        <td><i class="fas fa-compass me-2 text-success"></i> Définir des objectifs SMART / Clarté</td>
+                                        <td>Écrire un objectif SMART (Spécifique, Mesurable, Atteignable, Réaliste, Temporellement défini).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-burn me-2 text-danger"></i> Peur de l'échec / Inaction</td>
+                                        <td><i class="fas fa-phoenix me-2 text-success"></i> Apprendre de ses erreurs / Résilience</td>
+                                        <td>Identifier un échec passé et l'analyser pour en tirer 3 leçons.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-hand-fist me-2 text-danger"></i> Manque de discipline / Procrastination</td>
+                                        <td><i class="fas fa-calendar-check me-2 text-success"></i> Établir des routines et s'y tenir / Persévérance</td>
+                                        <td>Mettre en place une routine matinale ou du soir pour 7 jours.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="case-study">
+                    <div class="card-header">
+                        <i class="fas fa-cogs me-2"></i> Cas Pratique End-to-End : La Transformation de Koffi
+                    </div>
+                    <div class="card-body">
+                        <p class="lead">Rencontrons Amadou FALL, notre "Expert Mindset Africain" et Koffi, un jeune entrepreneur prometteur d'Abidjan, en Côte d'Ivoire. Koffi, un talentueux graphiste avec l'ambition de lancer sa propre agence de marketing digital, est malheureusement freiné par plusieurs des mentalités que nous avons identifiées. Amadou va l'accompagner dans un processus de transformation.</p>
+
+                        <div class="case-study-section">
+                            <h4>Scénario Initial : Les Blocages de Koffi</h4>
+                            <p>Koffi excelle dans la création visuelle mais son projet d'agence stagne depuis près d'un an. Amadou a identifié chez lui les profils suivants :</p>
+                            <ul>
+                                <li>**<span class="case-study-profile-badge">Le Perfectionniste Chronique</span>:** Il n'a toujours pas lancé son site web, car il juge toujours que "ce n'est pas parfait". Il passe des heures à peaufiner des détails insignifiants.</li>
+                                <li>**<span class="case-study-profile-badge">Le Rêveur Passif</span>:** Il passe beaucoup de temps à parler de l'ampleur de son agence future, mais n'a pas encore acquis de clients payants ni formalisé sa structure.</li>
+                                <li>**<span class="case-study-profile-badge">L'Irresponsable Financier</span>:** Il a récemment investi une grande partie de son maigre capital dans des logiciels de design haut de gamme qu'il n'utilise pas à plein potentiel, estimant que c'était une "nécessité avant de commencer", au lieu de chercher à générer des revenus. Ses dépenses personnelles sont également impulsives.</li>
+                                <li>**<span class="case-study-profile-badge">Le Résistant au Changement</span>:** Il préfère s'appuyer sur le bouche-à-oreille traditionnel, ignorant les outils de marketing digital modernes (réseaux sociaux, emailing) qu'il considère comme "trop compliqués" ou "pas adaptés à l'Afrique".</li>
+                            </ul>
+                        </div>
+
+                        <div class="case-study-section">
+                            <h4>Phase 1 : Diagnostic Approfondi & Prise de Conscience (1 semaine)</h4>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-user-friends me-2"></i> Étape 1.1 : Rencontre & Analyse Personnalisée</h5>
+                                <ul>
+                                    <li>Amadou explique à Koffi le concept du MindSet Business et l'importance de l'auto-responsabilisation dans l'environnement africain. Il utilise l'introduction du dashboard pour contextualiser le potentiel et les défis.</li>
+                                    <li>Ils passent en revue ensemble la section "Enjeux & Défis", en particulier le "Chômage élevé" et la "Peur de l'échec", pour aider Koffi à comprendre que ses blocages sont communs mais surmontables.</li>
+                                    <li>Amadou invite Koffi à auto-évaluer son degré de correspondance avec chaque profil des "12 Profils à Éviter", en se basant sur des exemples concrets de sa vie.</li>
+                                </ul>
+                            </div>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-brain me-2"></i> Étape 1.2 : Cartographie des Mentalités Dominantes</h5>
+                                <ul>
+                                    <li>Amadou aide Koffi à formaliser les 4 profils identifiés et à comprendre comment ils s'interconnectent (par exemple, le perfectionnisme nourrit la passivité et le retard financier).</li>
+                                    <li>Ils discutent des "Impacts Économiques" et "Conséquences Professionnelles" de chaque profil, quantifiant les opportunités manquées par Koffi (ex: estimation des revenus perdus par non-lancement).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="case-study-section">
+                            <h4>Phase 2 : Stratégies de Transformation & Plan d'Action (3 semaines)</h4>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-bolt me-2"></i> Étape 2.1 : Lutter contre le Perfectionnisme & la Passivit&eacute;</h5>
+                                <ul>
+                                    <li>**Action Concrète (MVP):** Amadou fixe à Koffi un défi : "Lance la version la plus simple de ton site web en 72 heures, avec juste un portfolio, tes contacts et une page de services minimale."</li>
+                                    <li>**Outil du Dashboard:** Utilisation de la "Méthode des petits pas" et "Done is better than perfect" du profil "Perfectionniste Chronique".</li>
+                                    <li>**Engagement:** Koffi s'engage à envoyer 3 propositions de service à des prospects identifiés, même avec son site incomplet (protocole d'urgence du "Rêveur Passif").</li>
+                                </ul>
+                            </div>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-dollar-sign me-2"></i> Étape 2.2 : Rééquilibrer les Finances</h5>
+                                <ul>
+                                    <li>**Action Concrète (Budget):** Amadou aide Koffi à créer un budget simple en appliquant la "Règle 50-30-20" pour son prochain revenu. Il l'encourage à mettre de côté 20% pour le développement de son agence avant toute autre dépense non essentielle.</li>
+                                    <li>**Outil du Dashboard:** Solutions du profil "L'Irresponsable Financier".</li>
+                                    <li>**Priorisation:** Koffi vend un des logiciels non essentiels pour récupérer une partie de son investissement initial et le réalloue à des dépenses marketing prioritaires (cartes de visite, publicités ciblées sur les réseaux sociaux).</li>
+                                </ul>
+                            </div>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-sync-alt me-2"></i> Étape 2.3 : Embrasser le Changement & l'Innovation</h5>
+                                <ul>
+                                    <li>**Action Concrète (Formation):** Amadou inscrit Koffi à un webinaire gratuit sur "Le Marketing Digital pour les PME Africaines" et lui demande d'identifier une nouvelle stratégie de communication à tester.</li>
+                                    <li>**Outil du Dashboard:** "S'adapter ou mourir" et "Tester de nouvelles approches" du profil "Résistant au Changement".</li>
+                                    <li>**Expérimentation:** Koffi met en place une campagne simple sur Facebook Ads avec un petit budget pour attirer des clients potentiels, mesurant les résultats avec Amadou.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="case-study-section">
+                            <h4>Phase 3 : Suivi, Renforcement & Pérennisation (Suivi continu sur 3 mois)</h4>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-check-double me-2"></i> Étape 3.1 : Suivi Régulier & Ajustement</h5>
+                                <ul>
+                                    <li>Amadou et Koffi se rencontrent bi-hebdomadairement pour revoir les progrès, célébrer les petites victoires et ajuster le plan.</li>
+                                    <li>Amadou continue de poser des questions responsabilisantes, en s'appuyant sur les "Actions Concrètes" de la "Synthèse des Bonnes Pratiques" pour ancrer les nouveaux comportements.</li>
+                                </ul>
+                            </div>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-medal me-2"></i> Étape 3.2 : Renforcement Positif & Vision</h5>
+                                <ul>
+                                    <li>Amadou encourage Koffi à regarder la "Vidéo REX" (Retour d'Expérience) pour s'inspirer d'autres entrepreneurs africains ayant surmonté des défis similaires.</li>
+                                    <li>Ils travaillent sur la visualisation du succès futur de Koffi, en se focalisant sur l'impact positif qu'il peut avoir sur sa communauté.</li>
+                                </ul>
+                            </div>
+                            <div class="case-study-step">
+                                <h5><i class="fas fa-clipboard-list me-2"></i> Étape 3.3 : Autonomisation & Transfert</h5>
+                                <ul>
+                                    <li>Après 3 mois, Koffi est capable d'appliquer de manière autonome les stratégies apprises. Amadou réduit progressivement son intervention, laissant Koffi gérer son propre tableau de bord mental.</li>
+                                    <li>Koffi devient à son tour un ambassadeur du "MindSet Business" en partageant son expérience avec d'autres jeunes entrepreneurs.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="case-study-outcome">
+                            <h5><i class="fas fa-award me-2"></i> Résultat et Impact de la Transformation de Koffi :</h5>
+                            <ul>
+                                <li><i class="fas fa-check-circle me-2"></i> **Agence Opérationnelle:** Koffi a lancé son site web et a obtenu ses 3 premiers clients payants en moins de 2 mois.</li>
+                                <li><i class="fas fa-check-circle me-2"></i> **Gestion Financière Saine:** Il suit désormais un budget, épargne régulièrement et a réinvesti une partie de ses premiers profits dans du matériel essentiel.</li>
+                                <li><i class="fas fa-check-circle me-2"></i> **Esprit Ouvert:** Il expérimente activement de nouvelles stratégies de marketing digital et est devenu un adepte de la formation continue.</li>
+                                <li><i class="fas fa-check-circle me-2"></i> **Confiance Accrue:** Il présente ses services avec assurance et ne craint plus le jugement ou l'échec, les considérant comme des opportunités d'apprentissage.</li>
+                                <li><i class="fas fa-check-circle me-2"></i> **Impact Communautaire:** Il mentor désormais un jeune designer, transmettant les bonnes pratiques du MindSet Business.</li>
+                            </ul>
+                            <p class="text-center mt-3">Ce cas pratique illustre comment une approche structurée et ciblée sur les mentalités peut débloquer un potentiel immense et transformer des rêves en réalités tangibles en Afrique.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" id="conclusion">
+                    <div class="card-header">
+                        <i class="fas fa-trophy me-2"></i> Conclusion & Appel à l'Action : Bâtir l'Afrique de Demain
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-primary">
+                            <h4><i class="fas fa-lightbulb me-2"></i> La clé du succès en Afrique : Le MindSet Business</h4>
+                            <p>Le continent africain est un foyer bouillonnant d'opportunités, d'innovations et de croissance. Les défis sont réels, mais ils sont souvent exacerbés par des mentalités qui freinent l'initiative et la résilience. Ce dashboard a mis en lumière 12 de ces profils, non pas pour stigmatiser, mais pour offrir un chemin vers la transformation.</p>
+                            <p>Le succès en Afrique, comme ailleurs, appartient à ceux qui non seulement voient les opportunités, mais qui possèdent aussi le "MindSet Business" adéquat pour les saisir. Cela implique une profonde auto-analyse, une volonté d'apprendre de ses erreurs et une capacité à s'adapter et à innover constamment.</p>
+                            <div class="row mt-4 text-center">
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center mb-3">
+                                        <div class="action-icon-circle mb-3">
+                                            <i class="fas fa-bolt"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Agir</h5>
+                                            <p class="mb-0 text-muted">au lieu de parler et de rêver passivement.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center mb-3">
+                                        <div class="action-icon-circle mb-3">
+                                            <i class="fas fa-book-open"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Apprendre</h5>
+                                            <p class="mb-0 text-muted">au lieu de critiquer et de résister au changement.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex flex-column align-items-center mb-3">
+                                        <div class="action-icon-circle mb-3">
+                                            <i class="fas fa-chart-line"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">Investir</h5>
+                                            <p class="mb-0 text-muted">au lieu de dépenser impulsivement et de dépendre.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="mt-3 text-center">Chaque pas vers la transformation de ces mentalités est un pas vers une vie plus épanouie et un continent plus prospère. Votre succès individuel est intrinsèquement lié au développement collectif de l'Afrique.</p>
+                        </div>
+                        
+                        <div class="text-center mt-5">
+                            <h4>Êtes-vous prêt à faire partie des bâtisseurs de l'Afrique de demain ?</h4>
+                            <p class="mb-4">Commencez dès aujourd'hui votre transformation. Le futur de l'Afrique vous attend !</p>
+                            <button class="btn btn-primary btn-lg me-3"><i class="fas fa-play me-2"></i> Regarder notre Vidéo REX</button>
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/EYL_VC2He9M?si=QjLuhrwjsYMK5f5G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            <button class="btn btn-outline-primary btn-lg"><i class="fas fa-download me-2"></i> Télécharger le Guide Complet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Load more profiles button
+        document.getElementById('loadMoreProfiles').addEventListener('click', function() {
+            const moreProfiles = document.getElementById('moreProfiles');
+            const button = this;
+            
+            if (moreProfiles.style.display === 'none') {
+                // Simulate loading (in a real app, this would be an AJAX call)
+                button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Chargement des profils...';
+                
+                setTimeout(function() {
+                    moreProfiles.style.display = 'flex'; // Use flex to maintain grid layout
+                    button.style.display = 'none'; // Hide the button once content is loaded
+                }, 800); // Simulate network delay
+            }
+        });
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Active nav link based on scroll position
+        const sections = document.querySelectorAll('div[id]');
+        const navItems = document.querySelectorAll('.sidebar .nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                // Adjust this value based on your header height and desired scroll offset
+                if (pageYOffset >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
