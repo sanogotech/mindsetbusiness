@@ -1,5 +1,4 @@
-# mindsetbusiness
-Mindset  Business
+# Mindset  Business
 
 # **12 Personnes Qui Ne Réussiront Jamais en Afrique : Comprendre les Freins et Trouver des Solutions**  
 
