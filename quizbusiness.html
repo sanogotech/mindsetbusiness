@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Business - Les 21 Leviers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Bleu foncé */
+            --secondary-color: #3498db; /* Bleu clair */
+            --accent-color: #e74c3c; /* Rouge */
+            --light-color: #ecf0f1; /* Gris très clair */
+            --dark-color: #2c3e50; /* Identique au primary */
+            --success-color: #27ae60; /* Vert */
+            --warning-color: #f39c12; /* Orange */
+            --info-color: #2980b9; /* Bleu moyen */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            padding-top: 70px; /* Espace pour la barre de navigation fixe */
+        }
+
+        .navbar {
+            background-color: var(--primary-color) !important;
+        }
+        .navbar-brand, .nav-link {
+            color: var(--light-color) !important;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .question-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            background-color: #fcfcfc;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .question-card h5 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .form-check-label {
+            cursor: pointer;
+            padding: 10px 0;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+        .form-check-label:hover {
+            background-color: #f0f4f7;
+        }
+        .form-check-input:checked + .form-check-label {
+            background-color: var(--light-color);
+            font-weight: 500;
+        }
+
+        .btn-submit-answer, .btn-next-question, .btn-reset-quiz {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit-answer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: none;
+        }
+        .btn-submit-answer:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-next-question {
+            background-color: var(--success-color);
+            color: #fff;
+            border: none;
+        }
+        .btn-next-question:hover {
+            background-color: #229a53;
+        }
+
+        .btn-reset-quiz {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            margin-top: 30px;
+        }
+        .btn-reset-quiz:hover {
+            background-color: #c0392b;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback h6 {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .feedback p {
+            margin-bottom: 5px;
+        }
+        .feedback ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .feedback ul li {
+            margin-bottom: 3px;
+        }
+
+        .progress-bar {
+            background-color: var(--secondary-color);
+        }
+        .progress-container {
+            height: 25px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            background-color: #e9ecef;
+            overflow: hidden; /* Ensure rounded corners for inner bar */
+        }
+        .progress-text {
+            text-align: center;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .quiz-end-screen {
+            text-align: center;
+            padding: 50px;
+            background-color: #e6f3ff;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        .quiz-end-screen h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        .quiz-end-screen p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        .quiz-end-screen .score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--success-color);
+            margin-bottom: 30px;
+        }
+        .score-details {
+            font-size: 1.1em;
+            color: var(--dark-color);
+            margin-top: 20px;
+        }
+        .score-details span {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="indexbusiness21lev.html"><i class="fas fa-chart-line me-2"></i> Tableau de Bord Business</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="indexbusiness21lev.html#introduction">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="indexbusiness21lev.html#levers">Les Leviers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="indexbusiness21lev.html#stats">Statistiques</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="indexbusiness21lev.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="quiz-container">
+            <h1>Testez vos connaissances sur les 21 Leviers Business !</h1>
+            <p class="text-center lead">Mode apprentissage : recevez la réponse et des explications détaillées après chaque question.</p>
+
+            <div class="progress-text" id="progressText">Question 1 / 50</div>
+            <div class="progress progress-container" role="progressbar" aria-label="Progression du quiz" aria-valuenow="0" aria-valuemin="0" aria-valuemax="50">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+
+            <div id="quiz-area">
+                </div>
+
+            <div id="quiz-end-screen" style="display:none;">
+                <div class="quiz-end-screen">
+                    <h2>Quiz Terminé !</h2>
+                    <p>Bravo, vous avez complété toutes les questions. Voici votre score final :</p>
+                    <div class="score" id="finalScore"></div>
+                    <p class="score-details">
+                        Vous avez répondu correctement à <span id="correctAnswersCount">0</span> questions sur <span id="totalQuestionsCount">0</span>.
+                    </p>
+                    <button class="btn btn-main btn-reset-quiz" onclick="resetQuiz()">Recommencer le Quiz</button>
+                    <a href="indexbusiness21lev.html" class="btn btn-secondary mt-3">Retour à la page des Leviers</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tableau de Bord Business. Tous droits réservés.</p>
+            <p>Pour plus de contenu et de ressources, <a href="#">contactez-nous</a>.</p>
+            <div class="social-icons mt-3">
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const questions = [
+            // Categorie 1: Structuration & Positionnement
+            {
+                question: "Quel est l'objectif principal de la définition d'une niche rentable ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Identifier un segment spécifique avec un besoin réel et non satisfait",
+                options: [
+                    "Vendre à un maximum de clients",
+                    "Identifier un segment spécifique avec un besoin réel et non satisfait",
+                    "Cibler uniquement les marchés internationaux",
+                    "Ignorer la concurrence"
+                ],
+                explanation: "Définir une niche rentable vise à concentrer les efforts sur un segment de marché précis où la demande est forte et les besoins sont clairs, permettant une meilleure adaptation de l'offre et une réduction de la concurrence directe. Cela permet de se positionner efficacement."
+            },
+            {
+                question: "Quelle est une bonne pratique pour structurer votre offre (levier 2) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Utiliser des preuves sociales (témoignages, chiffres, études de cas)",
+                options: [
+                    "Rendre l'offre la plus complexe possible",
+                    "Utiliser des preuves sociales (témoignages, chiffres, études de cas)",
+                    "Ne pas se soucier de la différenciation",
+                    "Proposer des prix non cohérents"
+                ],
+                explanation: "Les preuves sociales (témoignages, chiffres, études de cas) renforcent la crédibilité de votre offre et aident les prospects à se projeter. La clarté et la différenciation sont également cruciales pour une offre bien structurée."
+            },
+            {
+                question: "Pourquoi est-il crucial de définir un modèle économique rentable (levier 3) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "S'assurer que chaque vente génère un bénéfice suffisant",
+                options: [
+                    "Attirer un maximum d'investisseurs sans se soucier des marges",
+                    "Vendre à perte pour gagner des parts de marché",
+                    "S'assurer que chaque vente génère un bénéfice suffisant",
+                    "Ignorer les coûts indirects"
+                ],
+                explanation: "Un modèle économique rentable garantit la pérennité de l'entreprise en s'assurant que les revenus dépassent les coûts, directs et indirects, et que la marge est suffisante pour le réinvestissement et la croissance."
+            },
+            {
+                question: "Quel est un enjeu majeur de la gestion de l'innovation et de la stratégie (levier 4) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Ne pas se reposer sur les acquis et éviter la routine",
+                options: [
+                    "Se concentrer uniquement sur les produits existants",
+                    "Ne pas se reposer sur les acquis et éviter la routine",
+                    "Ignorer les nouvelles technologies",
+                    "Laisser la concurrence définir la direction"
+                ],
+                explanation: "L'innovation continue et une stratégie adaptable sont essentielles pour rester compétitif. Ne pas se reposer sur les acquis et être en veille constante est un enjeu majeur pour la survie et la croissance à long terme."
+            },
+            {
+                question: "Que signifie la gestion des risques multifactoriels (levier 5) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Identifier et préparer les menaces sur toutes les dimensions du business",
+                options: [
+                    "Ignorer les risques en espérant qu'ils ne se produisent pas",
+                    "Se concentrer uniquement sur les risques financiers",
+                    "Identifier et préparer les menaces sur toutes les dimensions du business",
+                    "Transférer tous les risques à un tiers"
+                ],
+                explanation: "La gestion des risques multifactoriels implique une approche holistique pour identifier, évaluer et mitiger les menaces potentielles (financiers, cyber, RH, juridiques, réputation) afin d'assurer la continuité des opérations."
+            },
+            {
+                question: "Quelle est une bonne pratique pour la gestion de la croissance et diversification progressive (levier 6) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Construire une roadmap claire de développement",
+                options: [
+                    "Se lancer dans de nombreux projets simultanément sans planification",
+                    "Éviter toute diversification pour rester concentré",
+                    "Construire une roadmap claire de développement",
+                    "Laisser la croissance se faire au hasard"
+                ],
+                explanation: "Une roadmap claire permet de planifier la croissance et la diversification de manière structurée, en priorisant les initiatives et en s'assurant que les ressources sont allouées efficacement sans perdre en qualité."
+            },
+            // Catégorie 2: Stratégie Commerciale & Client
+            {
+                question: "Quel est l'objectif principal du levier 'Obtenir ses premiers clients' (levier 7) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Valider l’adéquation offre-marché",
+                options: [
+                    "Gagner des millions du premier coup",
+                    "Valider l’adéquation offre-marché",
+                    "Vendre sans collecter de feedback",
+                    "Attendre que les clients viennent d'eux-mêmes"
+                ],
+                explanation: "Obtenir les premiers clients est crucial non seulement pour générer un cash flow initial, mais surtout pour valider que votre offre répond bien à un besoin du marché (adéquation offre-marché)."
+            },
+            {
+                question: "Qu'est-ce qu'une 'machine commerciale prévisible' (levier 8) vise à créer ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Un flux constant de leads qualifiés et de ventes",
+                options: [
+                    "Une dépendance au bouche-à-oreille",
+                    "Un flux constant de leads qualifiés et de ventes",
+                    "Des ventes aléatoires et imprévisibles",
+                    "Un processus commercial long et complexe"
+                ],
+                explanation: "Créer une machine commerciale prévisible signifie mettre en place des systèmes et des processus (tunnel de conversion, automatisation) qui génèrent un flux constant et mesurable de prospects et de ventes, réduisant l'incertitude."
+            },
+            {
+                question: "Comment 'Travailler sa visibilité et son autorité' (levier 9) contribue-t-il au business ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "En devenant une référence dans son domaine et en créant la confiance",
+                options: [
+                    "En spammant les réseaux sociaux avec des messages promotionnels",
+                    "En devenant une référence dans son domaine et en créant la confiance",
+                    "En ne produisant jamais de contenu",
+                    "En cachant les témoignages clients"
+                ],
+                explanation: "Développer sa visibilité et son autorité permet d'établir la crédibilité, d'attirer l'attention des prospects, et de les convertir plus facilement en clients grâce à une position d'expert et une relation de confiance."
+            },
+            {
+                question: "Quel est l'avantage principal de la fidélisation et du réachat (levier 10) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Augmenter la valeur client à vie (CLV) et générer des recommandations",
+                options: [
+                    "Réduire les coûts d'acquisition de nouveaux clients",
+                    "Augmenter la valeur client à vie (CLV) et générer des recommandations",
+                    "Se concentrer uniquement sur l'acquisition",
+                    "Ignorer les clients après leur premier achat"
+                ],
+                explanation: "Fidéliser les clients coûte moins cher que d'en acquérir de nouveaux. Cela augmente la Valeur Vie Client (CLV) et permet de bénéficier du bouche-à-oreille positif, source de nouveaux leads qualifiés."
+            },
+            {
+                question: "Quelle est une bonne pratique en matière de 'Gestion des partenariats' (levier 11) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Construire des partenariats gagnant-gagnant basés sur la confiance",
+                options: [
+                    "Chercher uniquement des partenaires plus petits pour les dominer",
+                    "Ignorer les contrats formels",
+                    "Construire des partenariats gagnant-gagnant basés sur la confiance",
+                    "Ne pas piloter la relation après signature"
+                ],
+                explanation: "Les partenariats les plus efficaces sont ceux qui sont mutuellement bénéfiques, basés sur la confiance et une vision partagée. Une formalisation claire et un suivi régulier sont essentiels pour leur succès."
+            },
+            {
+                question: "L'un des enjeux majeurs de la gestion commerciale est :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "La dépendance à un seul canal de vente",
+                options: [
+                    "La création d'un tunnel de vente efficace",
+                    "La dépendance à un seul canal de vente",
+                    "L'utilisation d'un CRM",
+                    "La génération de leads qualifiés"
+                ],
+                explanation: "La dépendance à un seul canal de vente (ex: bouche-à-oreille uniquement) est un risque majeur. Une diversification des canaux et la mise en place d'un processus commercial structuré sont essentielles pour la prévisibilité."
+            },
+            // Catégorie 3: Gestion Financière & Pilotage
+            {
+                question: "Quel est un objectif clé de la 'Maîtrise de la comptabilité et de la trésorerie' (levier 12) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Anticiper les flux de trésorerie",
+                options: [
+                    "Ignorer les charges variables",
+                    "Anticiper les flux de trésorerie",
+                    "Attendre la fin de l'année pour vérifier les comptes",
+                    "Se fier uniquement aux chiffres du passé"
+                ],
+                explanation: "Anticiper les flux de trésorerie (cash flow) est vital pour éviter les problèmes de liquidité, planifier les dépenses et les investissements, et s'assurer que l'entreprise peut faire face à ses obligations financières à tout moment."
+            },
+            {
+                question: "Pourquoi est-il important de 'Suivre les KPIs et les marges' (levier 13) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Identifier les leviers à optimiser et faciliter les prises de décision",
+                options: [
+                    "Avoir une surcharge de données sans analyse",
+                    "Identifier les leviers à optimiser et faciliter les prises de décision",
+                    "Mesurer uniquement le chiffre d'affaires",
+                    "Se concentrer sur les données passées sans projeter"
+                ],
+                explanation: "Le suivi des KPIs (Key Performance Indicators) et des marges permet de comprendre où se situent les forces et les faiblesses, d'identifier les opportunités d'amélioration et de prendre des décisions éclairées pour la croissance."
+            },
+            {
+                question: "Comment réinvestir intelligemment (levier 14) dans son business ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Prioriser les investissements à fort ROI (Retour sur Investissement)",
+                options: [
+                    "Dépenser sans compter pour de nouveaux équipements",
+                    "Prioriser les investissements à fort ROI (Retour sur Investissement)",
+                    "Ne jamais réinvestir et thésauriser l'argent",
+                    "Investir dans des projets non alignés avec la stratégie"
+                ],
+                explanation: "Réinvestir intelligemment, c'est allouer les bénéfices à des domaines qui vont générer la plus grande valeur ajoutée et le meilleur retour sur investissement, comme le marketing, la R&D, ou l'amélioration des outils."
+            },
+            {
+                question: "Quel est le principal enjeu d'une bonne 'Gestion de la dette' (levier 15) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Préserver la santé financière de l'entreprise et éviter le surendettement",
+                options: [
+                    "Emprunter le plus possible sans objectif clair",
+                    "Préserver la santé financière de l'entreprise et éviter le surendettement",
+                    "Ignorer le ratio d'endettement",
+                    "N'utiliser que l'autofinancement"
+                ],
+                explanation: "La dette peut être un levier puissant de croissance, mais une mauvaise gestion ou un surendettement peuvent gravement compromettre la trésorerie et la viabilité de l'entreprise."
+            },
+            {
+                question: "Pourquoi est-il important de 'Gérer ses fournisseurs' (levier 16) de manière stratégique ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Sécuriser l’approvisionnement et optimiser les coûts",
+                options: [
+                    "Changer de fournisseur chaque mois",
+                    "Ne travailler qu'avec un seul fournisseur pour simplifier",
+                    "Sécuriser l’approvisionnement et optimiser les coûts",
+                    "Ne pas négocier les conditions commerciales"
+                ],
+                explanation: "Une bonne gestion des fournisseurs assure la qualité, la fiabilité et la continuité de l'approvisionnement, tout en permettant de négocier les meilleures conditions pour optimiser les coûts et maintenir la rentabilité."
+            },
+            {
+                question: "Un des défis de la maîtrise de la comptabilité et trésorerie est :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "L'absence de prévisionnel fiable",
+                options: [
+                    "L'utilisation d'un logiciel comptable",
+                    "L'analyse régulière des marges brutes",
+                    "L'établissement d'un budget annuel",
+                    "L'absence de prévisionnel fiable"
+                ],
+                explanation: "Sans prévisionnel fiable, il est difficile d'anticiper les besoins en trésorerie, les périodes de creux ou les opportunités d'investissement, ce qui rend la gestion financière plus réactive qu' proactive."
+            },
+            // Catégorie 4: Optimisation & Leadership
+            {
+                question: "Quel est un objectif clé de la 'Gestion des ressources humaines (RH)' (levier 17) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Maintenir l’engagement et la motivation des équipes",
+                options: [
+                    "Recruter le plus grand nombre de personnes possible",
+                    "Ignorer le développement des compétences internes",
+                    "Maintenir l’engagement et la motivation des équipes",
+                    "Se concentrer uniquement sur les salaires"
+                ],
+                explanation: "Une gestion RH efficace vise à attirer, développer et retenir les talents. Maintenir l'engagement et la motivation des équipes est fondamental pour la productivité et la performance globale de l'entreprise."
+            },
+            {
+                question: "Pourquoi est-il important d''Automatiser et déléguer intelligemment' (levier 18) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Libérer du temps pour les tâches à forte valeur ajoutée",
+                options: [
+                    "Augmenter les tâches manuelles et répétitives",
+                    "Libérer du temps pour les tâches à forte valeur ajoutée",
+                    "Négliger la documentation des processus",
+                    "Éviter de faire confiance aux autres"
+                ],
+                explanation: "L'automatisation et la délégation permettent d'optimiser le temps des dirigeants et des équipes, en confiant les tâches répétitives ou à faible valeur ajoutée à des systèmes ou des prestataires, pour se concentrer sur la stratégie et l'innovation."
+            },
+            {
+                question: "Qu'implique le fait de 'Se former et cultiver son mindset de dirigeant' (levier 19) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Adopter un état d’esprit agile, résilient et orienté solution",
+                options: [
+                    "Croire que l'on sait déjà tout",
+                    "Ignorer les nouvelles tendances et apprentissages",
+                    "Adopter un état d’esprit agile, résilient et orienté solution",
+                    "Se couper des autres entrepreneurs"
+                ],
+                explanation: "Un dirigeant doit continuellement se développer, non seulement en termes de compétences techniques, mais aussi en cultivant un état d'esprit adaptable, orienté vers la résolution de problèmes et la résilience face aux défis."
+            },
+            {
+                question: "Quel est l'objectif de la 'Gestion de la résilience économique et stratégique' (levier 20) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Préparer le business aux chocs externes et assurer sa continuité",
+                options: [
+                    "Dépendre d'un seul client majeur",
+                    "Préparer le business aux chocs externes et assurer sa continuité",
+                    "Ignorer les plans d'urgence",
+                    "Ne jamais diversifier ses sources de revenus"
+                ],
+                explanation: "La résilience est la capacité d'une entreprise à absorber les chocs (crises économiques, sanitaires, etc.) et à s'adapter pour continuer à fonctionner. Cela passe par la diversification, la planification et la mise en place de fonds de sécurité."
+            },
+            {
+                question: "En quoi la 'Recherche & Développement (R&D)' (levier 21) est-elle cruciale ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Concevoir des produits ou services innovants et rester compétitif",
+                options: [
+                    "Générer des coûts inutiles",
+                    "Concevoir des produits ou services innovants et rester compétitif",
+                    "Ne jamais tester de nouvelles idées",
+                    "Se concentrer uniquement sur les produits existants"
+                ],
+                explanation: "La R&D est le moteur de l'innovation. Elle permet de développer de nouvelles offres, d'améliorer les produits existants, de s'adapter aux évolutions du marché et de maintenir un avantage concurrentiel."
+            },
+            {
+                question: "Quel est un enjeu de l'automatisation et la délégation ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "La résistance au changement ou la peur de perdre le contrôle",
+                options: [
+                    "La documentation des processus",
+                    "Le choix des outils adaptés",
+                    "La résistance au changement ou la peur de perdre le contrôle",
+                    "L'externalisation des tâches non stratégiques"
+                ],
+                explanation: "La résistance au changement, la peur de perdre le contrôle ou le manque de confiance sont des freins courants à l'automatisation et à la délégation, pourtant essentielles pour la croissance et l'efficacité."
+            },
+
+            // Ajout de questions supplémentaires pour atteindre 50, en équilibrant les catégories
+            // Structuration & Positionnement (nouvelles questions)
+            {
+                question: "Quel outil est recommandé pour évaluer la taille du marché et la compétition lors de la définition d'une niche ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "SEMrush ou Google Trends",
+                options: [
+                    "Microsoft Word",
+                    "Adobe Photoshop",
+                    "SEMrush ou Google Trends",
+                    "Un simple tableau Excel sans données"
+                ],
+                explanation: "Des outils comme SEMrush ou Google Trends sont essentiels pour analyser les tendances du marché, la demande pour certains mots-clés et l'activité de la concurrence, afin d'affiner la définition de votre niche."
+            },
+            {
+                question: "Qu'est-ce qu'un MVP (Produit Minimum Viable) aide à faire dans la structuration de l'offre ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Tester l'offre avec un minimum de ressources avant un déploiement complet",
+                options: [
+                    "Lancer un produit avec toutes les fonctionnalités possibles",
+                    "Tester l'offre avec un minimum de ressources avant un déploiement complet",
+                    "Éviter de recueillir des feedbacks clients",
+                    "Ignorer le marché cible"
+                ],
+                explanation: "Un MVP permet de valider les hypothèses clés de votre offre et de recueillir des retours utilisateurs précoces avec un investissement minimal, avant de développer la version complète."
+            },
+            {
+                question: "Un Business Model Canvas est utile pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Définir un modèle économique rentable",
+                options: [
+                    "Gérer les ressources humaines",
+                    "Obtenir ses premiers clients",
+                    "Définir un modèle économique rentable",
+                    "Automatiser les tâches"
+                ],
+                explanation: "Le Business Model Canvas est un outil stratégique qui permet de visualiser et de détailler tous les aspects d'un modèle économique, y compris les sources de revenus, les coûts, les partenaires clés, etc."
+            },
+            {
+                question: "Quel est un indicateur clé pour piloter la stratégie d'innovation ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Le nombre de nouvelles idées testées et validées",
+                options: [
+                    "Le nombre d'heures travaillées par les équipes",
+                    "Le nombre de réunions tenues",
+                    "Le nombre de nouvelles idées testées et validées",
+                    "Le budget marketing dépensé"
+                ],
+                explanation: "Pour une stratégie d'innovation efficace, il est important de mesurer concrètement les résultats, comme le nombre de prototypes, de tests ou de nouvelles offres lancées et validées par le marché."
+            },
+            {
+                question: "Quelle est l'importance du Plan de Continuité d’Activité (PCA) dans la gestion des risques ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Assurer la reprise rapide des opérations après un incident majeur",
+                options: [
+                    "Permettre de ne jamais rencontrer de problèmes",
+                    "Assurer la reprise rapide des opérations après un incident majeur",
+                    "Identifier uniquement les risques financiers",
+                    "Remplacer toutes les assurances"
+                ],
+                explanation: "Le PCA est un document essentiel qui décrit les procédures à suivre pour reprendre les activités essentielles de l'entreprise le plus rapidement possible en cas de catastrophe ou d'incident majeur."
+            },
+            {
+                question: "La diversification progressive (levier 6) permet de :",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Réduire la dépendance à un seul marché ou produit",
+                options: [
+                    "Augmenter immédiatement tous les coûts",
+                    "Réduire la dépendance à un seul marché ou produit",
+                    "Se concentrer sur une seule activité à jamais",
+                    "Ignorer les besoins des nouveaux segments"
+                ],
+                explanation: "La diversification progressive permet d'étendre la portée de l'entreprise, de minimiser les risques liés à la dépendance d'un seul secteur et de capter de nouvelles opportunités de croissance."
+            },
+
+            // Stratégie Commerciale & Client (nouvelles questions)
+            {
+                question: "Lors de l'obtention des premiers clients, pourquoi est-il pertinent de proposer des offres 'pilotes' ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Pour faciliter la prise de décision et obtenir des feedbacks précoces",
+                options: [
+                    "Pour ne jamais facturer le client",
+                    "Pour attirer uniquement des clients qui ne paient pas",
+                    "Pour faciliter la prise de décision et obtenir des feedbacks précoces",
+                    "Pour vendre un produit incomplet"
+                ],
+                explanation: "Les offres pilotes ou spéciales permettent de réduire la barrière à l'entrée pour les premiers clients, facilitant leur engagement et offrant l'opportunité de recueillir des retours essentiels pour affiner l'offre."
+            },
+            {
+                question: "Quel est l'un des risques d'une machine commerciale non prévisible ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Une dépendance excessive au bouche-à-oreille et des revenus instables",
+                options: [
+                    "Un flux constant de nouveaux leads",
+                    "Une dépendance excessive au bouche-à-oreille et des revenus instables",
+                    "Une excellente gestion des prospects",
+                    "Un tunnel de vente bien défini"
+                ],
+                explanation: "Une machine commerciale prévisible s'appuie sur des canaux et processus mesurables. Une machine non prévisible dépend souvent de sources aléatoires comme le bouche-à-oreille non maîtrisé, rendant les revenus incertains."
+            },
+            {
+                question: "La publication régulière de contenu de valeur (articles, vidéos) contribue à quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Travailler sa visibilité et son autorité",
+                options: [
+                    "Maîtriser sa comptabilité",
+                    "Recruter de nouveaux employés",
+                    "Travailler sa visibilité et son autorité",
+                    "Gérer ses fournisseurs"
+                ],
+                explanation: "Produire et partager du contenu de qualité sur des sujets liés à votre expertise établit votre marque comme une référence dans son domaine, augmentant sa visibilité et son autorité."
+            },
+            {
+                question: "Quel est l'un des meilleurs moyens d'augmenter la Valeur Vie Client (CLV) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Mettre en place un programme de fidélité ou VIP",
+                options: [
+                    "Ignorer les clients existants",
+                    "Ne jamais proposer de promotions",
+                    "Mettre en place un programme de fidélité ou VIP",
+                    "Vendre des produits de mauvaise qualité"
+                ],
+                explanation: "Les programmes de fidélité ou VIP encouragent les clients à rester plus longtemps, à acheter plus souvent et à dépenser davantage, augmentant ainsi leur valeur sur le long terme pour l'entreprise."
+            },
+            {
+                question: "Avant de formaliser un partenariat, que doit-on s'assurer ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Que les partenaires sont alignés sur les valeurs et les objectifs",
+                options: [
+                    "Que le partenaire est prêt à faire tout le travail",
+                    "Que les partenaires sont alignés sur les valeurs et les objectifs",
+                    "Que le partenariat sera secret",
+                    "Qu'il n'y a pas besoin de contrat"
+                ],
+                explanation: "Un partenariat durable et fructueux repose sur un alignement des valeurs, des objectifs et une vision commune. Sans cela, les risques de désaccord et d'échec sont élevés."
+            },
+            {
+                question: "Quel est un indicateur clé à suivre pour mesurer l'efficacité de la 'machine commerciale' ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Le taux de conversion des leads en clients",
+                options: [
+                    "Le nombre de likes sur les réseaux sociaux",
+                    "Le temps passé par les employés sur les réseaux",
+                    "Le taux de conversion des leads en clients",
+                    "Le coût de l'électricité du bureau"
+                ],
+                explanation: "Le taux de conversion des leads en clients est un KPI essentiel pour évaluer l'efficacité de votre processus commercial, de l'attraction du prospect à la conclusion de la vente."
+            },
+
+            // Gestion Financière & Pilotage (nouvelles questions)
+            {
+                question: "Une 'réserve de trésorerie de sécurité' sert à quoi ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Faire face aux imprévus et périodes de faibles revenus",
+                options: [
+                    "Payer toutes les factures dès qu'elles arrivent",
+                    "Faire face aux imprévus et périodes de faibles revenus",
+                    "N'être utilisée que pour des investissements massifs",
+                    "Ne jamais être constituée"
+                ],
+                explanation: "Une réserve de trésorerie est un fonds d'urgence qui permet à l'entreprise de maintenir ses opérations et de faire face à des dépenses imprévues ou à des baisses de revenus, assurant ainsi sa stabilité financière."
+            },
+            {
+                question: "Quel est un exemple de KPI financier à suivre régulièrement ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Le taux de marge nette",
+                options: [
+                    "Le nombre de tasses de café bues par jour",
+                    "Le nombre d'emails envoyés",
+                    "Le taux de marge nette",
+                    "La couleur du logo de la concurrence"
+                ],
+                explanation: "Le taux de marge nette (bénéfice net / chiffre d'affaires) est un indicateur crucial de la rentabilité réelle de l'entreprise, après déduction de toutes les charges."
+            },
+            {
+                question: "Quand on réinvestit intelligemment, quelle est la première étape ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Allouer les bénéfices selon un plan précis",
+                options: [
+                    "Acheter des gadgets pour les employés",
+                    "Allouer les bénéfices selon un plan précis",
+                    "Ignorer les besoins futurs",
+                    "Dépenser sans mesurer le retour"
+                ],
+                explanation: "Un plan d'allocation des bénéfices permet de diriger les fonds vers des investissements stratégiques qui soutiendront la croissance, l'innovation ou la résilience, plutôt que des dépenses impulsives."
+            },
+            {
+                question: "Un bon ratio d'endettement pour une entreprise est généralement :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Inférieur à 30% du Chiffre d'Affaires",
+                options: [
+                    "Supérieur à 100% du Chiffre d'Affaires",
+                    "Peu importe le chiffre, tant qu'on a de l'argent",
+                    "Inférieur à 30% du Chiffre d'Affaires",
+                    "Uniquement mesuré par le nombre de prêts"
+                ],
+                explanation: "Un ratio d'endettement faible (souvent <30% du CA) indique que l'entreprise est moins dépendante de ses créanciers et a une meilleure capacité à rembourser ses dettes, renforçant sa solidité financière."
+            },
+            {
+                question: "Pour la gestion des fournisseurs, pourquoi la diversification des sources d'approvisionnement est-elle recommandée ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Pour réduire les risques de rupture d'approvisionnement et de dépendance",
+                options: [
+                    "Pour compliquer la gestion",
+                    "Pour réduire les risques de rupture d'approvisionnement et de dépendance",
+                    "Pour payer plus cher",
+                    "Pour ne pas négocier"
+                ],
+                explanation: "Diversifier les fournisseurs permet de sécuriser l'approvisionnement en cas de problème avec un fournisseur unique, et de bénéficier d'une meilleure position pour négocier les prix et les conditions."
+            },
+            {
+                question: "L'établissement d'un budget annuel et son suivi mensuel rigoureux aident à :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Maîtriser la comptabilité et la trésorerie",
+                options: [
+                    "Générer plus de dettes",
+                    "Maîtriser la comptabilité et la trésorerie",
+                    "Se concentrer sur le passé",
+                    "Augmenter les dépenses inutiles"
+                ],
+                explanation: "Un budget bien géré et suivi de près est la base d'une gestion financière saine, permettant de contrôler les dépenses, d'anticiper les revenus et d'atteindre les objectifs financiers."
+            },
+
+            // Optimisation & Leadership (nouvelles questions)
+            {
+                question: "Un programme de mentoring interne contribue à la gestion RH en :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Améliorant la rétention des collaborateurs et leur développement",
+                options: [
+                    "Augmentant le turnover",
+                    "Réduisant les salaires",
+                    "Améliorant la rétention des collaborateurs et leur développement",
+                    "N'ayant aucun impact"
+                ],
+                explanation: "Les programmes de mentoring favorisent le transfert de connaissances, l'intégration des nouveaux et le développement des compétences, ce qui a un impact positif sur la satisfaction et la rétention des employés."
+            },
+            {
+                question: "Les SOP (Standard Operating Procedures) sont utiles pour quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Automatiser et déléguer intelligemment",
+                options: [
+                    "Définir une niche rentable",
+                    "Obtenir ses premiers clients",
+                    "Maîtriser sa trésorerie",
+                    "Automatiser et déléguer intelligemment"
+                ],
+                explanation: "Les SOP documentent les processus pas à pas, ce qui facilite leur automatisation, leur délégation et la formation des nouvelles recrues, garantissant la cohérence et l'efficacité."
+            },
+            {
+                question: "Pourquoi est-il bénéfique pour un dirigeant de rejoindre un mastermind ou un réseau d'entrepreneurs ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Pour échanger des défis, obtenir des conseils et étendre son réseau",
+                options: [
+                    "Pour se sentir moins seul",
+                    "Pour échanger des défis, obtenir des conseils et étendre son réseau",
+                    "Pour se comparer négativement aux autres",
+                    "Pour ne jamais parler de ses problèmes"
+                ],
+                explanation: "Les masterminds et réseaux offrent un environnement d'échange et de soutien précieux, permettant aux dirigeants de partager leurs expériences, d'obtenir des perspectives différentes et de trouver des solutions aux défis."
+            },
+            {
+                question: "La 'trésorerie tampon équivalente à 3 mois de charges' fait partie de quelle stratégie ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Gestion de la résilience économique et stratégique",
+                options: [
+                    "Gestion de la dette",
+                    "Recherche et développement",
+                    "Gestion de la résilience économique et stratégique",
+                    "Obtention des premiers clients"
+                ],
+                explanation: "Avoir une trésorerie tampon substantielle est une mesure clé de résilience, permettant à l'entreprise de traverser des périodes difficiles (baisse d'activité, crise inattendue) sans compromettre sa survie."
+            },
+            {
+                question: "Qu'est-ce que l'implication des clients dans la co-création favorise pour la R&D ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Une meilleure adéquation des produits aux besoins réels du marché",
+                options: [
+                    "Une augmentation des coûts de développement",
+                    "Une meilleure adéquation des produits aux besoins réels du marché",
+                    "Des produits qui ne plaisent à personne",
+                    "Un rallongement du cycle de développement"
+                ],
+                explanation: "Impliquer les clients dans le processus de R&D (co-création) permet de s'assurer que les innovations répondent à des besoins concrets, augmentant ainsi les chances de succès commercial des nouveaux produits ou services."
+            },
+            {
+                question: "Quel est un signe d'une mauvaise gestion des RH ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Un turnover élevé des employés",
+                options: [
+                    "Un bon taux de rétention",
+                    "Un turnover élevé des employés",
+                    "Des formations régulières",
+                    "Une culture d'entreprise positive"
+                ],
+                explanation: "Un turnover élevé indique souvent un problème de satisfaction, d'engagement ou de management au sein de l'entreprise, entraînant des coûts de recrutement et de formation importants."
+            },
+
+            // Questions mixées/transversales pour atteindre 50
+            {
+                question: "Le 'Value Proposition Canvas' est un outil recommandé pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Structurer ton offre (valeur perçue et différenciation)",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des fournisseurs",
+                    "Structurer ton offre (valeur perçue et différenciation)",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Le Value Proposition Canvas aide à articuler clairement la proposition de valeur de votre produit ou service en relation avec les besoins et les problèmes de vos clients."
+            },
+            {
+                question: "Si votre entreprise est trop dépendante d'un seul gros client, quel levier est directement impacté ?",
+                category: "Gestion de la Croissance & Résilience",
+                correctAnswer: "Gestion de la résilience économique et stratégique",
+                options: [
+                    "Maîtrise de la comptabilité",
+                    "Obtention des premiers clients",
+                    "Gestion de la résilience économique et stratégique",
+                    "Gestion des ressources humaines"
+                ],
+                explanation: "Une forte dépendance à un seul client augmente la vulnérabilité de l'entreprise. La diversification des clients est une composante clé de la résilience économique."
+            },
+            {
+                question: "Un objectif de la 'machine commerciale prévisible' est de réduire la dépendance à :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "La chance et les opportunités isolées",
+                options: [
+                    "La qualité du produit",
+                    "Les clients satisfaits",
+                    "La chance et les opportunités isolées",
+                    "La formation des vendeurs"
+                ],
+                explanation: "L'objectif est de remplacer un modèle de vente aléatoire par un système structuré qui génère des résultats constants et mesurables, en réduisant la dépendance à la 'chance'."
+            },
+            {
+                question: "Quel est le risque de sous-estimer les coûts indirects lors de la définition du modèle économique ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Des marges brutes qui ne couvrent pas les coûts réels et la rentabilité",
+                options: [
+                    "Une augmentation immédiate des ventes",
+                    "Des marges brutes qui ne couvrent pas les coûts réels et la rentabilité",
+                    "Des clients plus satisfaits",
+                    "Des délais de paiement réduits"
+                ],
+                explanation: "Sous-estimer les coûts indirects (marketing, SAV, frais généraux) peut entraîner des prix de vente trop bas, des marges insuffisantes et, à terme, un modèle économique non viable."
+            },
+            {
+                question: "Pour un dirigeant, la 'gestion du stress' (levier 19) est cruciale pour :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Éviter le burnout et maintenir une prise de décision claire",
+                options: [
+                    "Travailler plus d'heures par jour",
+                    "Éviter le burnout et maintenir une prise de décision claire",
+                    "Ignorer les problèmes personnels",
+                    "Ne jamais prendre de vacances"
+                ],
+                explanation: "La gestion du stress est essentielle pour la santé mentale et physique du dirigeant, lui permettant de rester lucide, de prendre des décisions éclairées et de maintenir sa performance sur le long terme."
+            },
+            {
+                question: "La 'veille technologique' est une pratique essentielle pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion de l’innovation et de la stratégie",
+                options: [
+                    "Fidélisation et réachat",
+                    "Gestion des fournisseurs",
+                    "Gestion de l’innovation et de la stratégie",
+                    "Obtenir ses premiers clients"
+                ],
+                explanation: "La veille technologique permet d'identifier les nouvelles tendances et outils qui peuvent améliorer les produits, les processus ou créer de nouvelles opportunités pour l'entreprise."
+            },
+            {
+                question: "Lorsque l'on parle de 'funnel de conversion' (entonnoir de vente), à quel levier fait-on référence ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Créer une machine commerciale prévisible",
+                options: [
+                    "Maîtriser comptabilité et trésorerie",
+                    "Gestion des ressources humaines",
+                    "Créer une machine commerciale prévisible",
+                    "Réinvestir intelligemment"
+                ],
+                explanation: "Le funnel de conversion est au cœur de la machine commerciale, il représente le parcours client de la découverte à l'achat, et sa mesure permet de rendre la vente prévisible."
+            },
+            {
+                question: "Le 'taux de churn' (taux d'attrition client) est un KPI pertinent pour quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Fidélisation et réachat",
+                options: [
+                    "Définir une niche rentable",
+                    "Gestion de la dette",
+                    "Fidélisation et réachat",
+                    "Recherche & Développement"
+                ],
+                explanation: "Le taux de churn mesure le pourcentage de clients perdus sur une période donnée. Le réduire est un objectif clé de la fidélisation pour maintenir la croissance des revenus."
+            },
+            {
+                question: "Pour optimiser ses coûts et délais, il est essentiel de bien négocier avec ses :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Fournisseurs",
+                options: [
+                    "Clients",
+                    "Employés",
+                    "Fournisseurs",
+                    "Concurrents"
+                ],
+                explanation: "Les négociations avec les fournisseurs ont un impact direct sur les coûts d'achat des matières premières ou des services, et sur les délais de production, influençant la rentabilité et l'efficacité opérationnelle."
+            },
+            {
+                question: "Quel terme décrit le mieux une entreprise qui adapte rapidement ses produits et services aux changements du marché ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Agile",
+                options: [
+                    "Rigide",
+                    "Stagnante",
+                    "Agile",
+                    "Lente"
+                ],
+                explanation: "L'agilité est la capacité d'une organisation à s'adapter rapidement aux changements et aux incertitudes du marché, en révisant ses stratégies et en ajustant ses opérations."
+            },
+            {
+                question: "L'objectif d'une entreprise est de capter la demande avec une offre adaptée. Cela correspond à quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Définir une niche rentable",
+                options: [
+                    "Faire du marketing de masse",
+                    "Définir une niche rentable",
+                    "Avoir un budget illimité",
+                    "Ignorer les retours clients"
+                ],
+                explanation: "Définir une niche rentable implique de comprendre et de répondre précisément aux besoins d'un segment de marché spécifique, ce qui est la base d'une offre adaptée."
+            },
+            {
+                question: "Quelle est l'importance de la preuve sociale dans la structuration de l'offre ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Renforcer la crédibilité et la confiance des prospects",
+                options: [
+                    "Augmenter le prix sans justification",
+                    "Renforcer la crédibilité et la confiance des prospects",
+                    "Rendre l'offre plus complexe",
+                    "Décourager les concurrents"
+                ],
+                explanation: "Les preuves sociales, comme les témoignages ou les études de cas, rassurent les prospects en montrant que d'autres ont déjà bénéficié de votre offre, bâtissant ainsi la confiance."
+            },
+            {
+                question: "Un Business Plan détaillé est particulièrement utile pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Maîtriser comptabilité et trésorerie",
+                options: [
+                    "Créer une machine commerciale prévisible",
+                    "Maîtriser comptabilité et trésorerie",
+                    "Gérer les partenariats",
+                    "Se former et cultiver son mindset"
+                ],
+                explanation: "Le Business Plan inclut les prévisions financières (comptabilité et trésorerie), ce qui est fondamental pour la maîtrise de cet aspect du business."
+            },
+            {
+                question: "Si une entreprise subit une attaque cyber, quel levier est directement mis à l'épreuve ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion des risques multifactoriels",
+                options: [
+                    "Obtenir ses premiers clients",
+                    "Gestion des ressources humaines",
+                    "Gestion des risques multifactoriels",
+                    "Recherche & Développement"
+                ],
+                explanation: "La cybersécurité est une composante essentielle de la gestion des risques multifactoriels, visant à protéger les données et les systèmes de l'entreprise contre les menaces numériques."
+            },
+            {
+                question: "L'amélioration continue des processus opérationnels (SOP) est un bénéfice direct de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Automatiser et déléguer intelligemment",
+                options: [
+                    "Définir une niche rentable",
+                    "Fidélisation et réachat",
+                    "Automatiser et déléguer intelligemment",
+                    "Gestion de la croissance"
+                ],
+                explanation: "Les SOP permettent de standardiser les processus, ce qui est la base de leur automatisation et de leur délégation efficace, améliorant ainsi la productivité et la qualité."
+            },
+            {
+                question: "Comment le storytelling (raconter l'histoire de la marque) aide-t-il la visibilité et l'autorité ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Il humanise la marque et crée un lien émotionnel avec le public",
+                options: [
+                    "Il rend l'entreprise plus secrète",
+                    "Il humanise la marque et crée un lien émotionnel avec le public",
+                    "Il permet de ne jamais avoir à publier",
+                    "Il rend le message promotionnel plus agressif"
+                ],
+                explanation: "Le storytelling permet de raconter l'histoire de l'entreprise, ses valeurs, sa mission, ce qui crée une connexion émotionnelle avec le public et renforce la notoriété et la confiance."
+            },
+            {
+                question: "Un audit régulier des fournisseurs permet de s'assurer de :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "La qualité des livrables et le respect des délais",
+                options: [
+                    "La couleur de leurs locaux",
+                    "La qualité des livrables et le respect des délais",
+                    "Leurs habitudes de vacances",
+                    "Leurs relations avec les concurrents"
+                ],
+                explanation: "Auditer les fournisseurs aide à maintenir des standards de qualité élevés, à s'assurer du respect des engagements contractuels et à identifier les axes d'amélioration continue."
+            },
+            {
+                question: "Quel rôle joue la culture d'entreprise dans la gestion des RH ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Elle attire et retient les talents en créant un environnement positif",
+                options: [
+                    "Elle n'a aucun impact sur la rétention",
+                    "Elle est juste un concept marketing",
+                    "Elle attire et retient les talents en créant un environnement positif",
+                    "Elle pousse les employés à partir"
+                ],
+                explanation: "Une culture d'entreprise forte et positive est un facteur clé d'attraction et de rétention des talents. Elle favorise un environnement de travail sain, l'engagement et la productivité."
+            },
+            {
+                question: "Un entrepreneur qui cherche à 'pivotter' (changer de stratégie majeure) son business agit sur quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion de l’innovation et de la stratégie",
+                options: [
+                    "Fidélisation et réachat",
+                    "Gestion des ressources humaines",
+                    "Gestion de l’innovation et de la stratégie",
+                    "Maîtriser comptabilité et trésorerie"
+                ],
+                explanation: "Un pivot est un changement fondamental de stratégie dans une startup ou une entreprise, souvent en réponse à des retours du marché ou à une nouvelle vision, relevant de la gestion stratégique et de l'innovation."
+            },
+            {
+                question: "Quel est un indicateur de bonne santé pour le levier 'Fidélisation et réachat' ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Le Net Promoter Score (NPS)",
+                options: [
+                    "Le nombre de followers sur Instagram",
+                    "Le coût d'acquisition client (CAC)",
+                    "Le Net Promoter Score (NPS)",
+                    "Le nombre de concurrents"
+                ],
+                explanation: "Le NPS mesure la propension des clients à recommander l'entreprise, un indicateur direct de leur satisfaction et de leur potentiel de fidélisation et de bouche-à-oreille."
+            },
+            {
+                question: "Qu'est-ce qu'une diversification 'non préparée' peut engendrer ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Une dispersion des ressources et une perte de focus",
+                options: [
+                    "Une augmentation immédiate des profits",
+                    "Une simplification des opérations",
+                    "Une dispersion des ressources et une perte de focus",
+                    "Une amélioration de la niche existante"
+                ],
+                explanation: "Une diversification sans préparation adéquate (étude de marché, ressources suffisantes) peut diluer les efforts de l'entreprise, engendrant des coûts inutiles et une perte de compétitivité sur son cœur de métier."
+            },
+            {
+                question: "Un 'tunnel de conversion' est au cœur de quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Créer une machine commerciale prévisible",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des risques",
+                    "Créer une machine commerciale prévisible",
+                    "Gestion des fournisseurs"
+                ],
+                explanation: "Le tunnel de conversion modélise le parcours client de la découverte à l'achat et est fondamental pour systematiser et prédire les ventes."
+            },
+            {
+                question: "Pour un entrepreneur, la pratique de la 'méditation et la gestion du stress' fait partie de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Se former et cultiver son mindset de dirigeant",
+                options: [
+                    "Gestion des risques",
+                    "Recherche & Développement",
+                    "Se former et cultiver son mindset de dirigeant",
+                    "Gestion des fournisseurs"
+                ],
+                explanation: "Ces pratiques contribuent au bien-être mental du dirigeant, essentiel pour un mindset résilient et une prise de décision saine, surtout sous pression."
+            },
+            {
+                question: "Quel est le risque de ne pas avoir de 'plan de crise' ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Une incapacité à réagir efficacement en cas d'événement imprévu",
+                options: [
+                    "Une meilleure flexibilité",
+                    "Une incapacité à réagir efficacement en cas d'événement imprévu",
+                    "Une réduction des coûts",
+                    "Un avantage concurrentiel"
+                ],
+                explanation: "Sans plan de crise, une entreprise est mal préparée à faire face aux imprévus (scandale, catastrophe naturelle, panne majeure), ce qui peut entraîner des pertes financières, de réputation et même la faillite."
+            },
+            {
+                question: "L'utilisation d'outils 'no-code / automation' (comme Zapier, Make) est une bonne pratique pour quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Automatiser et déléguer intelligemment",
+                options: [
+                    "Définir une niche rentable",
+                    "Gérer les partenariats",
+                    "Automatiser et déléguer intelligemment",
+                    "Réinvestir intelligemment"
+                ],
+                explanation: "Ces outils permettent d'automatiser des tâches répétitives sans avoir besoin de coder, ce qui est essentiel pour la productivité et la délégation."
+            },
+            {
+                question: "Pour évaluer la rentabilité d'un segment de marché, il est essentiel d'évaluer :",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Le pouvoir d’achat et la compétition",
+                options: [
+                    "La couleur du logo des concurrents",
+                    "Le pouvoir d’achat et la compétition",
+                    "Le nombre de produits vendus la veille",
+                    "Le nombre de visiteurs sur son site"
+                ],
+                explanation: "Au-delà de la taille du marché, le pouvoir d'achat des clients potentiels et le niveau de compétition sont des facteurs clés pour déterminer si une niche est réellement rentable."
+            },
+            {
+                question: "L'amélioration continue des produits et services est un objectif de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Recherche & Développement (R&D)",
+                options: [
+                    "Obtention des premiers clients",
+                    "Maîtrise de la trésorerie",
+                    "Recherche & Développement (R&D)",
+                    "Gestion des risques"
+                ],
+                explanation: "La R&D n'est pas seulement sur l'innovation radicale, mais aussi sur l'amélioration et l'optimisation continues des offres existantes pour rester pertinent sur le marché."
+            },
+            {
+                question: "Quel est l'un des avantages de diversifier les sources de revenus ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Réduire la dépendance à une seule source et augmenter la stabilité financière",
+                options: [
+                    "Augmenter la complexité inutilement",
+                    "Réduire la dépendance à une seule source et augmenter la stabilité financière",
+                    "Diminuer le chiffre d'affaires total",
+                    "Ne plus avoir à gérer la trésorerie"
+                ],
+                explanation: "La diversification des sources de revenus (ex: vente de produits + services, abonnement + ponctuel) réduit la vulnérabilité de l'entreprise aux fluctuations d'un seul marché ou produit."
+            },
+            {
+                question: "Un bon suivi 'post-vente' est essentiel pour quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Fidélisation et réachat",
+                options: [
+                    "Définir une niche rentable",
+                    "Gérer les risques",
+                    "Fidélisation et réachat",
+                    "Gestion des fournisseurs"
+                ],
+                explanation: "Le suivi post-vente, incluant le support client et la collecte de feedbacks, est crucial pour la satisfaction client, la fidélisation et l'encouragement au réachat ou à la recommandation."
+            },
+            {
+                question: "Pourquoi est-il important de 'tester plusieurs prix et offres' en conditions réelles (levier 3) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Pour valider le modèle économique et l'acceptation du marché",
+                options: [
+                    "Pour créer de la confusion chez le client",
+                    "Pour valider le modèle économique et l'acceptation du marché",
+                    "Pour décourager les ventes",
+                    "Pour ignorer la concurrence"
+                ],
+                explanation: "Tester différentes stratégies de prix et d'offres permet de comprendre la perception de valeur par le client et d'optimiser la rentabilité de votre modèle économique en fonction de la réaction du marché."
+            },
+            {
+                question: "L'expression 'cultiver un état d’esprit agile' (levier 19) fait référence à la capacité de :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "S'adapter rapidement aux changements et apprendre de ses erreurs",
+                options: [
+                    "Rester rigide face aux imprévus",
+                    "S'adapter rapidement aux changements et apprendre de ses erreurs",
+                    "Ne jamais remettre en question ses décisions",
+                    "Ignorer les feedbacks"
+                ],
+                explanation: "Un mindset agile implique une flexibilité mentale, une ouverture au changement, la capacité à apprendre des expériences (réussites ou échecs) et à ajuster sa direction en conséquence."
+            },
+            {
+                question: "La 'cartographie détaillée des risques' (levier 5) permet de :",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Visualiser toutes les menaces potentielles et leur impact",
+                options: [
+                    "Ignorer les risques mineurs",
+                    "Visualiser toutes les menaces potentielles et leur impact",
+                    "Se concentrer sur un seul type de risque",
+                    "Déléguer la gestion des risques à un seul employé"
+                ],
+                explanation: "La cartographie des risques est une étape fondamentale pour une gestion proactive. Elle permet d'identifier, d'évaluer et de prioriser les risques pour mieux les adresser."
+            },
+            {
+                question: "Un bon 'onboarding' (intégration) des nouveaux employés contribue à :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Réduire le turnover et améliorer l'engagement",
+                options: [
+                    "Augmenter les coûts de formation",
+                    "Réduire le turnover et améliorer l'engagement",
+                    "Rallonger la période d'essai",
+                    "N'avoir aucun impact sur la productivité"
+                ],
+                explanation: "Un processus d'intégration bien structuré permet aux nouveaux employés de s'adapter rapidement, de comprendre la culture de l'entreprise et de devenir productifs, ce qui impacte positivement la rétention."
+            },
+            {
+                question: "Quelle est l'importance de la 'négociation' dans la gestion des fournisseurs (levier 16) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Obtenir les meilleures conditions (prix, délais, qualité)",
+                options: [
+                    "Créer des conflits",
+                    "Obtenir les meilleures conditions (prix, délais, qualité)",
+                    "Payer le prix le plus élevé possible",
+                    "Éviter toute discussion"
+                ],
+                explanation: "La négociation est essentielle pour sécuriser des conditions avantageuses qui impactent directement la rentabilité et la compétitivité de l'entreprise."
+            },
+            {
+                question: "Quand une startup cherche à 'lever des fonds', cela concerne principalement quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Gestion de la dette (ou financement au sens large)",
+                options: [
+                    "Créer une machine commerciale prévisible",
+                    "Gestion de la dette (ou financement au sens large)",
+                    "Gestion des ressources humaines",
+                    "Définir une niche rentable"
+                ],
+                explanation: "Lever des fonds implique souvent de contracter des dettes (prêts bancaires) ou d'ouvrir le capital (equity), ce qui est directement lié à la gestion financière et au financement de l'entreprise."
+            },
+            {
+                question: "Un blog d'entreprise bien alimenté impacte directement quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Travailler sa visibilité et son autorité",
+                options: [
+                    "Gérer sa trésorerie",
+                    "Gérer ses fournisseurs",
+                    "Travailler sa visibilité et son autorité",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Un blog permet de partager l'expertise, d'attirer du trafic qualifié (SEO) et de positionner l'entreprise comme un leader d'opinion, augmentant ainsi sa visibilité et son autorité."
+            },
+            {
+                question: "Quelle est la principale différence entre la 'croissance rapide' et la 'croissance progressive' ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "La rapidité de l'expansion et la gestion des risques associés",
+                options: [
+                    "Il n'y a aucune différence",
+                    "La rapidité de l'expansion et la gestion des risques associés",
+                    "La croissance rapide est toujours la meilleure option",
+                    "La croissance progressive n'existe pas"
+                ],
+                explanation: "La croissance progressive est souvent plus contrôlée, permettant d'adapter les processus et les équipes à mesure que l'entreprise grandit, réduisant les risques de saturation ou de perte de contrôle associés à une croissance trop rapide."
+            },
+            {
+                question: "La 'valeur perçue' de l'offre (levier 2) est la :",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Perception des bénéfices par le client par rapport au prix",
+                options: [
+                    "Valeur du produit uniquement basée sur les coûts de production",
+                    "Perception des bénéfices par le client par rapport au prix",
+                    "Valeur définie uniquement par l'entreprise",
+                    "Valeur indépendante de la concurrence"
+                ],
+                explanation: "La valeur perçue est subjective et cruciale. Elle correspond à ce que le client estime obtenir en termes de bénéfices, solutions et avantages, comparé au prix qu'il paie. Une forte valeur perçue justifie un prix plus élevé."
+            },
+            {
+                question: "Quelle est une bonne pratique pour sécuriser ses approvisionnements (levier 16) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Diversifier les sources d’approvisionnement",
+                options: [
+                    "Dépendre d'un unique fournisseur",
+                    "Ne pas faire de contrats",
+                    "Diversifier les sources d’approvisionnement",
+                    "Attendre la dernière minute pour commander"
+                ],
+                explanation: "Dépendre d'un unique fournisseur expose l'entreprise à des risques importants de rupture. La diversification garantit une continuité même en cas de problème chez l'un des fournisseurs."
+            },
+            {
+                question: "L'utilisation de 'méthodes agiles' pour prototyper rapidement est pertinente pour quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Recherche & Développement (R&D)",
+                options: [
+                    "Gestion des partenariats",
+                    "Maîtrise de la trésorerie",
+                    "Recherche & Développement (R&D)",
+                    "Obtention des premiers clients"
+                ],
+                explanation: "Les méthodes agiles (Scrum, Kanban) sont idéales pour la R&D car elles favorisent l'expérimentation, l'itération rapide et l'adaptation aux feedbacks, ce qui accélère le développement de solutions innovantes."
+            },
+            {
+                question: "Quel est un enjeu de la gestion RH lié au 'turnover élevé' ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Perte de savoir-faire et coûts de recrutement élevés",
+                options: [
+                    "Augmentation de la productivité",
+                    "Perte de savoir-faire et coûts de recrutement élevés",
+                    "Amélioration de la culture d'entreprise",
+                    "Meilleure satisfaction des employés"
+                ],
+                explanation: "Un turnover élevé est coûteux (recrutement, formation) et peut entraîner une perte de compétences, de connaissances institutionnelles et un impact négatif sur la morale des équipes restantes."
+            },
+            {
+                question: "Les 'études de marché' sont essentielles pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Définir une niche rentable",
+                options: [
+                    "Réinvestir intelligemment",
+                    "Fidélisation et réachat",
+                    "Définir une niche rentable",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Les études de marché permettent de comprendre les besoins, les comportements des consommateurs, la taille du marché et la concurrence, informations cruciales pour identifier une niche rentable."
+            },
+            {
+                question: "Un 'tableau de bord simple et partagé' est une bonne pratique pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Suivre KPIs et marges",
+                options: [
+                    "Obtenir ses premiers clients",
+                    "Gérer les partenariats",
+                    "Suivre KPIs et marges",
+                    "Se former et cultiver son mindset"
+                ],
+                explanation: "Un tableau de bord clair et accessible permet à tous les acteurs de l'entreprise de suivre les indicateurs clés de performance et de prendre des décisions basées sur des données objectives."
+            },
+            {
+                question: "Quel est l'objectif des 'offres exclusives' aux clients existants (levier 10) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Renforcer la fidélité et encourager le réachat",
+                options: [
+                    "Attirer de nouveaux clients uniquement",
+                    "Réduire la qualité des produits",
+                    "Renforcer la fidélité et encourager le réachat",
+                    "Augmenter les coûts marketing"
+                ],
+                explanation: "Les offres exclusives montrent aux clients existants qu'ils sont valorisés, ce qui renforce leur sentiment d'appartenance et les incite à continuer à acheter ou à utiliser les services."
+            },
+            {
+                question: "Un dirigeant qui passe la majorité de son temps sur des tâches opérationnelles plutôt que stratégiques doit travailler sur quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Automatiser et déléguer intelligemment",
+                options: [
+                    "Définir une niche rentable",
+                    "Gérer la dette",
+                    "Automatiser et déléguer intelligemment",
+                    "Recherche & Développement"
+                ],
+                explanation: "La délégation et l'automatisation sont essentielles pour libérer le temps du dirigeant afin qu'il puisse se concentrer sur la vision, la stratégie et le développement de l'entreprise."
+            },
+            {
+                question: "Quel est un bénéfice de la 'collaboration avec des centres de recherche ou universités' (levier 21) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Accéder à de l'expertise pointue et à des infrastructures de R&D",
+                options: [
+                    "Économiser sur les salaires des employés",
+                    "Accéder à de l'expertise pointue et à des infrastructures de R&D",
+                    "Ignorer les dernières innovations",
+                    "Rendre les processus plus lents"
+                ],
+                explanation: "Les partenariats avec la recherche académique ou les centres techniques peuvent apporter une expertise spécialisée, des équipements de pointe et des opportunités de financement pour les projets de R&D."
+            },
+            {
+                question: "Un 'plan de formation continue' pour les employés relève de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Gestion des ressources humaines (RH)",
+                options: [
+                    "Gestion des risques",
+                    "Gestion de la dette",
+                    "Gestion des ressources humaines (RH)",
+                    "Maîtrise de la trésorerie"
+                ],
+                explanation: "La formation continue est fondamentale pour le développement des compétences des employés, leur motivation et leur fidélisation, et relève de la gestion proactive des RH."
+            },
+            {
+                question: "La 'segmentation du marché' est une étape cruciale pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Définir une niche rentable",
+                options: [
+                    "Gérer les fournisseurs",
+                    "Automatiser et déléguer",
+                    "Définir une niche rentable",
+                    "Fidélisation et réachat"
+                ],
+                explanation: "La segmentation du marché consiste à diviser le marché en groupes de consommateurs ayant des besoins similaires, ce qui est la base pour identifier et cibler une niche rentable."
+            },
+            {
+                question: "Un bon CRM (Customer Relationship Management) est essentiel pour quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Créer une machine commerciale prévisible",
+                options: [
+                    "Gestion de la dette",
+                    "Recherche & Développement",
+                    "Créer une machine commerciale prévisible",
+                    "Gestion des risques"
+                ],
+                explanation: "Un CRM aide à gérer les interactions avec les clients et prospects, à suivre le pipeline de vente et à automatiser les processus commerciaux, ce qui rend la machine commerciale plus prévisible."
+            },
+            {
+                question: "La 'diversification des canaux de vente' est une composante de quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion de la croissance et diversification progressive",
+                options: [
+                    "Maîtrise de la comptabilité",
+                    "Gestion des risques multifactoriels",
+                    "Gestion de la croissance et diversification progressive",
+                    "Gestion des ressources humaines"
+                ],
+                explanation: "La diversification des canaux (e-commerce, boutique physique, distributeurs) est une forme de croissance qui réduit la dépendance à un seul canal et étend la portée de l'entreprise."
+            },
+            {
+                question: "L'analyse des 'écarts entre le budget prévu et le réalisé' est une bonne pratique pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Maîtriser comptabilité et trésorerie",
+                options: [
+                    "Obtenir ses premiers clients",
+                    "Travailler sa visibilité",
+                    "Maîtriser comptabilité et trésorerie",
+                    "Gérer les partenariats"
+                ],
+                explanation: "Comparer les prévisions budgétaires aux résultats réels est crucial pour identifier les problèmes, ajuster les dépenses et maintenir la trajectoire financière de l'entreprise."
+            },
+            {
+                question: "L'externalisation des tâches non stratégiques (ex: comptabilité, support IT) est une illustration de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Automatiser et déléguer intelligemment",
+                options: [
+                    "Recherche & Développement",
+                    "Définir une niche rentable",
+                    "Automatiser et déléguer intelligemment",
+                    "Gestion de la dette"
+                ],
+                explanation: "Déléguer des tâches non essentielles à des prestataires externes permet à l'entreprise de se concentrer sur son cœur de métier et de libérer des ressources internes."
+            },
+            {
+                question: "La 'gestion de la réputation' (e-réputation, crise de communication) fait partie de quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion des risques multifactoriels",
+                options: [
+                    "Fidélisation et réachat",
+                    "Gestion des risques multifactoriels",
+                    "Obtention des premiers clients",
+                    "Réinvestir intelligemment"
+                ],
+                explanation: "La réputation est un actif intangible vital. Une crise de communication peut avoir un impact dévastateur, d'où l'importance de la gérer comme un risque majeur."
+            },
+            {
+                question: "Un 'leader visionnaire' qui inspire et guide son équipe travaille principalement sur quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Se former et cultiver son mindset de dirigeant",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des fournisseurs",
+                    "Se former et cultiver son mindset de dirigeant",
+                    "Maîtrise de la comptabilité"
+                ],
+                explanation: "Le leadership, la vision et la capacité à inspirer font partie intégrante du mindset du dirigeant, qui se cultive et se développe continuellement."
+            },
+            {
+                question: "Le 'panier moyen' et le 'coût d'acquisition client' (CAC) sont des KPIs financiers pertinents pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Suivre KPIs et marges",
+                options: [
+                    "Gestion des ressources humaines",
+                    "Gestion des partenariats",
+                    "Suivre KPIs et marges",
+                    "Recherche & Développement"
+                ],
+                explanation: "Ces KPIs sont essentiels pour comprendre la performance commerciale et la rentabilité des clients, informations cruciales pour le pilotage financier."
+            },
+            {
+                question: "Un programme d'incitation pour les employés (bonus, primes) est un outil de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Gestion des ressources humaines (RH)",
+                options: [
+                    "Gestion des risques",
+                    "Gestion de la dette",
+                    "Gestion des ressources humaines (RH)",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Les programmes d'incitation sont des outils RH pour motiver les employés, améliorer la performance et la rétention."
+            },
+            {
+                question: "Quel est un avantage de 'formaliser les partenariats par un contrat clair' (levier 11) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Définir clairement les objectifs, responsabilités et rémunérations",
+                options: [
+                    "Créer des tensions",
+                    "Définir clairement les objectifs, responsabilités et rémunérations",
+                    "Rendre le partenariat secret",
+                    "Éviter toute communication"
+                ],
+                explanation: "Un contrat clair prévient les malentendus et les conflits en définissant les termes de la collaboration, assurant une relation saine et productive."
+            },
+            {
+                question: "L'allocation d'un 'pourcentage du CA à la R&D' (levier 21) est une bonne pratique pour garantir :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Un investissement continu dans l'innovation",
+                options: [
+                    "Une réduction immédiate des coûts",
+                    "Un investissement continu dans l'innovation",
+                    "Une augmentation des dividendes à court terme",
+                    "L'arrêt de toute nouvelle idée"
+                ],
+                explanation: "Dédier une part fixe du chiffre d'affaires à la R&D assure que l'innovation reste une priorité, même en période de fluctuations, permettant un développement constant de nouvelles solutions."
+            },
+            {
+                question: "Quel est un objectif des 'enquêtes clients' (levier 1) lors de la définition d'une niche rentable ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Comprendre les besoins non satisfaits et les douleurs spécifiques",
+                options: [
+                    "Vérifier le niveau de concurrence",
+                    "Comprendre les besoins non satisfaits et les douleurs spécifiques",
+                    "Déterminer les prix des concurrents",
+                    "Estimer la taille du marché sans interagir avec les clients"
+                ],
+                explanation: "Les enquêtes clients fournissent des données qualitatives essentielles pour identifier les lacunes du marché et les opportunités de créer une offre parfaitement adaptée."
+            },
+            {
+                question: "Un 'fonds d'urgence financier' (levier 14) est destiné à :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Couvrir les imprévus et les périodes de crise",
+                options: [
+                    "Financer des investissements risqués",
+                    "Payer des salaires exorbitants",
+                    "Couvrir les imprévus et les périodes de crise",
+                    "Distribuer des dividendes exceptionnels"
+                ],
+                explanation: "Ce fonds est une composante de la bonne gestion financière et de la résilience, offrant une sécurité pour faire face aux dépenses imprévues ou aux baisses de revenus."
+            },
+            {
+                question: "La 'cartographie des processus clés' (levier 18) est une étape préalable à :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "L'automatisation et la délégation des tâches",
+                options: [
+                    "Le recrutement de nouveaux employés",
+                    "L'automatisation et la délégation des tâches",
+                    "La création d'un nouveau produit",
+                    "La gestion des partenariats"
+                ],
+                explanation: "Pour automatiser ou déléguer efficacement, il faut d'abord comprendre et documenter les processus existants pour identifier les goulots d'étranglement et les opportunités d'optimisation."
+            },
+            {
+                question: "Quel est l'un des bénéfices de maintenir une 'trésorerie tampon' équivalente à 3 mois de charges (levier 20) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Assurer la survie de l'entreprise en cas de choc économique",
+                options: [
+                    "Accélérer la croissance à tout prix",
+                    "Ne pas avoir besoin de prévoir les dépenses",
+                    "Assurer la survie de l'entreprise en cas de choc économique",
+                    "Rendre l'entreprise dépendante de la dette"
+                ],
+                explanation: "Cette pratique renforce la résilience financière de l'entreprise en lui donnant les moyens de faire face à des imprévus majeurs (crise, pandémie, perte de client important) sans être en cessation de paiement."
+            },
+            {
+                question: "L'intégration des 'feedbacks clients' systématiquement (levier 7) lors de l'acquisition des premiers clients permet de :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Affiner l'offre et s'assurer qu'elle répond aux attentes",
+                options: [
+                    "Ignorer les besoins du marché",
+                    "Affiner l'offre et s'assurer qu'elle répond aux attentes",
+                    "Vendre un produit non désiré",
+                    "Ne pas communiquer avec les clients"
+                ],
+                explanation: "Les retours des premiers clients sont une mine d'or pour valider et améliorer l'offre, s'assurant qu'elle est parfaitement adaptée aux besoins du marché."
+            },
+            {
+                question: "La mise en place de 'certifications' ou 'labels' pour un produit renforce quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Structurer ton offre (valeur perçue et différenciation)",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des fournisseurs",
+                    "Structurer ton offre (valeur perçue et différenciation)",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Les certifications apportent une preuve tangible de qualité ou de conformité, augmentant la valeur perçue et la différenciation de l'offre sur le marché."
+            },
+            {
+                question: "Le 'coaching' ou le 'mentorat' pour le dirigeant contribue à quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Se former et cultiver son mindset de dirigeant",
+                options: [
+                    "Obtenir ses premiers clients",
+                    "Maîtriser comptabilité et trésorerie",
+                    "Se former et cultiver son mindset de dirigeant",
+                    "Gestion des partenariats"
+                ],
+                explanation: "Ces accompagnements sont cruciaux pour le développement personnel et professionnel du dirigeant, renforçant ses compétences, sa vision et sa résilience."
+            },
+            {
+                question: "L'analyse des 'marges nettes vs brutes' (levier 3) permet de mieux comprendre :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "La rentabilité réelle de chaque produit ou service après toutes les charges",
+                options: [
+                    "Uniquement le coût de production",
+                    "La rentabilité réelle de chaque produit ou service après toutes les charges",
+                    "Le chiffre d'affaires total",
+                    "Le nombre d'employés"
+                ],
+                explanation: "Analyser les marges nettes est essentiel pour comprendre la véritable rentabilité, car elle inclut toutes les charges (fixes et variables) contrairement à la marge brute."
+            },
+            {
+                question: "Pourquoi les 'KPIs doivent être clairs' et en nombre limité (levier 13) ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Pour éviter la surcharge d'informations et faciliter la prise de décision",
+                options: [
+                    "Pour rendre les choses plus complexes",
+                    "Pour éviter la surcharge d'informations et faciliter la prise de décision",
+                    "Pour ne rien mesurer",
+                    "Pour que seuls les experts les comprennent"
+                ],
+                explanation: "Un nombre limité de KPIs pertinents permet de se concentrer sur les données essentielles à la performance et d'agir rapidement sans être noyé sous les chiffres."
+            },
+            {
+                question: "La 'communication régulière' avec les partenaires (levier 11) permet de :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Entretenir la relation et anticiper les éventuels problèmes",
+                options: [
+                    "Ne pas se soucier des partenaires",
+                    "Entretenir la relation et anticiper les éventuels problèmes",
+                    "Créer des désaccords",
+                    "Rendre les partenariats moins efficaces"
+                ],
+                explanation: "Une communication ouverte et régulière est la clé d'un partenariat sain, permettant de résoudre les problèmes en amont et de maximiser les bénéfices mutuels."
+            },
+            {
+                question: "Quel est un moyen d'éviter la 'saturation ou la perte de contrôle' lors de la croissance rapide (levier 6) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Impliquer les équipes dans la montée en compétences et ajuster les processus",
+                options: [
+                    "Ignorer l'augmentation de la demande",
+                    "Impliquer les équipes dans la montée en compétences et ajuster les processus",
+                    "Ne pas embaucher de personnel supplémentaire",
+                    "Garder les mêmes processus, quelle que soit la taille"
+                ],
+                explanation: "Une croissance saine s'accompagne d'une adaptation des structures, des processus et des compétences internes pour gérer l'augmentation de l'activité sans craquer."
+            },
+            {
+                question: "Les 'outils d'automatisation' (comme l'email marketing) sont fondamentaux pour quelle étape de la machine commerciale (levier 8) ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Le suivi et le 'nurturing' des prospects",
+                options: [
+                    "La prospection initiale",
+                    "Le suivi et le 'nurturing' des prospects",
+                    "La conclusion de vente en face à face",
+                    "La livraison des produits"
+                ],
+                explanation: "Les outils d'email marketing et d'automatisation permettent de maintenir un contact régulier avec les prospects qualifiés, de les éduquer et de les faire progresser dans le tunnel de vente."
+            },
+            {
+                question: "La 'veille structurée' est une bonne pratique pour quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gestion de l’innovation et de la stratégie",
+                options: [
+                    "Gestion de la dette",
+                    "Fidélisation et réachat",
+                    "Gestion de l’innovation et de la stratégie",
+                    "Automatiser et déléguer"
+                ],
+                explanation: "Une veille organisée (concurrentielle, technologique, réglementaire) est indispensable pour anticiper les changements, identifier les opportunités d'innovation et ajuster la stratégie."
+            },
+            {
+                question: "Quel est le but d'un 'MVP' (Minimum Viable Product) dans le cadre de la R&D (levier 21) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Tester rapidement une hypothèse de produit/service avec un minimum de fonctionnalités",
+                options: [
+                    "Lancer un produit parfait et définitif",
+                    "Tester rapidement une hypothèse de produit/service avec un minimum de fonctionnalités",
+                    "Éviter tout feedback client",
+                    "Ignorer le marché"
+                ],
+                explanation: "Le MVP permet de valider la demande et les fonctionnalités essentielles avec un investissement réduit, avant de se lancer dans un développement complet."
+            },
+            {
+                question: "La 'gestion du risque de surendettement' (levier 15) est essentielle pour :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Maintenir la capacité de l'entreprise à rembourser ses dettes et investir",
+                options: [
+                    "Emprunter sans limite",
+                    "Maintenir la capacité de l'entreprise à rembourser ses dettes et investir",
+                    "Ignorer les taux d'intérêt",
+                    "Rendre l'entreprise dépendante des banques"
+                ],
+                explanation: "Le surendettement limite la flexibilité financière, augmente les charges d'intérêts et peut empêcher l'entreprise d'obtenir de nouveaux financements ou d'investir dans sa croissance."
+            },
+            {
+                question: "L'investissement dans un 'système de gestion de la qualité' (ISO 9001, etc.) peut impacter positivement quel levier ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Structurer ton offre (valeur perçue et différenciation)",
+                options: [
+                    "Gestion de la dette",
+                    "Obtention des premiers clients",
+                    "Structurer ton offre (valeur perçue et différenciation)",
+                    "Gestion des ressources humaines"
+                ],
+                explanation: "Un système qualité formalisé assure la consistance des produits/services, renforce la confiance des clients et peut être un avantage différenciateur."
+            },
+            {
+                question: "Quelle est l'importance du 'développement des compétences' (levier 17) pour les équipes ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Maintenir la compétitivité et la polyvalence des employés",
+                options: [
+                    "Réduire les salaires",
+                    "Maintenir la compétitivité et la polyvalence des employés",
+                    "Augmenter le turnover",
+                    "Éviter les nouvelles technologies"
+                ],
+                explanation: "Le développement des compétences assure que les employés restent pertinents, productifs et motivés, et que l'entreprise dispose des talents nécessaires pour affronter l'avenir."
+            },
+            {
+                question: "Un 'audit financier régulier' est une bonne pratique pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Maîtriser comptabilité et trésorerie",
+                options: [
+                    "Fidélisation et réachat",
+                    "Gestion des partenariats",
+                    "Maîtriser comptabilité et trésorerie",
+                    "Recherche & Développement"
+                ],
+                explanation: "Les audits garantissent l'exactitude des comptes, la conformité aux normes et aident à identifier les problèmes financiers avant qu'ils ne deviennent critiques."
+            },
+            {
+                question: "La 'segmentation des offres' par persona (levier 2) est utile pour :",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Adapter le message marketing et les fonctionnalités à chaque type de client",
+                options: [
+                    "Compliquer la gamme de produits",
+                    "Adapter le message marketing et les fonctionnalités à chaque type de client",
+                    "Ne cibler personne en particulier",
+                    "Réduire les coûts de production"
+                ],
+                explanation: "Comprendre les personas permet de créer des offres et des messages marketing ultra-ciblés, augmentant la pertinence et le taux de conversion."
+            },
+            {
+                question: "Quel est un avantage d'un 'bon équilibre vie pro/perso' (levier 19) pour un dirigeant ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Prévenir le burnout et maintenir une haute performance sur le long terme",
+                options: [
+                    "Travailler moins d'heures",
+                    "Prévenir le burnout et maintenir une haute performance sur le long terme",
+                    "Se couper du monde",
+                    "Ignorer les responsabilités"
+                ],
+                explanation: "Un bon équilibre est crucial pour la santé et la résilience du dirigeant. Il permet de recharger les batteries, de maintenir une perspective saine et d'éviter l'épuisement professionnel."
+            },
+            {
+                question: "Le 'recueil régulier de la satisfaction client' (levier 10) sert à :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Identifier les points d'amélioration et renforcer la fidélité",
+                options: [
+                    "Ignorer les plaintes",
+                    "Identifier les points d'amélioration et renforcer la fidélité",
+                    "Réduire les coûts d'acquisition",
+                    "Ne pas s'adapter aux besoins"
+                ],
+                explanation: "Écouter les clients permet d'améliorer les produits/services, de résoudre les problèmes avant qu'ils ne s'aggravent et de renforcer la relation, contribuant ainsi à la fidélisation."
+            },
+            {
+                question: "Quel est l'objectif principal de la 'gestion de la réputation' (intégrée au levier 5: risques) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Protéger l'image de marque et la confiance du public",
+                options: [
+                    "Ne jamais répondre aux commentaires en ligne",
+                    "Protéger l'image de marque et la confiance du public",
+                    "Laisser les rumeurs se propager",
+                    "Ignorer les réseaux sociaux"
+                ],
+                explanation: "La gestion de la réputation vise à anticiper, surveiller et réagir aux opinions publiques pour préserver une image positive, essentielle pour la confiance des clients et partenaires."
+            },
+            {
+                question: "Les 'formations continues sur les tendances du marché' sont un exemple de pratique pour quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Se former et cultiver son mindset de dirigeant",
+                options: [
+                    "Maîtrise de la trésorerie",
+                    "Gestion des fournisseurs",
+                    "Se former et cultiver son mindset de dirigeant",
+                    "Obtention des premiers clients"
+                ],
+                explanation: "Se tenir informé des évolutions du marché et se former continuellement est un aspect clé du développement du dirigeant et de sa capacité à innover."
+            },
+            {
+                question: "Quel est le bénéfice d'un 'budget alloué et du temps dédié à l'innovation' (levier 4) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Permettre l'expérimentation et le développement de nouvelles idées",
+                options: [
+                    "Ignorer la R&D",
+                    "Permettre l'expérimentation et le développement de nouvelles idées",
+                    "Réduire les dépenses",
+                    "Ne rien tester"
+                ],
+                explanation: "Dédier des ressources spécifiques à l'innovation assure que de nouvelles idées sont explorées et développées, évitant que l'innovation ne soit reléguée au second plan."
+            },
+            {
+                question: "La 'simulation des impacts financiers avant un emprunt' (levier 15) est une bonne pratique pour :",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Comprendre la capacité de remboursement et les risques",
+                options: [
+                    "Se lancer sans réfléchir",
+                    "Comprendre la capacité de remboursement et les risques",
+                    "Augmenter l'endettement à tout prix",
+                    "Éviter les banques"
+                ],
+                explanation: "Simuler l'impact d'une dette sur la trésorerie et la rentabilité permet de prendre une décision éclairée et d'éviter un surendettement qui mettrait l'entreprise en difficulté."
+            },
+            {
+                question: "Quel est un avantage d'avoir des 'SOP (Standard Operating Procedures)' (levier 18) pour la gestion d'équipe ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Assurer la cohérence des tâches et faciliter la formation des nouveaux",
+                options: [
+                    "Rendre les tâches plus complexes",
+                    "Assurer la cohérence des tâches et faciliter la formation des nouveaux",
+                    "Réduire la responsabilité des employés",
+                    "Ne pas avoir de processus"
+                ],
+                explanation: "Les SOP garantissent que les tâches sont effectuées de manière cohérente, réduisent les erreurs et simplifient l'intégration des nouvelles recrues, améliorant l'efficacité opérationnelle."
+            },
+            {
+                question: "La 'dépendance à un seul canal' pour l'acquisition de clients (ex: publicités payantes uniquement) est un risque pour quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Créer une machine commerciale prévisible",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des fournisseurs",
+                    "Créer une machine commerciale prévisible",
+                    "Gestion des ressources humaines"
+                ],
+                explanation: "Si ce canal devient inefficace ou trop coûteux, l'entreprise n'aura plus de flux de leads. Une machine prévisible diversifie ses sources d'acquisition."
+            },
+            {
+                question: "Pour un entrepreneur individuel, la 'délégation' peut inclure l'utilisation de :",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Freelances spécialisés ou assistants virtuels",
+                options: [
+                    "Uniquement des employés à temps plein",
+                    "Freelances spécialisés ou assistants virtuels",
+                    "Ne jamais déléguer",
+                    "Uniquement des tâches stratégiques"
+                ],
+                explanation: "La délégation peut prendre diverses formes, et pour les petites structures, faire appel à des freelances ou des assistants virtuels est un moyen efficace d'externaliser des tâches et de libérer du temps."
+            },
+            {
+                question: "L'audit des contrats fournisseurs est une bonne pratique pour quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Gestion des fournisseurs",
+                options: [
+                    "Obtenir ses premiers clients",
+                    "Fidélisation et réachat",
+                    "Gestion des fournisseurs",
+                    "Recherche & Développement"
+                ],
+                explanation: "Auditer les contrats fournisseurs permet de s'assurer du respect des termes, d'identifier les opportunités de renégociation et de gérer les risques liés aux engagements contractuels."
+            },
+            {
+                question: "Quelle est la principale différence entre la 'croissance' et la 'diversification' (levier 6) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "La croissance est l'augmentation de la taille/CA, la diversification est l'extension à de nouvelles activités/marchés.",
+                options: [
+                    "Il n'y a aucune différence",
+                    "La croissance est l'augmentation de la taille/CA, la diversification est l'extension à de nouvelles activités/marchés.",
+                    "La diversification est toujours plus facile que la croissance",
+                    "La croissance ne peut exister sans diversification"
+                ],
+                explanation: "La croissance peut être interne (plus de ventes du même produit) ou externe. La diversification implique de se lancer dans de nouvelles offres ou sur de nouveaux marchés, ce qui est une forme de croissance mais avec des risques et opportunités différents."
+            },
+            {
+                question: "Le 'retour sur investissement (ROI)' est un indicateur clé pour évaluer quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Réinvestir intelligemment",
+                options: [
+                    "Gestion des ressources humaines",
+                    "Travailler sa visibilité",
+                    "Réinvestir intelligemment",
+                    "Obtenir ses premiers clients"
+                ],
+                explanation: "Le ROI permet de mesurer l'efficacité des investissements réalisés, et est donc crucial pour décider où et comment réinvestir les bénéfices pour une croissance rentable."
+            },
+            {
+                question: "Pourquoi est-il important de 'tester régulièrement les scénarios de crise' (levier 20) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Pour s'assurer que les plans d'urgence sont opérationnels et que les équipes sont préparées",
+                options: [
+                    "Pour créer de la panique inutile",
+                    "Pour s'assurer que les plans d'urgence sont opérationnels et que les équipes sont préparées",
+                    "Pour ignorer les risques",
+                    "Pour ne pas avoir de plan"
+                ],
+                explanation: "Les tests de scénarios (simulations de crise) révèlent les failles des plans d'urgence et entraînent les équipes, améliorant la réactivité et l'efficacité en situation réelle."
+            },
+            {
+                question: "La 'création d'un blog' (levier 9) est un excellent moyen de renforcer :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "L'autorité et le référencement naturel (SEO)",
+                options: [
+                    "Uniquement les ventes directes",
+                    "L'autorité et le référencement naturel (SEO)",
+                    "Le bouche-à-oreille négatif",
+                    "Le coût d'acquisition client"
+                ],
+                explanation: "Un blog, en publiant du contenu pertinent, attire du trafic via les moteurs de recherche (SEO) et positionne l'entreprise comme un expert dans son domaine, augmentant son autorité et sa visibilité."
+            },
+            {
+                question: "Un 'bon climat social' au sein de l'entreprise est le résultat d'une bonne gestion de quel levier ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "Gestion des ressources humaines (RH)",
+                options: [
+                    "Gestion de la dette",
+                    "Maîtrise de la trésorerie",
+                    "Gestion des ressources humaines (RH)",
+                    "Gestion des partenariats"
+                ],
+                explanation: "Un climat social positif, caractérisé par une bonne ambiance, la reconnaissance et la communication, est un indicateur clé d'une gestion RH réussie et contribue à la productivité et la rétention."
+            },
+            {
+                question: "Quel est un enjeu majeur de la 'gestion de l'innovation' (levier 4) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Gérer l'équilibre entre l'exploitation des activités actuelles et l'exploration de nouvelles opportunités",
+                options: [
+                    "Ignorer les nouvelles idées",
+                    "Se concentrer uniquement sur les concurrents",
+                    "Gérer l'équilibre entre l'exploitation des activités actuelles et l'exploration de nouvelles opportunités",
+                    "Éviter tout changement"
+                ],
+                explanation: "Les entreprises doivent allouer des ressources à la fois pour optimiser leurs activités existantes (exploitation) et pour explorer de nouvelles pistes (innovation), un équilibre souvent difficile à trouver."
+            },
+            {
+                question: "Le 'coût d'acquisition client (CAC)' est un KPI important pour évaluer l'efficacité de quel levier ?",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "Créer une machine commerciale prévisible",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des ressources humaines",
+                    "Créer une machine commerciale prévisible",
+                    "Recherche & Développement"
+                ],
+                explanation: "Le CAC mesure combien il coûte d'acquérir un nouveau client, un indicateur essentiel pour évaluer la rentabilité des stratégies marketing et commerciales."
+            },
+            {
+                question: "Quel est l'objectif des 'audits réguliers' dans la gestion des risques (levier 5) ?",
+                category: "Structuration & Positionnement",
+                correctAnswer: "Identifier les faiblesses, assurer la conformité et améliorer les contrôles internes",
+                options: [
+                    "Augmenter les coûts",
+                    "Identifier les faiblesses, assurer la conformité et améliorer les contrôles internes",
+                    "Ignorer les problèmes",
+                    "Ralentir les opérations"
+                ],
+                explanation: "Les audits (financiers, opérationnels, de sécurité) sont des outils essentiels pour une gestion des risques proactive, permettant de détecter les vulnérabilités et d'améliorer les processus."
+            },
+            {
+                question: "Le 'développement de partenariats stratégiques' (levier 11) peut ouvrir l'accès à :",
+                category: "Stratégie Commerciale & Client",
+                correctAnswer: "De nouveaux marchés ou de nouvelles technologies",
+                options: [
+                    "Plus de dettes",
+                    "Des clients moins rentables",
+                    "De nouveaux marchés ou de nouvelles technologies",
+                    "Moins de visibilité"
+                ],
+                explanation: "Les partenariats stratégiques peuvent être un accélérateur de croissance en ouvrant des portes vers des clients inaccessibles seuls, ou en partageant des ressources technologiques."
+            },
+            {
+                question: "La 'consolidation des profits' avant de réinvestir massivement est une approche de quel levier ?",
+                category: "Gestion Financière & Pilotage",
+                correctAnswer: "Réinvestir intelligemment",
+                options: [
+                    "Gestion de la dette",
+                    "Gestion des ressources humaines",
+                    "Réinvestir intelligemment",
+                    "Obtention des premiers clients"
+                ],
+                explanation: "Consolider les profits signifie s'assurer que l'entreprise est solide financièrement avant de se lancer dans des investissements importants, réduisant ainsi le risque."
+            },
+            {
+                question: "Quel est un indicateur de 'résilience' pour une entreprise (levier 20) ?",
+                category: "Optimisation & Leadership",
+                correctAnswer: "La capacité à pivoter rapidement en cas de changement majeur de marché",
+                options: [
+                    "La rigidité des processus",
+                    "La capacité à pivoter rapidement en cas de changement majeur de marché",
+                    "La dépendance à un seul fournisseur",
+                    "L'absence de plan B"
+                ],
+                explanation: "La résilience est la capacité d'adaptation et de transformation face à l'adversité ou aux évolutions du marché, souvent illustrée par la capacité à pivoter stratégiquement."
+            }
+            // FIN des 50 questions
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let correctAnswersCount = 0;
+        let totalQuestionsAttempted = 0;
+
+        const quizArea = document.getElementById('quiz-area');
+        const quizEndScreen = document.getElementById('quiz-end-screen');
+        const finalScoreDisplay = document.getElementById('finalScore');
+        const correctAnswersCountDisplay = document.getElementById('correctAnswersCount');
+        const totalQuestionsCountDisplay = document.getElementById('totalQuestionsCount');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Shuffle questions once at the start
+        const shuffledQuestions = shuffleArray([...questions]);
+
+        function loadQuestion() {
+            if (currentQuestionIndex >= shuffledQuestions.length) {
+                showQuizEndScreen();
+                return;
+            }
+
+            const questionData = shuffledQuestions[currentQuestionIndex];
+            quizArea.innerHTML = `
+                <div class="question-card" id="question-${currentQuestionIndex}">
+                    <h5>Question ${currentQuestionIndex + 1} / ${shuffledQuestions.length}: ${questionData.question}</h5>
+                    <div class="options-container">
+                        ${shuffleArray([...questionData.options]).map((option, index) => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question-${currentQuestionIndex}" id="option-${currentQuestionIndex}-${index}" value="${option}">
+                                <label class="form-check-label" for="option-${currentQuestionIndex}-${index}">
+                                    ${option}
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="btn btn-primary btn-submit-answer" onclick="submitAnswer(${currentQuestionIndex})">Valider la réponse</button>
+                    <div class="feedback" id="feedback-${currentQuestionIndex}" style="display:none;"></div>
+                    <button class="btn btn-main btn-next-question mt-3" style="display:none;" onclick="nextQuestion()">Question Suivante <i class="fas fa-arrow-right ms-2"></i></button>
+                </div>
+            `;
+            updateProgressBar();
+        }
+
+        function submitAnswer(questionId) {
+            const selectedOption = document.querySelector(`input[name="question-${questionId}"]:checked`);
+            const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+            const submitBtn = document.querySelector(`#question-${questionId} .btn-submit-answer`);
+            const nextBtn = document.querySelector(`#question-${questionId} .btn-next-question`);
+            const optionsContainer = document.querySelector(`#question-${questionId} .options-container`);
+
+            if (!selectedOption) {
+                feedbackDiv.style.display = 'block';
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.innerHTML = '<h6><i class="fas fa-exclamation-triangle me-2"></i> Attention !</h6><p>Veuillez sélectionner une réponse.</p>';
+                return;
+            }
+
+            const userAnswer = selectedOption.value;
+            const correctAnswer = shuffledQuestions[questionId].correctAnswer;
+            const explanation = shuffledQuestions[questionId].explanation;
+
+            totalQuestionsAttempted++;
+
+            // Disable all radio buttons after submission
+            optionsContainer.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.disabled = true;
+            });
+
+            if (userAnswer === correctAnswer) {
+                score++;
+                correctAnswersCount++;
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.innerHTML = `<h6><i class="fas fa-check-circle me-2"></i> Bonne réponse !</h6><p>${explanation}</p>`;
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.innerHTML = `<h6><i class="fas fa-times-circle me-2"></i> Mauvaise réponse.</h6><p>La bonne réponse était : <strong>${correctAnswer}</strong>.</p><p>${explanation}</p>`;
+            }
+
+            feedbackDiv.style.display = 'block';
+            submitBtn.style.display = 'none';
+            nextBtn.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+            // Scroll to top of quiz container for next question
+            document.querySelector('.quiz-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex) / shuffledQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `Question ${currentQuestionIndex + 1} / ${shuffledQuestions.length}`;
+            if (currentQuestionIndex === shuffledQuestions.length) {
+                progressText.textContent = `Quiz Terminé !`;
+            }
+        }
+
+        function showQuizEndScreen() {
+            quizArea.style.display = 'none';
+            quizEndScreen.style.display = 'block';
+            finalScoreDisplay.textContent = `${score} / ${shuffledQuestions.length}`;
+            correctAnswersCountDisplay.textContent = correctAnswersCount;
+            totalQuestionsCountDisplay.textContent = totalQuestionsAttempted;
+        }
+
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            correctAnswersCount = 0;
+            totalQuestionsAttempted = 0;
+            shuffleArray(shuffledQuestions); // Reshuffle questions for a new experience
+            quizEndScreen.style.display = 'none';
+            quizArea.style.display = 'block';
+            loadQuestion();
+        }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', loadQuestion);
+    </script>
+</body>
+</html>

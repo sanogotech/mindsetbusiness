@@ -3,842 +3,1244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Success Dashboard - 21 Essential Levers</title>
+    <title>Tableau de Bord de Réussite Business - Les 21 Leviers Essentiels</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --info-color: #2980b9;
+            --primary-color: #2c3e50; /* Bleu foncé */
+            --secondary-color: #3498db; /* Bleu clair */
+            --accent-color: #e74c3c; /* Rouge */
+            --light-color: #ecf0f1; /* Gris très clair */
+            --dark-color: #2c3e50; /* Identique au primary */
+            --success-color: #27ae60; /* Vert */
+            --warning-color: #f39c12; /* Orange */
+            --info-color: #2980b9; /* Bleu moyen */
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f7fa;
+            background-color: #f5f7fa; /* Fond léger */
             color: var(--dark-color);
         }
         
         .navbar-brand {
             font-weight: 700;
             font-size: 1.8rem;
+            color: var(--light-color) !important;
         }
         
-        .nav-link {
-            font-weight: 500;
-        }
-        
-        .dashboard-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            padding: 2rem 0;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-        
-        .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 1.5rem;
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.9), rgba(44, 62, 80, 0.7)), url('https://images.unsplash.com/photo-1542744173-8e7e534f3785?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjY1NDl8MHwxfHNlYXJjaHw1NXx8YnVzaW5lc3MlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzE5NzQwNjAzfDA&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse-effect 15s infinite alternate;
+            z-index: 0;
         }
         
-        .card-header {
-            background-color: white;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            font-weight: 600;
-            padding: 1rem 1.5rem;
+        @keyframes pulse-effect {
+            0% { transform: scale(0.8) rotate(0deg); opacity: 0.1; }
+            50% { transform: scale(1.2) rotate(15deg); opacity: 0.2; }
+            100% { transform: scale(0.8) rotate(0deg); opacity: 0.1; }
         }
-        
-        .category-card {
-            border-left: 5px solid var(--secondary-color);
-        }
-        
-        .category-1 {
-            border-left-color: #3498db;
-        }
-        
-        .category-2 {
-            border-left-color: #e74c3c;
-        }
-        
-        .category-3 {
-            border-left-color: #27ae60;
-        }
-        
-        .category-4 {
-            border-left-color: #f39c12;
-        }
-        
-        .kpi-card {
-            text-align: center;
-            padding: 1.5rem;
-        }
-        
-        .kpi-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-        }
-        
-        .kpi-label {
-            font-size: 0.9rem;
-            color: #7f8c8d;
-        }
-        
-        .progress {
-            height: 10px;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-        
-        .progress-bar {
-            background-color: var(--secondary-color);
-        }
-        
-        .lever-card {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .lever-card:hover {
-            background-color: rgba(52, 152, 219, 0.05);
-        }
-        
-        .lever-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            color: var(--secondary-color);
-        }
-        
-        .case-study {
-            background-color: rgba(52, 152, 219, 0.05);
-            border-left: 3px solid var(--secondary-color);
-            padding: 1rem;
-            border-radius: 0 5px 5px 0;
-            margin: 1rem 0;
-        }
-        
-        .tool-item {
-            display: inline-block;
-            background-color: rgba(52, 152, 219, 0.1);
-            color: var(--secondary-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            margin: 0.2rem;
-            font-size: 0.8rem;
-        }
-        
-        .badge-category {
-            font-size: 0.7rem;
-            padding: 0.3rem 0.6rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .chart-container {
+
+        .hero-section .container {
             position: relative;
-            height: 250px;
-            width: 100%;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         
-        .animated-number {
-            font-size: 2.5rem;
-            font-weight: 700;
+        .hero-section p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn-main {
+            background-color: var(--accent-color);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        
+        .btn-main:hover {
+            background-color: #c0392b; /* Rouge plus foncé */
+            color: #fff;
+        }
+        
+        .category-section {
+            padding: 60px 0;
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .accordion-button {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: 8px !important;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background-color: var(--secondary-color);
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .accordion-item {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .accordion-body {
+            padding: 25px;
+            border-top: 1px solid #eee;
+            background-color: #fcfcfc;
+            line-height: 1.7;
+        }
+
+        .accordion-body h6 {
             color: var(--secondary-color);
+            font-weight: 600;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
         }
         
-        /* Animation classes */
+        .accordion-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .accordion-body ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .accordion-body ul li::before {
+            content: "\f00c"; /* FontAwesome check icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--success-color);
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .badge-category {
+            font-size: 0.9rem;
+            padding: 0.5em 0.8em;
+            margin-bottom: 30px;
+            display: inline-block;
+            border-radius: 20px;
+        }
+
+        .badge-category.structuration { background-color: var(--primary-color); }
+        .badge-category.commercial { background-color: var(--accent-color); }
+        .badge-category.financier { background-color: var(--success-color); }
+        .badge-category.optimisation { background-color: var(--warning-color); }
+
+        .case-study {
+            background-color: #e9f5ff; /* Léger bleu pour les cas concrets */
+            border-left: 4px solid var(--info-color);
+            padding: 15px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .case-study h6 {
+            color: var(--info-color);
+            margin-top: 0;
+        }
+        .case-study p {
+            margin-bottom: 5px;
+        }
+
+        .tool-item {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f4f7;
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+            border: 1px solid #e0e4e7;
+        }
+        .tool-item i {
+            color: var(--secondary-color);
+            margin-right: 5px;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .stat-item {
+            margin-bottom: 30px;
+        }
+        
+        .stat-item h3 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation */
         .wow-effect {
-            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .kpi-value {
-                font-size: 2rem;
-            }
-            
-            .animated-number {
-                font-size: 2rem;
-            }
+        .wow-effect.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-rocket me-2"></i>Business Success
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="#"><i class="fas fa-chart-line me-2"></i> Tableau de Bord Business</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Dashboard</a>
+                        <a class="nav-link" href="#introduction">Introduction</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-chart-line me-1"></i> Analytics</a>
+                        <a class="nav-link" href="#levers">Les Leviers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-book me-1"></i> Guides</a>
+                        <a class="nav-link" href="#stats">Statistiques Clés</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-tools me-1"></i> Tools</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-user-circle me-1"></i> Account</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Dashboard Header -->
-    <div class="dashboard-header">
+    <header id="introduction" class="hero-section">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="display-5 fw-bold">Business Success Dashboard</h1>
-                    <p class="lead">Master the 21 essential levers to build a durable, innovative and resilient business</p>
-                    <div class="d-flex align-items-center mt-3">
-                        <div class="me-4">
-                            <span class="badge bg-success me-2"><i class="fas fa-check-circle me-1"></i> Active</span>
-                            <span class="text-white-50">Last updated: <span id="current-date"></span></span>
-                        </div>
-                        <button class="btn btn-light btn-sm"><i class="fas fa-sync-alt me-1"></i> Refresh Data</button>
-                    </div>
-                </div>
-                <div class="col-md-4 text-end d-none d-md-block">
-                    <img src="https://via.placeholder.com/250x150/2c3e50/ecf0f1?text=Business+Growth" alt="Business Growth" class="img-fluid rounded">
-                </div>
-            </div>
+            <h1 class="wow-effect" style="animation-delay: 0.1s;">Maîtrisez les 21 Leviers Essentiels pour un Succès Durable</h1>
+            <p class="lead wow-effect" style="animation-delay: 0.3s;">
+                Découvrez le guide complet pour naviguer l'environnement complexe des affaires. Chaque levier est une pierre angulaire pour la croissance, l'innovation et la résilience de votre entreprise.
+            </p>
+            <a href="#levers" class="btn btn-main wow-effect" style="animation-delay: 0.5s;">Explorer les Leviers</a>
         </div>
-    </div>
+    </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- KPI Overview -->
-        <div class="row mb-4 wow-effect" style="animation-delay: 0.1s;">
-            <div class="col-md-3">
-                <div class="card kpi-card">
-                    <div class="card-body">
-                        <i class="fas fa-chart-line fa-2x mb-2" style="color: var(--success-color);"></i>
-                        <div class="kpi-value animated-number" data-target="12.5">0</div>
-                        <div class="kpi-label">Monthly Growth (%)</div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card kpi-card">
-                    <div class="card-body">
-                        <i class="fas fa-users fa-2x mb-2" style="color: var(--info-color);"></i>
-                        <div class="kpi-value animated-number" data-target="248">0</div>
-                        <div class="kpi-label">New Customers (30d)</div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 62%;" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card kpi-card">
-                    <div class="card-body">
-                        <i class="fas fa-dollar-sign fa-2x mb-2" style="color: var(--warning-color);"></i>
-                        <div class="kpi-value">$<span class="animated-number" data-target="42750">0</span></div>
-                        <div class="kpi-label">Avg. Monthly Revenue</div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 85%;" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card kpi-card">
-                    <div class="card-body">
-                        <i class="fas fa-heart fa-2x mb-2" style="color: var(--accent-color);"></i>
-                        <div class="kpi-value animated-number" data-target="92">0</div>
-                        <div class="kpi-label">Customer Satisfaction</div>
-                        <div class="progress mt-2">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 92%;" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Categories Navigation -->
-        <div class="row mb-4 wow-effect" style="animation-delay: 0.2s;">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Business Success Categories</h5>
-                        <div>
-                            <button class="btn btn-sm btn-outline-primary me-2 active">All</button>
-                            <button class="btn btn-sm btn-outline-primary me-2">Structuration</button>
-                            <button class="btn btn-sm btn-outline-primary me-2">Acquisition</button>
-                            <button class="btn btn-sm btn-outline-primary me-2">Finance</button>
-                            <button class="btn btn-sm btn-outline-primary">Organization</button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <div class="card category-card h-100 category-1">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="lever-icon"><i class="fas fa-chess-board"></i></div>
-                                            <h6 class="mb-0">Structuration & Positionnement</h6>
-                                        </div>
-                                        <p class="small text-muted">6 essential levers to build a solid foundation for your business.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <span class="badge bg-primary">6 Levers</span>
-                                            <a href="#" class="btn btn-sm btn-outline-primary">Explore</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <div class="card category-card h-100 category-2">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="lever-icon"><i class="fas fa-bullseye"></i></div>
-                                            <h6 class="mb-0">Acquisition, Ventes & Clientèle</h6>
-                                        </div>
-                                        <p class="small text-muted">5 powerful levers to attract and retain customers.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <span class="badge bg-danger">5 Levers</span>
-                                            <a href="#" class="btn btn-sm btn-outline-danger">Explore</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <div class="card category-card h-100 category-3">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="lever-icon"><i class="fas fa-chart-pie"></i></div>
-                                            <h6 class="mb-0">Finance, Pilotage & Relations Fournisseurs</h6>
-                                        </div>
-                                        <p class="small text-muted">5 critical levers for financial health and supplier management.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <span class="badge bg-success">5 Levers</span>
-                                            <a href="#" class="btn btn-sm btn-outline-success">Explore</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <div class="card category-card h-100 category-4">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div class="lever-icon"><i class="fas fa-users-cog"></i></div>
-                                            <h6 class="mb-0">Organisation, RH & Leadership</h6>
-                                        </div>
-                                        <p class="small text-muted">5 key levers for team management and leadership.</p>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <span class="badge bg-warning">5 Levers</span>
-                                            <a href="#" class="btn btn-sm btn-outline-warning">Explore</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Levers List with Details -->
-        <div class="row wow-effect" style="animation-delay: 0.3s;">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">21 Essential Business Levers</h5>
-                        <div class="input-group input-group-sm" style="width: 200px;">
-                            <input type="text" class="form-control" placeholder="Search levers...">
-                            <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="accordion" id="leversAccordion">
-                            <!-- Lever 1 -->
-                            <div class="accordion-item mb-3">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                        <span class="badge bg-primary me-2">1</span> Définir une niche rentable
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#leversAccordion">
-                                    <div class="accordion-body">
-                                        <h6>Objectives</h6>
-                                        <ul>
-                                            <li>Identify a specific segment with a real, unmet need</li>
-                                            <li>Evaluate market size, purchasing power, competition</li>
-                                            <li>Position to capture demand with an adapted offer</li>
-                                        </ul>
-                                        
-                                        <h6 class="mt-3">Challenges</h6>
-                                        <ul>
-                                            <li>Tendency to "cover too wide" and lose efficiency</li>
-                                            <li>Difficulty measuring real segment profitability</li>
-                                            <li>Risk of underestimating customer needs or competition</li>
-                                        </ul>
-                                        
-                                        <div class="case-study mt-3">
-                                            <h6><i class="fas fa-lightbulb me-2"></i>Case Study</h6>
-                                            <p>A young entrepreneur launched a coaching service exclusively for women transitioning to digital careers. By precisely targeting this niche, she built an ultra-adapted offer and avoided direct competition with generalist coaching services.</p>
-                                            <p class="text-success"><strong>Result:</strong> 3x conversion rate compared to generalist approach</p>
-                                        </div>
-                                        
-                                        <h6 class="mt-3">Best Practices</h6>
-                                        <div class="d-flex flex-wrap mt-2">
-                                            <span class="tool-item"><i class="fas fa-chart-line me-1"></i> Market Research</span>
-                                            <span class="tool-item"><i class="fas fa-flask me-1"></i> MVP Testing</span>
-                                            <span class="tool-item"><i class="fas fa-tools me-1"></i> Google Trends</span>
-                                            <span class="tool-item"><i class="fas fa-search me-1"></i> SEMrush</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Lever 2 -->
-                            <div class="accordion-item mb-3">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                        <span class="badge bg-primary me-2">2</span> Structurer ton offre (valeur perçue et différenciation)
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#leversAccordion">
-                                    <div class="accordion-body">
-                                        <h6>Objectives</h6>
-                                        <ul>
-                                            <li>Create a clear proposition explaining why customers should choose your offer</li>
-                                            <li>Clearly define benefits, results and promise</li>
-                                            <li>Build messaging that speaks directly to customer pain points or desires</li>
-                                        </ul>
-                                        
-                                        <h6 class="mt-3">Challenges</h6>
-                                        <ul>
-                                            <li>Overly complex offers, lack of clarity, diluted messaging</li>
-                                            <li>Difficulty highlighting differentiation against competitors</li>
-                                            <li>Underestimating importance of social proof (testimonials, case studies)</li>
-                                        </ul>
-                                        
-                                        <div class="case-study mt-3">
-                                            <h6><i class="fas fa-lightbulb me-2"></i>Case Study</h6>
-                                            <p>A digital marketing agency structured its offers into three clear packages (starter, growth, premium), with specific benefits and case studies for each, which facilitated sales and upselling.</p>
-                                            <p class="text-success"><strong>Result:</strong> 25% increase in average deal size</p>
-                                        </div>
-                                        
-                                        <h6 class="mt-3">Best Practices</h6>
-                                        <div class="d-flex flex-wrap mt-2">
-                                            <span class="tool-item"><i class="fas fa-palette me-1"></i> Value Prop Canvas</span>
-                                            <span class="tool-item"><i class="fas fa-code-branch me-1"></i> A/B Testing</span>
-                                            <span class="tool-item"><i class="fas fa-comment-alt me-1"></i> Social Proof</span>
-                                            <span class="tool-item"><i class="fas fa-boxes me-1"></i> Packaging</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Lever 7 -->
-                            <div class="accordion-item mb-3">
-                                <h2 class="accordion-header" id="headingSeven">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
-                                        <span class="badge bg-danger me-2">7</span> Obtenir ses premiers clients
-                                    </button>
-                                </h2>
-                                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#leversAccordion">
-                                    <div class="accordion-body">
-                                        <h6>Objectives</h6>
-                                        <ul>
-                                            <li>Quickly gain commercial proof of concept</li>
-                                            <li>Validate product-market fit</li>
-                                            <li>Generate first positive cash flow</li>
-                                        </ul>
-                                        
-                                        <h6 class="mt-3">Challenges</h6>
-                                        <ul>
-                                            <li>Fear of failure or poor sales blocking action</li>
-                                            <li>Difficulty quickly identifying good prospects</li>
-                                            <li>Lack of simple sales tools or processes</li>
-                                        </ul>
-                                        
-                                        <div class="case-study mt-3">
-                                            <h6><i class="fas fa-lightbulb me-2"></i>Case Study</h6>
-                                            <p>An independent consultant organized a free online workshop to attract his first clients, converting 30% of participants into paying customers.</p>
-                                            <p class="text-success"><strong>Result:</strong> 5 new contracts signed within 2 weeks</p>
-                                        </div>
-                                        
-                                        <h6 class="mt-3">Best Practices</h6>
-                                        <div class="d-flex flex-wrap mt-2">
-                                            <span class="tool-item"><i class="fas fa-network-wired me-1"></i> Personal Network</span>
-                                            <span class="tool-item"><i class="fas fa-file-alt me-1"></i> Sales Scripts</span>
-                                            <span class="tool-item"><i class="fas fa-gift me-1"></i> Special Offers</span>
-                                            <span class="tool-item"><i class="fas fa-comments me-1"></i> Customer Feedback</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Lever 12 -->
-                            <div class="accordion-item mb-3">
-                                <h2 class="accordion-header" id="headingTwelve">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve">
-                                        <span class="badge bg-success me-2">12</span> Maîtriser comptabilité et trésorerie
-                                    </button>
-                                </h2>
-                                <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve" data-bs-parent="#leversAccordion">
-                                    <div class="accordion-body">
-                                        <h6>Objectives</h6>
-                                        <ul>
-                                            <li>Have a clear view of financial health</li>
-                                            <li>Anticipate cash flow</li>
-                                            <li>Optimize costs and investments</li>
-                                        </ul>
-                                        
-                                        <h6 class="mt-3">Challenges</h6>
-                                        <ul>
-                                            <li>Underestimation of fixed and variable costs</li>
-                                            <li>Poor management of payment terms</li>
-                                            <li>Lack of reliable forecasts</li>
-                                        </ul>
-                                        
-                                        <div class="case-study mt-3">
-                                            <h6><i class="fas fa-lightbulb me-2"></i>Case Study</h6>
-                                            <p>A startup adopted online accounting software allowing instant tracking of flows, facilitating decision making.</p>
-                                            <p class="text-success"><strong>Result:</strong> Reduced late payments by 40%</p>
-                                        </div>
-                                        
-                                        <h6 class="mt-3">Best Practices</h6>
-                                        <div class="d-flex flex-wrap mt-2">
-                                            <span class="tool-item"><i class="fas fa-calculator me-1"></i> Accounting Software</span>
-                                            <span class="tool-item"><i class="fas fa-calendar-alt me-1"></i> Annual Budget</span>
-                                            <span class="tool-item"><i class="fas fa-chart-bar me-1"></i> Variance Analysis</span>
-                                            <span class="tool-item"><i class="fas fa-piggy-bank me-1"></i> Cash Reserves</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Lever 17 -->
-                            <div class="accordion-item mb-3">
-                                <h2 class="accordion-header" id="headingSeventeen">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeventeen">
-                                        <span class="badge bg-warning me-2">17</span> Gestion des ressources humaines (RH)
-                                    </button>
-                                </h2>
-                                <div id="collapseSeventeen" class="accordion-collapse collapse" aria-labelledby="headingSeventeen" data-bs-parent="#leversAccordion">
-                                    <div class="accordion-body">
-                                        <h6>Objectives</h6>
-                                        <ul>
-                                            <li>Recruit right profiles adapted to company culture</li>
-                                            <li>Train and develop internal skills</li>
-                                            <li>Maintain engagement and motivation</li>
-                                        </ul>
-                                        
-                                        <h6 class="mt-3">Challenges</h6>
-                                        <ul>
-                                            <li>Difficulty attracting talent in competitive context</li>
-                                            <li>High turnover and loss of know-how</li>
-                                            <li>Lack of structured HR processes</li>
-                                        </ul>
-                                        
-                                        <div class="case-study mt-3">
-                                            <h6><i class="fas fa-lightbulb me-2"></i>Case Study</h6>
-                                            <p>A digital agency implemented an internal mentoring program, increasing employee retention by 30%.</p>
-                                            <p class="text-success"><strong>Result:</strong> Reduced recruitment costs by 25%</p>
-                                        </div>
-                                        
-                                        <h6 class="mt-3">Best Practices</h6>
-                                        <div class="d-flex flex-wrap mt-2">
-                                            <span class="tool-item"><i class="fas fa-user-plus me-1"></i> Recruitment Process</span>
-                                            <span class="tool-item"><i class="fas fa-graduation-cap me-1"></i> Training Plan</span>
-                                            <span class="tool-item"><i class="fas fa-heart me-1"></i> Company Culture</span>
-                                            <span class="tool-item"><i class="fas fa-poll me-1"></i> Engagement Surveys</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-primary">View All 21 Levers</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <main class="container my-5">
+        <section id="levers" class="category-section">
+            <h2 class="category-title wow-effect">Les 21 Leviers pour propulser votre Business</h2>
             
-            <!-- Right Sidebar -->
-            <div class="col-md-4">
-                <!-- Implementation Progress -->
-                <div class="card mb-4 wow-effect" style="animation-delay: 0.4s;">
-                    <div class="card-header">
-                        <h6 class="mb-0"><i class="fas fa-tasks me-2"></i>Your Implementation Progress</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <small>Structuration (6/6)</small>
-                                <small>75%</small>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <small>Acquisition (3/5)</small>
-                                <small>60%</small>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <small>Finance (2/5)</small>
-                                <small>40%</small>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="d-flex justify-content-between mb-1">
-                                <small>Organization (1/5)</small>
-                                <small>20%</small>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-sm btn-outline-primary">View Detailed Plan</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recommended Tools -->
-                <div class="card mb-4 wow-effect" style="animation-delay: 0.5s;">
-                    <div class="card-header">
-                        <h6 class="mb-0"><i class="fas fa-tools me-2"></i>Recommended Tools</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex align-items-start mb-3">
-                            <img src="https://via.placeholder.com/40/3498db/ffffff?text=GT" alt="Google Trends" class="me-3 rounded" width="40" height="40">
-                            <div>
-                                <h6 class="mb-0">Google Trends</h6>
-                                <small class="text-muted">For niche research and market validation</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start mb-3">
-                            <img src="https://via.placeholder.com/40/e74c3c/ffffff?text=SM" alt="SEMrush" class="me-3 rounded" width="40" height="40">
-                            <div>
-                                <h6 class="mb-0">SEMrush</h6>
-                                <small class="text-muted">For competitive analysis and SEO</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start mb-3">
-                            <img src="https://via.placeholder.com/40/27ae60/ffffff?text=QB" alt="QuickBooks" class="me-3 rounded" width="40" height="40">
-                            <div>
-                                <h6 class="mb-0">QuickBooks</h6>
-                                <small class="text-muted">For accounting and financial management</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start mb-3">
-                            <img src="https://via.placeholder.com/40/2980b9/ffffff?text=PB" alt="Power BI" class="me-3 rounded" width="40" height="40">
-                            <div>
-                                <h6 class="mb-0">Power BI</h6>
-                                <small class="text-muted">For KPI tracking and data visualization</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-start">
-                            <img src="https://via.placeholder.com/40/f39c12/ffffff?text=ZP" alt="Zapier" class="me-3 rounded" width="40" height="40">
-                            <div>
-                                <h6 class="mb-0">Zapier</h6>
-                                <small class="text-muted">For automation and workflow optimization</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recent Case Studies -->
-                <div class="card wow-effect" style="animation-delay: 0.6s;">
-                    <div class="card-header">
-                        <h6 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Recent Success Stories</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <h6 class="mb-1">Coaching Niche Specialization</h6>
-                            <p class="small text-muted">A coach focused exclusively on women transitioning to digital careers achieved 3x higher conversion rates than generalist competitors.</p>
-                            <span class="badge bg-primary badge-category">Structuration</span>
-                        </div>
-                        <div class="mb-3">
-                            <h6 class="mb-1">Automated Sales Funnel</h6>
-                            <p class="small text-muted">A SaaS company implemented a complete online qualification funnel, reducing average closing time by 40%.</p>
-                            <span class="badge bg-danger badge-category">Acquisition</span>
-                        </div>
-                        <div class="mb-3">
-                            <h6 class="mb-1">Financial Dashboard</h6>
-                            <p class="small text-muted">A startup adopted real-time financial tracking, reducing late payments by 40% and improving cash flow.</p>
-                            <span class="badge bg-success badge-category">Finance</span>
-                        </div>
-                        <div>
-                            <h6 class="mb-1">Mentoring Program</h6>
-                            <p class="small text-muted">An agency's internal mentoring program increased employee retention by 30%, reducing recruitment costs.</p>
-                            <span class="badge bg-warning badge-category">Organization</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <h3 class="category-title-sub mt-5 mb-4 text-center wow-effect" style="animation-delay: 0.1s;">
+                <span class="badge badge-category structuration"><i class="fas fa-sitemap me-2"></i> 1. Structuration & Positionnement</span>
+            </h3>
+            <div class="accordion" id="leversAccordionStructuration">
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.2s;">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <span class="badge bg-primary me-2">1</span> Définir une niche rentable
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Identifier un segment spécifique avec un besoin réel et non satisfait</li>
+                                <li>Évaluer la taille du marché, le pouvoir d’achat, la compétition</li>
+                                <li>Se positionner pour capter la demande avec une offre adaptée</li>
+                            </ul>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white mt-5">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="mb-3"><i class="fas fa-rocket me-2"></i>Business Success</h5>
-                    <p class="small text-white-50">Master the 21 essential levers to build a durable, innovative and resilient business.</p>
-                    <div class="d-flex mt-4">
-                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Tendance à vouloir “couvrir trop large” et perdre en efficacité</li>
+                                <li>Difficulté à mesurer la rentabilité réelle du segment ciblé</li>
+                                <li>Risque de sous-estimer les besoins clients ou la concurrence</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une jeune entrepreneure a lancé un service de coaching uniquement dédié aux femmes en reconversion professionnelle dans le secteur du digital. En ciblant précisément cette niche, elle a pu construire une offre ultra-adaptée et a évité la compétition directe sur le coaching généraliste.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une startup tech s’est repositionnée sur un sous-segment niche et a multiplié son taux de conversion par 3. Un artisan local a ciblé un public précis (ex. coiffeurs afro) et a explosé ses ventes en 1 an.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-chart-line me-1"></i> Étude terrain qualitative et quantitative</span>
+                                <span class="tool-item"><i class="fas fa-flask me-1"></i> Construire un MVP (Produit Minimum Viable)</span>
+                                <span class="tool-item"><i class="fas fa-tools me-1"></i> Google Trends</span>
+                                <span class="tool-item"><i class="fas fa-search me-1"></i> SEMrush</span>
+                                <span class="tool-item"><i class="fas fa-poll me-1"></i> Enquêtes clients</span>
+                                <span class="tool-item"><i class="fas fa-star me-1"></i> Privilégier la spécialisation</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2 mb-4 mb-md-0">
-                    <h6 class="mb-3">Resources</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#" class="text-white-50">Guides</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Tools</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Templates</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Case Studies</a></li>
-                        <li><a href="#" class="text-white-50">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-2 mb-4 mb-md-0">
-                    <h6 class="mb-3">Company</h6>
-                    <ul class="list-unstyled small">
-                        <li class="mb-2"><a href="#" class="text-white-50">About</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Team</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Careers</a></li>
-                        <li class="mb-2"><a href="#" class="text-white-50">Contact</a></li>
-                        <li><a href="#" class="text-white-50">Privacy</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h6 class="mb-3">Newsletter</h6>
-                    <p class="small text-white-50">Subscribe to get updates and business tips.</p>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control form-control-sm" placeholder="Your email">
-                        <button class="btn btn-primary btn-sm" type="button">Subscribe</button>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.3s;">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            <span class="badge bg-primary me-2">2</span> Structurer ton offre (valeur perçue et différenciation)
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Créer une proposition claire qui explique pourquoi le client doit choisir votre offre</li>
+                                <li>Définir clairement les bénéfices, les résultats et la promesse</li>
+                                <li>Construire un discours qui parle directement à la douleur ou au désir du client</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Offres trop complexes, manque de clarté, dilution du message</li>
+                                <li>Difficulté à mettre en avant la différenciation face aux concurrents</li>
+                                <li>Sous-estimer l’importance de la preuve sociale (témoignages, cas clients)</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une agence marketing digital a décliné ses offres en trois packs clairs (starter, growth, premium), avec des bénéfices précis et des études de cas pour chacun, ce qui a facilité la vente et la montée en gamme.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un coach a revu son offre en simplifiant et a doublé son taux de transformation. Un e-commerce a segmenté son offre par persona et a augmenté la satisfaction client.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-palette me-1"></i> Utiliser le Value Proposition Canvas</span>
+                                <span class="tool-item"><i class="fas fa-code-branch me-1"></i> Tester plusieurs versions d’argumentaires (A/B testing)</span>
+                                <span class="tool-item"><i class="fas fa-comment-alt me-1"></i> Intégrer des preuves sociales, chiffres, études de cas, certifications</span>
+                                <span class="tool-item"><i class="fas fa-boxes me-1"></i> Construire des packages clairs avec des prix cohérents</span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="small text-white-50 mb-0">We'll never share your email with others.</p>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.4s;">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            <span class="badge bg-primary me-2">3</span> Définir un modèle économique rentable (prix, marges, canaux)
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>S’assurer que chaque vente génère un bénéfice suffisant</li>
+                                <li>Construire un modèle scalable pour passer à l’échelle sans exploser les coûts</li>
+                                <li>Choisir les canaux de vente et de distribution adaptés à la cible</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Sous-estimer les coûts indirects (marketing, SAV, logistique)</li>
+                                <li>Choisir un pricing trop bas par peur de perdre des clients</li>
+                                <li>Difficulté à diversifier les sources de revenus</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise de formation en ligne a testé plusieurs stratégies tarifaires avant d’adopter un modèle d’abonnement annuel avec accès à toute la bibliothèque, augmentant ainsi son CA moyen par client.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un producteur local a ajouté un abonnement mensuel à ses ventes ponctuelles, générant un revenu stable. Une startup SaaS a adopté un pricing freemium puis premium, multipliant par 4 son CA en 2 ans.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-chart-area me-1"></i> Réaliser un business model canvas détaillé</span>
+                                <span class="tool-item"><i class="fas fa-money-bill-wave me-1"></i> Tester plusieurs prix et offres en conditions réelles</span>
+                                <span class="tool-item"><i class="fas fa-hand-holding-usd me-1"></i> Intégrer des sources complémentaires (abonnements, upsells, services annexes)</span>
+                                <span class="tool-item"><i class="fas fa-percent me-1"></i> Analyse régulière des marges nettes vs brutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.5s;">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                            <span class="badge bg-primary me-2">4</span> Gestion de l’innovation et de la stratégie
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Garder une longueur d’avance face à la concurrence</li>
+                                <li>Identifier les nouvelles tendances, technologies et besoins clients</li>
+                                <li>Définir une vision claire et adaptable</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Ne pas se reposer sur les acquis, éviter la routine</li>
+                                <li>Risque de dispersion avec trop d’idées non testées</li>
+                                <li>Gestion des ressources entre exploitation et innovation</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une PME du secteur agroalimentaire a intégré une cellule innovation qui a développé un produit bio en 6 mois, générant un nouveau segment de revenus.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une entreprise a pivoté son offre suite à la veille technologique et a gagné 30% de parts de marché. Une PME organise des sessions d’idéation mensuelles impliquant toute l’équipe.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-eye me-1"></i> Mettre en place une veille structurée</span>
+                                <span class="tool-item"><i class="fas fa-lightbulb me-1"></i> Consacrer un budget et du temps dédié à l’innovation</span>
+                                <span class="tool-item"><i class="fas fa-users-cog me-1"></i> Favoriser la culture d’entreprise orientée test et apprentissage rapide</span>
+                                <span class="tool-item"><i class="fas fa-chart-pie me-1"></i> Piloter la stratégie avec des indicateurs clairs et des revues périodiques</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.6s;">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                            <span class="badge bg-primary me-2">5</span> Gestion des risques multifactoriels (financiers, cyber, RH, juridiques, réputation)
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Identifier les menaces potentielles sur toutes les dimensions du business</li>
+                                <li>Mettre en place des plans d’actions préventifs et correctifs</li>
+                                <li>Assurer la continuité des opérations en cas de crise</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Sous-estimation des risques cyber et compliance</li>
+                                <li>Absence de plan de crise ou de sauvegardes régulières</li>
+                                <li>Gestion complexe des risques liés aux ressources humaines (turnover, conflits)</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise IT a mis en place un PCA incluant la formation de ses équipes et la sécurisation de ses infrastructures, limitant l’impact d’un incident majeur.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME victime d’une attaque cyber a pu redémarrer en 48h grâce aux backups. Une startup a évité un litige grâce à une bonne veille juridique.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-map-marked-alt me-1"></i> Réaliser une cartographie détaillée des risques</span>
+                                <span class="tool-item"><i class="fas fa-clipboard-list me-1"></i> Mettre en place un Plan de Continuité d’Activité (PCA) et un Plan de Reprise d’Activité (PRA)</span>
+                                <span class="tool-item"><i class="fas fa-user-shield me-1"></i> Former les équipes à la gestion des risques</span>
+                                <span class="tool-item"><i class="fas fa-umbrella-beach me-1"></i> Souscrire aux assurances adaptées</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.7s;">
+                    <h2 class="accordion-header" id="headingSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+                            <span class="badge bg-primary me-2">6</span> Gestion de la croissance et diversification progressive
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#leversAccordionStructuration">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Étendre l’offre ou les marchés sans perdre en qualité</li>
+                                <li>Piloter la montée en charge des opérations</li>
+                                <li>Identifier les nouveaux segments ou services à valeur</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Croissance trop rapide menant à la saturation ou à la perte de contrôle</li>
+                                <li>Diversification mal préparée pouvant disperser les ressources</li>
+                                <li>Difficulté à ajuster les process et équipes rapidement</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une société de services IT a lancé progressivement une offre SaaS après avoir consolidé ses prestations de service, assurant ainsi un double flux de revenus stable.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une marque de cosmétiques est passée du B2C au B2B en 12 mois avec succès. Une PME a diversifié ses canaux de vente (e-commerce, boutiques physiques, partenaires).</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-road me-1"></i> Construire une roadmap claire de développement</span>
+                                <span class="tool-item"><i class="fas fa-check-double me-1"></i> Prioriser les initiatives selon ROI et capacité interne</span>
+                                <span class="tool-item"><i class="fas fa-users-line me-1"></i> Impliquer les équipes dans la montée en compétences</span>
+                                <span class="tool-item"><i class="fas fa-robot me-1"></i> Automatiser et déléguer en même temps que la croissance</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="bg-darker py-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start">
-                        <p class="small mb-0 text-white-50">© 2023 Business Success Dashboard. All rights reserved.</p>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <p class="small mb-0 text-white-50">Made with <i class="fas fa-heart text-danger"></i> for entrepreneurs</p>
+
+            <h3 class="category-title-sub mt-5 mb-4 text-center wow-effect" style="animation-delay: 0.8s;">
+                <span class="badge badge-category commercial"><i class="fas fa-handshake me-2"></i> 2. Stratégie Commerciale & Client</span>
+            </h3>
+            <div class="accordion" id="leversAccordionCommercial">
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 0.9s;">
+                    <h2 class="accordion-header" id="headingSeven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven">
+                            <span class="badge bg-danger me-2">7</span> Obtenir ses premiers clients
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#leversAccordionCommercial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Gagner rapidement des preuves de concept commercial</li>
+                                <li>Valider l’adéquation offre-marché</li>
+                                <li>Générer un premier cash flow positif</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Peur de l’échec ou de mal vendre qui bloque l’action</li>
+                                <li>Difficulté à identifier les bons prospects rapidement</li>
+                                <li>Absence d’outils ou de process de vente simples</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Un consultant indépendant a organisé un atelier gratuit en ligne pour attirer ses premiers clients, transformant 30% des participants en clients payants.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un freelance a décroché ses 5 premiers contrats via LinkedIn et appels ciblés. Une start-up a organisé un webinar d’introduction et signé 10 clients en 1 mois.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-network-wired me-1"></i> Prospecter via son réseau personnel et professionnel</span>
+                                <span class="tool-item"><i class="fas fa-file-alt me-1"></i> Utiliser des scripts de vente adaptés et bien préparés</span>
+                                <span class="tool-item"><i class="fas fa-gift me-1"></i> Proposer des offres spéciales ou pilotes pour faciliter la prise de décision</span>
+                                <span class="tool-item"><i class="fas fa-comments me-1"></i> Recueillir les feedbacks clients systématiquement</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.0s;">
+                    <h2 class="accordion-header" id="headingEight">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight">
+                            <span class="badge bg-danger me-2">8</span> Créer une machine commerciale prévisible
+                        </button>
+                    </h2>
+                    <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#leversAccordionCommercial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Mettre en place un tunnel de conversion efficace</li>
+                                <li>Automatiser le suivi et la relance des prospects</li>
+                                <li>Générer un flux constant de leads qualifiés</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Dépendance à un canal unique (ex. bouche à oreille)</li>
+                                <li>Manque de suivi et de nurturing des prospects</li>
+                                <li>Process commercial trop long ou trop complexe</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une société SaaS a mis en place un tunnel complet de qualification en ligne, réduisant le temps moyen de closing de 40%.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une formatrice génère 1 000€ / semaine grâce à un tunnel email + vidéos. Une PME a doublé son taux de conversion avec un CRM simple et une séquence de relance.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-filter me-1"></i> Construire un funnel clair (attirer, convertir, vendre, fidéliser)</span>
+                                <span class="tool-item"><i class="fas fa-robot me-1"></i> Utiliser des outils d’automatisation (CRM, email marketing)</span>
+                                <span class="tool-item"><i class="fas fa-chart-bar me-1"></i> Définir des KPI clairs pour chaque étape du tunnel</span>
+                                <span class="tool-item"><i class="fas fa-users-line me-1"></i> Former les équipes commerciales</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.1s;">
+                    <h2 class="accordion-header" id="headingNine">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine">
+                            <span class="badge bg-danger me-2">9</span> Travailler sa visibilité et son autorité
+                        </button>
+                    </h2>
+                    <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#leversAccordionCommercial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Devenir une référence dans son domaine</li>
+                                <li>Créer une relation de confiance avec la communauté cible</li>
+                                <li>Développer la notoriété de la marque et des produits</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Difficulté à produire du contenu à valeur régulière</li>
+                                <li>Surcharger les canaux sans cohérence</li>
+                                <li>Négliger le storytelling et la preuve sociale</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise tech a développé une série de vidéos explicatives et tutoriels, gagnant en visibilité et générant des leads qualifiés.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un consultant a doublé son CA après 6 mois de posts LinkedIn bi-hebdomadaires. Une marque B2B a amélioré sa notoriété via un podcast mensuel.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-feather-alt me-1"></i> Publier régulièrement sur les réseaux sociaux et blogs</span>
+                                <span class="tool-item"><i class="fas fa-bullhorn me-1"></i> Partager des études de cas, témoignages clients, chiffres clés</span>
+                                <span class="tool-item"><i class="fas fa-book-open me-1"></i> Utiliser le storytelling pour humaniser la marque</span>
+                                <span class="tool-item"><i class="fas fa-microphone-alt me-1"></i> Participer à des événements, podcasts, webinars</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.2s;">
+                    <h2 class="accordion-header" id="headingTen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen">
+                            <span class="badge bg-danger me-2">10</span> Fidélisation et réachat
+                        </button>
+                    </h2>
+                    <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#leversAccordionCommercial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Créer une clientèle récurrente et engagée</li>
+                                <li>Augmenter la valeur client à vie (CLV)</li>
+                                <li>Bénéficier de recommandations et bouche-à-oreille</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Concentration excessive sur l’acquisition au détriment de la fidélisation</li>
+                                <li>Mauvais suivi post-vente, absence de relance</li>
+                                <li>Offres peu incitatives pour le réachat</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une société de services a lancé un programme d’abonnement avec coaching personnalisé, fidélisant 70% de ses clients sur 12 mois.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une boutique e-commerce a vu son CA augmenter de 35% grâce aux campagnes de réactivation. Un SaaS a réduit son taux de churn de 15% via un onboarding et un support proactif.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-award me-1"></i> Mettre en place un programme de fidélité ou VIP</span>
+                                <span class="tool-item"><i class="fas fa-envelope-open-text me-1"></i> Envoyer des emails personnalisés de remerciement et relance</span>
+                                <span class="tool-item"><i class="fas fa-tags me-1"></i> Proposer des offres exclusives aux clients existants</span>
+                                <span class="tool-item"><i class="fas fa-smile me-1"></i> Recueillir régulièrement la satisfaction client</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.3s;">
+                    <h2 class="accordion-header" id="headingEleven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEleven">
+                            <span class="badge bg-danger me-2">11</span> Gestion des partenariats
+                        </button>
+                    </h2>
+                    <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven" data-bs-parent="#leversAccordionCommercial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Créer des synergies avec des acteurs complémentaires</li>
+                                <li>Accéder à de nouveaux marchés ou ressources</li>
+                                <li>Partager les risques et coûts</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Sélection des partenaires alignés sur valeurs et objectifs</li>
+                                <li>Formalisation juridique et financière claire</li>
+                                <li>Gestion des conflits ou désaccords</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise d’événementiel a noué un partenariat avec un réseau d’hôtels pour proposer des offres packagées, boostant ses ventes de 40%.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une start-up tech a multiplié par 3 ses clients via un partenariat avec des distributeurs. Une PME locale a sécurisé ses approvisionnements via des partenariats stratégiques.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-handshake me-1"></i> Construire des partenariats win-win basés sur la confiance</span>
+                                <span class="tool-item"><i class="fas fa-file-contract me-1"></i> Formaliser par contrat clair (objectifs, responsabilités, rémunérations)</span>
+                                <span class="tool-item"><i class="fas fa-calendar-check me-1"></i> Piloter la relation par des revues régulières</span>
+                                <span class="tool-item"><i class="fas fa-users-class me-1"></i> Impliquer les partenaires dans la co-création</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-title-sub mt-5 mb-4 text-center wow-effect" style="animation-delay: 1.4s;">
+                <span class="badge badge-category financier"><i class="fas fa-money-bill-wave me-2"></i> 3. Gestion Financière & Pilotage</span>
+            </h3>
+            <div class="accordion" id="leversAccordionFinancial">
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.5s;">
+                    <h2 class="accordion-header" id="headingTwelve">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwelve">
+                            <span class="badge bg-success me-2">12</span> Maîtriser comptabilité et trésorerie
+                        </button>
+                    </h2>
+                    <div id="collapseTwelve" class="accordion-collapse collapse" aria-labelledby="headingTwelve" data-bs-parent="#leversAccordionFinancial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Avoir une vision claire de la santé financière</li>
+                                <li>Anticiper les flux de trésorerie</li>
+                                <li>Optimiser les coûts et investissements</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Sous-estimation des charges fixes et variables</li>
+                                <li>Mauvaise gestion des délais de paiement</li>
+                                <li>Absence de prévisionnel fiable</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une startup a adopté un logiciel de comptabilité en ligne permettant un suivi instantané des flux, facilitant la prise de décision.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME a été sauvée d’une crise de liquidité grâce à un tableau de bord trésorerie rigoureux. Un entrepreneur a évité un surendettement par une gestion proactive.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-calculator me-1"></i> Utiliser des logiciels adaptés (Odoo, QuickBooks, Excel avancé)</span>
+                                <span class="tool-item"><i class="fas fa-calendar-alt me-1"></i> Établir un budget annuel puis un suivi mensuel rigoureux</span>
+                                <span class="tool-item"><i class="fas fa-chart-bar me-1"></i> Analyser régulièrement les écarts entre prévu et réalisé</span>
+                                <span class="tool-item"><i class="fas fa-piggy-bank me-1"></i> Mettre en place des réserves de trésorerie de sécurité</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.6s;">
+                    <h2 class="accordion-header" id="headingThirteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThirteen">
+                            <span class="badge bg-success me-2">13</span> Suivre KPIs et marges
+                        </button>
+                    </h2>
+                    <div id="collapseThirteen" class="accordion-collapse collapse" aria-labelledby="headingThirteen" data-bs-parent="#leversAccordionFinancial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Mesurer la performance commerciale et opérationnelle</li>
+                                <li>Identifier les leviers à optimiser</li>
+                                <li>Faciliter les prises de décision</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Collecte et traitement des données peu structurés</li>
+                                <li>Trop d’indicateurs sans priorité</li>
+                                <li>Manque d’analyse qualitative des chiffres</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise a déployé un dashboard Power BI pour visualiser ses données commerciales en temps réel, facilitant les ajustements rapides.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un coach digital a doublé ses ventes en se concentrant sur le canal le plus rentable. Une PME a amélioré ses marges de 15% après une revue KPI mensuelle.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-key me-1"></i> Définir 5 KPIs clés (CA, marge, taux de conversion, panier moyen, coûts d’acquisition)</span>
+                                <span class="tool-item"><i class="fas fa-chart-line me-1"></i> Mettre en place un tableau de bord simple et partagé</span>
+                                <span class="tool-item"><i class="fas fa-sync-alt me-1"></i> Analyser les tendances et faire des revues régulières</span>
+                                <span class="tool-item"><i class="fas fa-comments-dollar me-1"></i> Croiser données quantitatives et feedback clients</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.7s;">
+                    <h2 class="accordion-header" id="headingFourteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFourteen">
+                            <span class="badge bg-success me-2">14</span> Réinvestir intelligemment
+                        </button>
+                    </h2>
+                    <div id="collapseFourteen" class="accordion-collapse collapse" aria-labelledby="headingFourteen" data-bs-parent="#leversAccordionFinancial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Utiliser les profits pour soutenir la croissance</li>
+                                <li>Prioriser les investissements à fort ROI</li>
+                                <li>Équilibrer entre croissance et sécurité financière</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Réinvestir dans des projets peu rentables ou non alignés</li>
+                                <li>Manque de discipline budgétaire</li>
+                                <li>Négliger l’épargne ou fonds de réserve</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une société de service a planifié ses investissements sur 12 mois, évitant les dépenses inutiles et maximisant l’impact.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un coach a investi dans la publicité et un assistant virtuel, générant un triplement du CA. Une PME a consolidé sa position en réinvestissant dans la R&D et l’innovation.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-wallet me-1"></i> Allouer les bénéfices selon un plan précis (marketing, RH, outils, R&D)</span>
+                                <span class="tool-item"><i class="fas fa-chart-line me-1"></i> Mesurer les résultats de chaque investissement</span>
+                                <span class="tool-item"><i class="fas fa-piggy-bank me-1"></i> Prévoir un fonds d’urgence financier</span>
+                                <span class="tool-item"><i class="fas fa-calendar-check me-1"></i> Revue trimestrielle des budgets</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.8s;">
+                    <h2 class="accordion-header" id="headingFifteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFifteen">
+                            <span class="badge bg-success me-2">15</span> Gestion de la dette
+                        </button>
+                    </h2>
+                    <div id="collapseFifteen" class="accordion-collapse collapse" aria-labelledby="headingFifteen" data-bs-parent="#leversAccordionFinancial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Utiliser l’endettement comme levier de croissance contrôlée</li>
+                                <li>Préserver la santé financière</li>
+                                <li>Gérer le risque de surendettement</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Emprunter sans projet rentable clair</li>
+                                <li>Endettement excessif ou mal géré</li>
+                                <li>Impact négatif sur la trésorerie et la crédibilité</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise a contracté un prêt bancaire pour financer l’achat de matériel, doublant sa capacité de production sans mettre en péril ses finances.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME a financé sa croissance via un crédit fournisseur bien négocié. Un entrepreneur a évité le surendettement par un suivi mensuel précis.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-chart-pie me-1"></i> Évaluer le ratio d’endettement maximal (idéalement &lt;30% du CA)</span>
+                                <span class="tool-item"><i class="fas fa-piggy-bank me-1"></i> Prioriser les dettes à faible coût et durée maîtrisée</span>
+                                <span class="tool-item"><i class="fas fa-calculator me-1"></i> Simuler les impacts financiers avant emprunt</span>
+                                <span class="tool-item"><i class="fas fa-coins me-1"></i> Maintenir une trésorerie tampon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 1.9s;">
+                    <h2 class="accordion-header" id="headingSixteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSixteen">
+                            <span class="badge bg-success me-2">16</span> Gestion des fournisseurs
+                        </button>
+                    </h2>
+                    <div id="collapseSixteen" class="accordion-collapse collapse" aria-labelledby="headingSixteen" data-bs-parent="#leversAccordionFinancial">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Sécuriser l’approvisionnement en qualité et délais</li>
+                                <li>Négocier les meilleures conditions commerciales</li>
+                                <li>Construire des relations partenariales durables</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Dépendance à un fournisseur unique</li>
+                                <li>Risques de rupture ou de qualité médiocre</li>
+                                <li>Difficulté à piloter plusieurs fournisseurs</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une PME agroalimentaire a mis en place un comité fournisseur trimestriel pour améliorer la qualité et anticiper les risques de rupture.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un retailer a optimisé ses coûts et délais via des négociations régulières. Une PME a sécurisé ses stocks en multipliant les fournisseurs clés.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-map-marked-alt me-1"></i> Cartographier les fournisseurs et analyser les risques</span>
+                                <span class="tool-item"><i class="fas fa-file-contract me-1"></i> Mettre en place des contrats clairs et audits réguliers</span>
+                                <span class="tool-item"><i class="fas fa-parachute-box me-1"></i> Diversifier les sources d’approvisionnement</span>
+                                <span class="tool-item"><i class="fas fa-comments me-1"></i> Communiquer régulièrement et entretenir la relation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-title-sub mt-5 mb-4 text-center wow-effect" style="animation-delay: 2.0s;">
+                <span class="badge badge-category optimisation"><i class="fas fa-cogs me-2"></i> 4. Optimisation & Leadership</span>
+            </h3>
+            <div class="accordion" id="leversAccordionOptimisation">
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 2.1s;">
+                    <h2 class="accordion-header" id="headingSeventeen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeventeen">
+                            <span class="badge bg-warning me-2">17</span> Gestion des ressources humaines (RH)
+                        </button>
+                    </h2>
+                    <div id="collapseSeventeen" class="accordion-collapse collapse" aria-labelledby="headingSeventeen" data-bs-parent="#leversAccordionOptimisation">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Recruter les bons profils adaptés à la culture d’entreprise</li>
+                                <li>Former et développer les compétences internes</li>
+                                <li>Maintenir l’engagement et la motivation</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Difficulté à attirer des talents dans un contexte concurrentiel</li>
+                                <li>Turnover élevé et perte de savoir-faire</li>
+                                <li>Manque de processus RH structurés</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une agence digitale a instauré un programme de mentoring interne, augmentant la rétention des collaborateurs de 30%.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME a fidélisé ses équipes par un plan de formation adapté. Une Start-up a réduit son turnover en améliorant sa culture interne.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-user-plus me-1"></i> Définir un processus de recrutement clair et structuré</span>
+                                <span class="tool-item"><i class="fas fa-graduation-cap me-1"></i> Mettre en place un plan de formation continue</span>
+                                <span class="tool-item"><i class="fas fa-heart me-1"></i> Instaurer une culture d’entreprise positive et inclusive</span>
+                                <span class="tool-item"><i class="fas fa-poll me-1"></i> Mesurer la satisfaction et l’engagement des collaborateurs</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 2.2s;">
+                    <h2 class="accordion-header" id="headingEighteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEighteen">
+                            <span class="badge bg-warning me-2">18</span> Automatiser et déléguer intelligemment
+                        </button>
+                    </h2>
+                    <div id="collapseEighteen" class="accordion-collapse collapse" aria-labelledby="headingEighteen" data-bs-parent="#leversAccordionOptimisation">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Libérer du temps pour les tâches à forte valeur ajoutée</li>
+                                <li>Fiabiliser les processus récurrents</li>
+                                <li>Éviter le burnout des dirigeants</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Résistance au changement ou perte de contrôle</li>
+                                <li>Choix des bons outils et prestataires</li>
+                                <li>Gestion des processus non documentés</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une PME met en place un CRM et automatise la facturation, réduisant les erreurs et accélérant les paiements.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une agence a gagné 25h/semaine via l’automatisation et la délégation. Un entrepreneur a recentré son temps sur la stratégie et l’innovation.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-sitemap me-1"></i> Cartographier les processus clés et identifier les goulots d’étranglement</span>
+                                <span class="tool-item"><i class="fas fa-clipboard-check me-1"></i> Implémenter des SOP (Standard Operating Procedures)</span>
+                                <span class="tool-item"><i class="fas fa-robot me-1"></i> Utiliser des outils no-code / automation (Zapier, Make)</span>
+                                <span class="tool-item"><i class="fas fa-user-tie me-1"></i> Externaliser les tâches non stratégiques à des freelances spécialisés</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 2.3s;">
+                    <h2 class="accordion-header" id="headingNineteen">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNineteen">
+                            <span class="badge bg-warning me-2">19</span> Se former et cultiver son mindset de dirigeant
+                        </button>
+                    </h2>
+                    <div id="collapseNineteen" class="accordion-collapse collapse" aria-labelledby="headingNineteen" data-bs-parent="#leversAccordionOptimisation">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Accompagner la montée en compétences personnelle</li>
+                                <li>Adopter un état d’esprit agile, résilient et orienté solution</li>
+                                <li>S’ouvrir à l’apprentissage continu</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Rester bloqué dans une zone de confort mentale</li>
+                                <li>Négliger la formation par manque de temps ou de budget</li>
+                                <li>Manque de réseau et d’échanges avec des pairs</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Un fondateur a rejoint un mastermind international, partageant défis et bonnes pratiques, et accélérant sa croissance.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Un entrepreneur a multiplié son CA par 3 après 6 mois de coaching business. Un dirigeant a évité le burnout grâce à un équilibre vie pro/perso.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-users-line me-1"></i> Participer à des masterminds, réseaux d’entrepreneurs</span>
+                                <span class="tool-item"><i class="fas fa-book-reader me-1"></i> Consacrer du temps régulier à la lecture et aux formations ciblées</span>
+                                <span class="tool-item"><i class="fas fa-chalkboard-teacher me-1"></i> Travailler avec un coach ou mentor</span>
+                                <span class="tool-item"><i class="fas fa-spa me-1"></i> Pratiquer la méditation et la gestion du stress</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 2.4s;">
+                    <h2 class="accordion-header" id="headingTwenty">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwenty">
+                            <span class="badge bg-warning me-2">20</span> Gestion de la résilience économique et stratégique
+                        </button>
+                    </h2>
+                    <div id="collapseTwenty" class="accordion-collapse collapse" aria-labelledby="headingTwenty" data-bs-parent="#leversAccordionOptimisation">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Préparer le business aux chocs externes et internes</li>
+                                <li>Assurer la continuité et l’adaptabilité</li>
+                                <li>Mettre en place des plans d’urgence et alternatives</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Dépendance trop forte à un client, fournisseur ou canal</li>
+                                <li>Absence de fonds de secours ou de planification</li>
+                                <li>Difficulté à anticiper les risques nouveaux</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une TPE diversifie ses offres et clients suite à une baisse de 40% des commandes d’un secteur, assurant sa survie.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME a rebondi après la perte d’un client clé grâce à la diversification. Une Startup a survécu à une crise financière grâce au PCA.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-clipboard-list me-1"></i> Construire un plan de continuité d’activité (PCA)</span>
+                                <span class="tool-item"><i class="fas fa-bezier-curve me-1"></i> Diversifier ses sources de revenus et clients</span>
+                                <span class="tool-item"><i class="fas fa-piggy-bank me-1"></i> Maintenir une trésorerie tampon équivalente à 3 mois de charges</span>
+                                <span class="tool-item"><i class="fas fa-vial me-1"></i> Tester régulièrement les scénarios de crise</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item mb-3 wow-effect" style="animation-delay: 2.5s;">
+                    <h2 class="accordion-header" id="headingTwentyOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwentyOne">
+                            <span class="badge bg-warning me-2">21</span> Recherche & Développement (R&D)
+                        </button>
+                    </h2>
+                    <div id="collapseTwentyOne" class="accordion-collapse collapse" aria-labelledby="headingTwentyOne" data-bs-parent="#leversAccordionOptimisation">
+                        <div class="accordion-body">
+                            <h6>Objectifs</h6>
+                            <ul>
+                                <li>Concevoir des produits ou services innovants</li>
+                                <li>Tester et améliorer les solutions en continu</li>
+                                <li>S’adapter aux évolutions technologiques et marché</li>
+                            </ul>
+
+                            <h6 class="mt-3">Enjeux et défis</h6>
+                            <ul>
+                                <li>Budget limité pour la R&D</li>
+                                <li>Difficulté à passer de l’idée à la mise en œuvre</li>
+                                <li>Gestion des projets R&D souvent non intégrée</li>
+                            </ul>
+
+                            <div class="case-study mt-3">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Cas concret</h6>
+                                <p>Une entreprise industrielle collabore avec une université pour développer un matériau durable, ouvrant un nouveau marché.</p>
+                                <p class="text-success"><strong>Résultat :</strong> Une PME a développé un produit innovant qui a doublé son CA. Une Start-up a accéléré son time-to-market via des sprints agiles.</p>
+                            </div>
+
+                            <h6 class="mt-3">Bonnes pratiques</h6>
+                            <div class="d-flex flex-wrap mt-2">
+                                <span class="tool-item"><i class="fas fa-percentage me-1"></i> Allouer un pourcentage du CA à la R&D</span>
+                                <span class="tool-item"><i class="fas fa-lightbulb me-1"></i> Utiliser des méthodes agiles pour prototyper rapidement</span>
+                                <span class="tool-item"><i class="fas fa-users-cog me-1"></i> Impliquer les clients dans la co-création</span>
+                                <span class="tool-item"><i class="fas fa-university me-1"></i> Collaborer avec des centres de recherche ou universités</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stats" class="stats-section rounded my-5 p-5">
+            <h2 class="text-center mb-5 text-white wow-effect">Impact des leviers en chiffres</h2>
+            <div class="row text-center">
+                <div class="col-md-4 stat-item wow-effect" style="animation-delay: 0.1s;">
+                    <h3 id="stat1" class="animated-number" data-target="80">0</h3>
+                    <p>% des entreprises qui appliquent ces leviers voient une croissance durable</p>
+                </div>
+                <div class="col-md-4 stat-item wow-effect" style="animation-delay: 0.3s;">
+                    <h3 id="stat2" class="animated-number" data-target="30">0</h3>
+                    <p>% de réduction du risque d'échec business avec une approche structurée</p>
+                </div>
+                <div class="col-md-4 stat-item wow-effect" style="animation-delay: 0.5s;">
+                    <h3 id="stat3" class="animated-number" data-target="150">0</h3>
+                    <p>% d'augmentation du CA moyen pour les PME innovantes</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p>&copy; 2025 Tableau de Bord Business. Tous droits réservés.</p>
+            <p>Pour plus de contenu et de ressources, <a href="#">contactez-nous</a>.</p>
+            <div class="social-icons mt-3">
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-twitter fa-lg"></i></a>
+                <a href="#" class="text-secondary mx-2"><i class="fab fa-facebook-f fa-lg"></i></a>
             </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Set current date
-        const now = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('current-date').textContent = now.toLocaleDateString('fr-FR', options);
-        
-        // Animate numbers
         function animateValue(id, start, end, duration) {
+            const range = end - start;
+            let current = start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
             const obj = document.getElementById(id);
-            let startTimestamp = null;
-            const step = (timestamp) => {
-                if (!startTimestamp) startTimestamp = timestamp;
-                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start);
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
+            if (!obj) return; // Prevent error if element not found
+
+            const timer = setInterval(() => {
+                current += increment;
+                obj.textContent = current;
+                if (current === end) {
+                    clearInterval(timer);
                 }
-            };
-            window.requestAnimationFrame(step);
+            }, stepTime);
         }
-        
-        // Initialize animated numbers
-        document.addEventListener('DOMContentLoaded', function() {
+
+        document.addEventListener('DOMContentLoaded', () => {
             const animatedNumbers = document.querySelectorAll('.animated-number');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Trigger when 50% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const el = entry.target;
+                        const target = parseInt(el.getAttribute('data-target'));
+                        animateValue(el.id, 0, target, 2000);
+                        observer.unobserve(el); // Stop observing once animated
+                    }
+                });
+            }, observerOptions);
+
             animatedNumbers.forEach(el => {
-                const target = parseInt(el.getAttribute('data-target'));
-                animateValue(el.id, 0, target, 2000);
-                el.id = 'animated-' + Math.floor(Math.random() * 1000); // Assign unique ID
+                el.id = 'animated-' + Math.floor(Math.random() * 1000000); // Ensure unique ID
+                observer.observe(el);
             });
             
-            // Add animation classes with delay
+            // Add animation classes with delay for general wow-effect elements
             const wowElements = document.querySelectorAll('.wow-effect');
+            const wowObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const wowObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, wowObserverOptions);
+
             wowElements.forEach((el, index) => {
-                const delay = parseFloat(el.style.animationDelay || '0.1s');
-                el.style.animationDelay = (delay + (index * 0.1)) + 's';
-            });
-            
-            // Initialize charts
-            const ctx = document.createElement('canvas');
-            ctx.className = 'chart-container';
-            // You would add actual chart initialization here
-        });
-        
-        // Simple scroll animation
-        window.addEventListener('scroll', function() {
-            const elements = document.querySelectorAll('.wow-effect');
-            elements.forEach(el => {
-                const position = el.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if(position < screenPosition) {
-                    el.style.opacity = '1';
-                }
+                const delay = parseFloat(el.style.animationDelay || '0s');
+                el.style.transitionDelay = (delay) + 's'; // Use transition-delay for smoother effect
+                wowObserver.observe(el);
             });
         });
     </script>
