@@ -730,4 +730,117 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-4 mb-4 mb-md-0">
-                    <h
+                    <h5 class="mb-3"><i class="fas fa-rocket me-2"></i>Business Success</h5>
+                    <p class="small text-white-50">Master the 21 essential levers to build a durable, innovative and resilient business.</p>
+                    <div class="d-flex mt-4">
+                        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Resources</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-white-50">Guides</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Tools</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Templates</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Case Studies</a></li>
+                        <li><a href="#" class="text-white-50">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-white-50">About</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Team</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Contact</a></li>
+                        <li><a href="#" class="text-white-50">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="mb-3">Newsletter</h6>
+                    <p class="small text-white-50">Subscribe to get updates and business tips.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control form-control-sm" placeholder="Your email">
+                        <button class="btn btn-primary btn-sm" type="button">Subscribe</button>
+                    </div>
+                    <p class="small text-white-50 mb-0">We'll never share your email with others.</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-darker py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="small mb-0 text-white-50">© 2023 Business Success Dashboard. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <p class="small mb-0 text-white-50">Made with <i class="fas fa-heart text-danger"></i> for entrepreneurs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Set current date
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').textContent = now.toLocaleDateString('fr-FR', options);
+        
+        // Animate numbers
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        
+        // Initialize animated numbers
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedNumbers = document.querySelectorAll('.animated-number');
+            animatedNumbers.forEach(el => {
+                const target = parseInt(el.getAttribute('data-target'));
+                animateValue(el.id, 0, target, 2000);
+                el.id = 'animated-' + Math.floor(Math.random() * 1000); // Assign unique ID
+            });
+            
+            // Add animation classes with delay
+            const wowElements = document.querySelectorAll('.wow-effect');
+            wowElements.forEach((el, index) => {
+                const delay = parseFloat(el.style.animationDelay || '0.1s');
+                el.style.animationDelay = (delay + (index * 0.1)) + 's';
+            });
+            
+            // Initialize charts
+            const ctx = document.createElement('canvas');
+            ctx.className = 'chart-container';
+            // You would add actual chart initialization here
+        });
+        
+        // Simple scroll animation
+        window.addEventListener('scroll', function() {
+            const elements = document.querySelectorAll('.wow-effect');
+            elements.forEach(el => {
+                const position = el.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(position < screenPosition) {
+                    el.style.opacity = '1';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
