@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+		<style>
+  .bg-purple { background-color: #6f42c1; }
+  .btn-purple { background-color: #6f42c1; color: white; }
+</style>
 </head>
 <body>
     <!-- Navbar -->
@@ -428,25 +432,560 @@
     </section>
 
     <!-- Modal pour Marketing Digital -->
-    <div class="modal fade" id="modalMarketing" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Marketing Digital & Personal Branding</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Stratégies efficaces :</h6>
-                    <ul>
-                        <li>Utiliser LinkedIn pour le B2B.</li>
-                        <li>Créer du contenu vidéo pour Facebook/Instagram.</li>
-                    </ul>
-                    <h6>Outils recommandés :</h6>
-                    <p>Canva, Google Analytics, Hootsuite.</p>
-                </div>
+ <div class="modal fade" id="modalMarketing" tabindex="-1" aria-labelledby="modalMarketingLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="modalMarketingLabel"><i class="fas fa-bullhorn me-2"></i> Boîte à Outils Marketing</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Colonne 1 : Templates -->
+          <div class="col-md-6">
+            <div class="resource-card p-3 mb-3 border rounded">
+              <h6><i class="fas fa-file-alt me-2"></i> Templates Prêts-à-utiliser :</h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none">
+                    <i class="fas fa-download me-2"></i> Calendrier éditorial 2024 (Excel)
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none">
+                    <i class="fas fa-download me-2"></i> Kit de posts Instagram (Canva)
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none">
+                    <i class="fas fa-download me-2"></i> Scripts TikTok pour artisans (PDF)
+                  </a>
+                </li>
+              </ul>
             </div>
+          </div>
+          
+          <!-- Colonne 2 : Formations -->
+          <div class="col-md-6">
+            <div class="resource-card p-3 mb-3 border rounded">
+              <h6><i class="fas fa-graduation-cap me-2"></i> Formations Africaines :</h6>
+              <div class="list-group">
+                <a href="https://alxafrica.com/digital-marketing" target="_blank" class="list-group-item list-group-item-action">
+                  <strong>ALX Africa</strong> : Certification en marketing digital (6 semaines)
+                </a>
+                <a href="https://www.udemy.com/course/marketing-digital-afrique/" target="_blank" class="list-group-item list-group-item-action">
+                  <strong>Udemy</strong> : Cours spécialisé marché francophone
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Section Bonus -->
+        <div class="alert alert-warning mt-3">
+          <h6><i class="fas fa-lightbulb me-2"></i> Astuce Pro :</h6>
+          <p>Téléchargez notre <a href="#" class="fw-bold">checklist "20 erreurs à éviter sur Facebook en Afrique"</a> (basée sur une étude de 200 PME africaines).</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-primary"><i class="fas fa-box me-2"></i> Télécharger tous les fichiers (.zip)</a>
+      </div>
     </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="modalAdaptabilite" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title"><i class="fas fa-sync-alt me-2"></i> Kit de Survie Business</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-4">
+            <h6><i class="fas fa-bolt me-2"></i> Solutions Énergie :</h6>
+            <ul>
+              <li><a href="#">Comparatif générateurs solaires (Afrique de l'Ouest)</a></li>
+              <li><a href="#">Liste fournisseurs batteries à Lagos/Accra</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6><i class="fas fa-wifi me-2"></i> Backup Internet :</h6>
+            <ul>
+              <li><a href="#">Guide configuration 4G+WiFi (PDF)</a></li>
+              <li><a href="#">Carte couverture Starlink par pays</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6><i class="fas fa-truck me-2"></i> Logistique :</h6>
+            <ul>
+              <li><a href="#">Template contrat transporteur (Word)</a></li>
+              <li><a href="#">Calculateur coûts Douanes RDC</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="mt-3 p-3 bg-light rounded">
+          <h6>📌 Témoignage :</h6>
+          <p>"Ce kit m'a sauvé quand ENEO a coupé le courant pendant 3 jours à Douala." - <em>Sarah, e-commerçante</em></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-warning"><i class="fas fa-file-pdf me-2"></i> Guide Complet (28 pages)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalFinances" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title"><i class="fas fa-calculator me-2"></i> Outils Financiers</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Type</th>
+              <th>Ressource</th>
+              <th>Format</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Comptabilité</td>
+              <td><a href="#">Modèle de cashflow (Franc CFA/XOF)</a></td>
+              <td>Excel</td>
+            </tr>
+            <tr>
+              <td>Taxes</td>
+              <td><a href="#">Calculateur TVA par pays UEMOA</a></td>
+              <td>Web App</td>
+            </tr>
+            <tr>
+              <td>Devises</td>
+              <td><a href="#">Convertisseur Naira/CFA avec frais réels</a></td>
+              <td>Android/iOS</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="alert alert-info mt-3">
+          <h6>⚠️ Attention :</h6>
+          <p>Tous les outils incluent les dernières mises à jour réglementaires 2024 (lois de finances africaines).</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-outline-success"><i class="fab fa-google-drive me-2"></i> Accès Drive</a>
+        <a href="#" class="btn btn-success"><i class="fas fa-file-excel me-2"></i> Pack Complet</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalInnovation" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-purple text-white">
+        <h5 class="modal-title"><i class="fas fa-lightbulb me-2"></i> Galerie d'Innovations Africaines</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Carte 1 -->
+          <div class="col-md-4 mb-3">
+            <div class="card h-100">
+              <img src="assets/mpesa.jpg" class="card-img-top" alt="M-Pesa">
+              <div class="card-body">
+                <h6>M-Pesa (Kenya)</h6>
+                <p>Banque mobile sans smartphone via SMS/USSD.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary">Voir étude de cas</a>
+              </div>
+            </div>
+          </div>
+          <!-- Carte 2 -->
+          <div class="col-md-4 mb-3">
+            <div class="card h-100">
+              <img src="assets/zeepay.jpg" class="card-img-top" alt="ZeePay">
+              <div class="card-body">
+                <h6>ZeePay (Ghana)</h6>
+                <p>Conversion airtime-en-espèces cross-border.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary">Template business model</a>
+              </div>
+            </div>
+          </div>
+          <!-- Carte 3 -->
+          <div class="col-md-4 mb-3">
+            <div class="card h-100">
+              <img src="assets/farmcrowdy.jpg" class="card-img-top" alt="Farmcrowdy">
+              <div class="card-body">
+                <h6>Farmcrowdy (Nigeria)</h6>
+                <p>Agro-financement participatif.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary">Kit de lancement</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-purple"><i class="fas fa-book me-2"></i> Livre Blanc (PDF)</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalRH" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title"><i class="fas fa-users me-2"></i> Quiz RH Afrique</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="quizRH">
+          <div class="mb-3">
+            <p><strong>1. Comment motiver une équipe au Sénégal ?</strong></p>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1a">
+              <label class="form-check-label" for="q1a">Augmentations fréquentes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1b" checked>
+              <label class="form-check-label" for="q1b">Reconnaissance publique</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <p><strong>2. Quelle est la prime la plus appréciée au Kenya ?</strong></p>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q2" id="q2a">
+              <label class="form-check-label" for="q2a">Chèques-cadeaux</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q2" id="q2b" checked>
+              <label class="form-check-label" for="q2b">Paiement des frais scolaires</label>
+            </div>
+          </div>
+        </form>
+
+        <div id="quizResult" class="mt-3 p-3 bg-light d-none">
+          <h6>📊 Votre score : <span id="score">0</span>/2</h6>
+          <p id="feedback" class="mb-0"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-danger" onclick="calculateScore()"><i class="fas fa-check me-2"></i> Valider</button>
+        <a href="#" class="btn btn-outline-danger"><i class="fas fa-download me-2"></i> Guide RH Panafricain</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalInnovation" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title"><i class="fas fa-lightbulb me-2"></i> Lab d'Innovation Africaine</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6><i class="fas fa-tools me-2"></i> Méthodologies Locales :</h6>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Jugaad (Improvisation)
+                <span class="badge bg-primary rounded-pill">PDF</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Kanju (Nigeria)
+                <span class="badge bg-primary rounded-pill">Vidéo</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h6><i class="fas fa-trophy me-2"></i> Concours Africains :</h6>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                Africa Innovation Prize (Deadline: 15/10/2024)
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                Orange Social Venture Prize
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="mt-4 p-3 bg-light rounded">
+          <h6>🛠️ Atelier Pratique :</h6>
+          <p>"Comment transformer les contraintes en opportunités ?" <br>
+          <small>Téléchargez notre <a href="#">canevas d'innovation frugale</a> (basé sur 50 startups africaines)</small></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-info"><i class="fas fa-flask me-2"></i> Accéder au Lab</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalRH" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title"><i class="fas fa-users-cog me-2"></i> Toolkit RH Afrique</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="rhTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="recrutement-tab" data-bs-toggle="tab" data-bs-target="#recrutement">Recrutement</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="paie-tab" data-bs-toggle="tab" data-bs-target="#paie">Paie</button>
+          </li>
+        </ul>
+        
+        <div class="tab-content p-3 border border-top-0" id="rhTabContent">
+          <div class="tab-pane fade show active" id="recrutement">
+            <h6>📋 Modèles pour :</h6>
+            <div class="row">
+              <div class="col-md-6">
+                <ul>
+                  <li><a href="#">Annonce adaptée (Francophone)</a></li>
+                  <li><a href="#">Test de compétences technique</a></li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li><a href="#">Grille salariale Nigeria 2024</a></li>
+                  <li><a href="#">Clause de non-concurrence valable UA</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="paie">
+            <h6>📊 Calculateurs :</h6>
+            <ul>
+              <li><a href="#">Cotisations sociales Maroc</a></li>
+              <li><a href="#">Simulateur avantages en nature Kenya</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-danger"><i class="fas fa-file-archive me-2"></i> Pack Complet RH</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalReseau" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-purple text-white">
+        <h5 class="modal-title"><i class="fas fa-network-wired me-2"></i> Cartographie des Réseaux</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6>🌍 Hubs Clés par Région :</h6>
+        <div class="list-group mb-3">
+          <a href="#" class="list-group-item list-group-item-action">
+            <strong>Afrique de l'Ouest :</strong> CCIA (Abidjan), Nhub (Nigeria)
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <strong>Afrique de l'Est :</strong> iHub (Nairobi), IceAddis
+          </a>
+        </div>
+        
+        <h6>📅 Événements 2024 :</h6>
+        <table class="table table-sm">
+          <tr>
+            <td>15-18/03</td>
+            <td><a href="#">Africa Tech Summit</a></td>
+            <td>Kigali</td>
+          </tr>
+          <tr>
+            <td>22/05</td>
+            <td><a href="#">SA Innovation Summit</a></td>
+            <td>Le Cap</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-purple"><i class="fas fa-map-marked-alt me-2"></i> Carte Interactive</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalRegulation" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title"><i class="fas fa-balance-scale me-2"></i> Compliance Toolkit</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning">
+          <strong>⚠ Mise à jour :</strong> Nouvelles lois sur le e-commerce en Algérie et Tunisie (Juillet 2024)
+        </div>
+        
+        <h6>📚 Bases de Données :</h6>
+        <div class="row">
+          <div class="col-md-6">
+            <ul>
+              <li><a href="#">Code des Investissements par pays</a></li>
+              <li><a href="#">Guide OHADA actualisé</a></li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul>
+              <li><a href="#">Modèle de statuts UEMOA</a></li>
+              <li><a href="#">Calculateur droits de douane</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <h6 class="mt-3">📞 Contacts Utiles :</h6>
+        <ul>
+          <li><strong>CEDEAO :</strong> service.entreprises@ecowas.int</li>
+          <li><strong>Ghana Investment Center :</strong> +233 30 266 6354</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-dark"><i class="fas fa-bell me-2"></i> Alertez-moi des changements</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalRisques" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-secondary text-white">
+        <h5 class="modal-title"><i class="fas fa-shield-alt me-2"></i> Matrice des Risques</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6>🔍 Classement par Pays :</h6>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Risque Politique
+            <span class="badge bg-danger rounded-pill">Élevé (Sahel)</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Risque Monétaire
+            <span class="badge bg-warning rounded-pill">Modéré (Nigeria)</span>
+          </li>
+        </ul>
+        
+        <h6>🛡️ Parades :</h6>
+        <ol>
+          <li><a href="#">Liste assureurs spécialisés Afrique</a></li>
+          <li><a href="#">Clause force majeure type</a></li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-warning"><i class="fas fa-exclamation-triangle me-2"></i> Guide Urgence</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalLeadership" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title"><i class="fas fa-chess-king me-2"></i> Academy Leadership</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <h6>🎧 Podcasts :</h6>
+            <div class="list-group">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="fas fa-headphones me-2"></i> "Lead Like Masiyiwa" (Zimbabwe)
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="fas fa-headphones me-2"></i> "Ubuntu Management" (Afrique du Sud)
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <h6>📚 Livres :</h6>
+            <ul>
+              <li><em>Le Leader Africain du 21e Siècle</em></li>
+              <li><em>Gérer une équipe multiculturelle</em></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-3 p-3 bg-light rounded">
+          <h6>🧠 Testez Votre Style :</h6>
+          <p>Quel type de leader êtes-vous ? <a href="#">Faire le test (5 min)</a></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-primary"><i class="fas fa-chalkboard-teacher me-2"></i> Formation VIP</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalCulture" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title"><i class="fas fa-globe-africa me-2"></i> Guide Culturel</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <h6>📌 Protocoles par Pays :</h6>
+        <div class="list-group mb-3">
+          <a href="#" class="list-group-item list-group-item-action">
+            <strong>Nigeria :</strong> Donner/recevoir avec la main droite
+          </a>
+          <a href="#" class="list-group-item list-group-item-action">
+            <strong>Maroc :</strong> Refuser le thé à 3 reprises avant d'accepter
+          </a>
+        </div>
+        
+        <h6>💼 Business Practices :</h6>
+        <ul>
+          <li>Horaires flexibles en Afrique de l'Ouest</li>
+          <li>Importance des titres universitaires en Afrique Centrale</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-success"><i class="fas fa-download me-2"></i> PDF Complet</a>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
@@ -459,5 +998,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="js/script.js"></script>
+	
+
+
+<script>
+  function calculateScore() {
+    let score = 0;
+    if(document.getElementById('q1b').checked) score++;
+    if(document.getElementById('q2b').checked) score++;
+    
+    document.getElementById('score').textContent = score;
+    document.getElementById('feedback').innerHTML = 
+      score === 2 ? "✅ Expert en RH africains !" : "📚 Consultez notre guide pour améliorer vos pratiques";
+    document.getElementById('quizResult').classList.remove('d-none');
+  }
+</script>
+
 </body>
 </html>
