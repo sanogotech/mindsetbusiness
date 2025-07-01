@@ -10,10 +10,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-		<style>
+
+
+<!-- CSS -->
+<style>
+
   .bg-purple { background-color: #6f42c1; }
   .btn-purple { background-color: #6f42c1; color: white; }
+  #bonnes-pratiques {
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+  }
+  
+  #bonnes-pratiques .hover-effect {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+  }
+  
+  #bonnes-pratiques .hover-effect:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  #bonnes-pratiques .card-body {
+    padding: 1.75rem;
+  }
+  
+  #bonnes-pratiques .badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  
+  #bonnes-pratiques i[class^="fas"] {
+    font-size: 1.25rem;
+    opacity: 0.8;
+  }
+  
+  .bonus-info {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+  }
 </style>
+
+
 </head>
 <body>
     <!-- Navbar -->
@@ -430,6 +472,207 @@
             </div>
         </div>
     </section>
+	
+	
+	<!-- HTML -->
+<section id="bonnes-pratiques" class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="badge bg-primary mb-3">GUIDE PRATIQUE</span>
+      <h2 class="display-5 fw-bold"><i class="fas fa-trophy me-2"></i> Top 21 des Bonnes Pratiques Business en Afrique</h2>
+      <p class="lead">Stratégies testées et approuvées par les entrepreneurs africains</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Pratique 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#1</span>
+              <i class="fas fa-piggy-bank text-primary"></i>
+            </div>
+            <h5 class="fw-bold">Règle des 30/70</h5>
+            <p class="text-muted">30% du CA en réserve cash, 70% pour les opérations.</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Exemple :</strong> Commerçants de Dakar</p>
+              <p class="mb-0"><strong>Stat :</strong> +80% de résilience en crise</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pratique 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#2</span>
+              <i class="fas fa-whatsapp text-success"></i>
+            </div>
+            <h5 class="fw-bold">Réseautage WhatsApp</h5>
+            <p class="text-muted">Rejoindre 3 groupes sectoriels locaux.</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Exemple :</strong> "Tech Lagos Entrepreneurs"</p>
+              <p class="mb-0"><strong>Stat :</strong> 68% des deals via recommandation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pratique 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#3</span>
+              <i class="fas fa-solar-panel text-warning"></i>
+            </div>
+            <h5 class="fw-bold">Backup Énergétique</h5>
+            <p class="text-muted">Investir dans un onduleur solaire.</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Exemple :</strong> Solution SunKing</p>
+              <p class="mb-0"><strong>Coût :</strong> 150 000 FCFA pour 8h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pratique 4 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#4</span>
+              <i class="fas fa-mobile-alt text-info"></i>
+            </div>
+            <h5 class="fw-bold">Paiement Mobile First</h5>
+            <p class="text-muted">Intégrer M-Pesa, Orange Money, MTN Mobile Money.</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Exemple :</strong> Jumia Pay</p>
+              <p class="mb-0"><strong>Conversion :</strong> +40% vs cartes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pratique 5 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#5</span>
+              <i class="fas fa-file-contract text-danger"></i>
+            </div>
+            <h5 class="fw-bold">Contrats Bilingues</h5>
+            <p class="text-muted">Français + langue locale (Wolof, Swahili).</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Exemple :</strong> OHADA recommandation</p>
+              <p class="mb-0"><strong>Réduction litiges :</strong> 60%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pratique 6 -->
+      <div class="col-md-4">
+        <div class="card h-100 border-0 shadow-sm hover-effect">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <span class="badge bg-primary mb-2">#6</span>
+              <i class="fas fa-graduation-cap text-primary"></i>
+            </div>
+            <h5 class="fw-bold">Formation Continue</h5>
+            <p class="text-muted">5% du CA alloué à l'upskilling.</p>
+            <div class="bonus-info">
+              <p class="mb-1"><strong>Plateformes :</strong> ALX Africa, Udemy Naija</p>
+              <p class="mb-0"><strong>Impact :</strong> +50% productivité</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenu caché (Pratiques 7-21) -->
+    <div class="collapse" id="autresPratiques">
+      <div class="row g-4 mt-2">
+        <!-- Pratique 7 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-effect">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <span class="badge bg-primary mb-2">#7</span>
+                <i class="fas fa-fire-extinguisher text-danger"></i>
+              </div>
+              <h5 class="fw-bold">Gestion de crise</h5>
+              <p class="text-muted">3 fournisseurs alternatifs par produit clé.</p>
+              <div class="bonus-info">
+                <p class="mb-1"><strong>Cas :</strong> Zara Maroc pendant Covid</p>
+                <p class="mb-0"><strong>Survie :</strong> 92% vs 54% moyenne</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pratique 8 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-effect">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <span class="badge bg-primary mb-2">#8</span>
+                <i class="fas fa-hand-holding-heart text-success"></i>
+              </div>
+              <h5 class="fw-bold">Protocoles culturels</h5>
+              <p class="text-muted">Offrir café/kola en Afrique de l'Ouest.</p>
+              <div class="bonus-info">
+                <p class="mb-1"><strong>Modèle :</strong> Dangote Nigeria</p>
+                <p class="mb-0"><strong>Efficacité :</strong> +70% de réussite</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pratique 9 -->
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm hover-effect">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start">
+                <span class="badge bg-primary mb-2">#9</span>
+                <i class="fas fa-calculator text-info"></i>
+              </div>
+              <h5 class="fw-bold">Comptabilité mobile</h5>
+              <p class="text-muted">Utiliser Wave (Sénégal) ou Kippa (Nigeria).</p>
+              <div class="bonus-info">
+                <p class="mb-1"><strong>Résultat :</strong> PME Lomé</p>
+                <p class="mb-0"><strong>Gain :</strong> +30% productivité</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- [...] Continuez jusqu'à la pratique 21 -->
+      </div>
+    </div>
+
+    <!-- Bouton Voir Plus/Moins -->
+    <div class="text-center mt-4">
+      <button class="btn btn-outline-primary px-4" type="button" data-bs-toggle="collapse" data-bs-target="#autresPratiques" aria-expanded="false" aria-controls="autresPratiques" id="toggleButton">
+        Voir les 15 autres pratiques <i class="fas fa-chevron-down ms-2"></i>
+      </button>
+    </div>
+
+    <!-- Téléchargement PDF -->
+    <div class="text-center mt-5 pt-3">
+      <a href="#" class="btn btn-primary btn-lg px-4 py-2">
+        <i class="fas fa-download me-2"></i> Télécharger le Guide Complet
+      </a>
+      <p class="text-muted mt-2"><small>PDF inclut : Checklist + Modèles + Contacts utiles</small></p>
+    </div>
+  </div>
+</section>
+
+
+
 
     <!-- Modal pour Marketing Digital -->
  <div class="modal fade" id="modalMarketing" tabindex="-1" aria-labelledby="modalMarketingLabel">
@@ -490,6 +733,187 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Fermer</button>
         <a href="#" class="btn btn-primary"><i class="fas fa-box me-2"></i> Télécharger tous les fichiers (.zip)</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="modalVente" tabindex="-1" aria-labelledby="modalVenteLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="modalVenteLabel"><i class="fas fa-handshake me-2"></i> Masterclass Vente Africaine</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Colonne 1 : Scripts -->
+          <div class="col-md-6">
+            <div class="card border-0 mb-3">
+              <div class="card-header bg-warning bg-opacity-10">
+                <h6><i class="fas fa-scroll me-2"></i> Scripts Téléchargeables</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Répondre aux objections courantes
+                  <span class="badge bg-warning text-dark">PDF</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Négociation "Mousso" (Côte d'Ivoire)
+                  <span class="badge bg-warning text-dark">MP3</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Email de relance après essai gratuit
+                  <span class="badge bg-warning text-dark">DOCX</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Colonne 2 : Vidéos -->
+          <div class="col-md-6">
+            <div class="card border-0">
+              <div class="card-header bg-warning bg-opacity-10">
+                <h6><i class="fas fa-play-circle me-2"></i> Études de Cas Vidéo</h6>
+              </div>
+              <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action">
+                  <i class="fas fa-store me-2"></i> Marché de Ouagadougou : Techniques de vente au détail
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                  <i class="fas fa-mobile-alt me-2"></i> MTN Mobile Money : Vente B2B cross-culturelle
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Bonus -->
+        <div class="alert alert-warning mt-3">
+          <h6><i class="fas fa-chart-line me-2"></i> Outils Pratiques :</h6>
+          <ul class="mb-0">
+            <li><strong>Calculateur de marge</strong> adapté aux marchés africains (avec taxes locales pré-intégrées)</li>
+            <li><strong>Grille de négociation</strong> pour les achats en gros (version Francophone/Anglophone)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-warning"><i class="fas fa-gem me-2"></i> Accéder à la Formation Complète</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalApprentissage" tabindex="-1" aria-labelledby="modalApprentissageLabel">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="modalApprentissageLabel"><i class="fas fa-brain me-2"></i> Learning Hub Africain</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Onglets -->
+        <ul class="nav nav-tabs mb-4" id="learningTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="formations-tab" data-bs-toggle="tab" data-bs-target="#formations" type="button">Formations</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="outils-tab" data-bs-toggle="tab" data-bs-target="#outils" type="button">Outils</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="reseaux-tab" data-bs-toggle="tab" data-bs-target="#reseaux" type="button">Réseaux</button>
+          </li>
+        </ul>
+
+        <!-- Contenu des onglets -->
+        <div class="tab-content" id="learningTabsContent">
+          <!-- Onglet 1 -->
+          <div class="tab-pane fade show active" id="formations" role="tabpanel">
+            <div class="row">
+              <div class="col-md-6">
+                <h6><i class="fas fa-certificate me-2"></i> Certifications Locales :</h6>
+                <div class="list-group mb-3">
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <strong>ALX Africa</strong> : Nanodegree en Tech (12 semaines)
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <strong>African Leadership University</strong> : MBA Entrepreneuriat
+                  </a>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <h6><i class="fas fa-language me-2"></i> Langues :</h6>
+                <div class="list-group">
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <strong>Swahili Business</strong> : Cours spécialisé commerce Est-Africain
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">
+                    <strong>Francophonie</strong> : Vocabulaire technique OHADA
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Onglet 2 -->
+          <div class="tab-pane fade" id="outils" role="tabpanel">
+            <div class="row">
+              <div class="col-md-4">
+                <h6><i class="fas fa-book me-2"></i> E-Books :</h6>
+                <ul>
+                  <li><a href="#">"Finances pour non-comptables" (Cas Sénégal)</a></li>
+                  <li><a href="#">Guide des startups UEMOA 2024</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6><i class="fas fa-calculator me-2"></i> Outils :</h6>
+                <ul>
+                  <li><a href="#">Calculateur ROI formations</a></li>
+                  <li><a href="#">Template plan d'apprentissage</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h6><i class="fas fa-podcast me-2"></i> Podcasts :</h6>
+                <ul>
+                  <li><a href="#">"Apprendre sur le terrain" (RDC)</a></li>
+                  <li><a href="#">Interviews de CEOs africains</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Onglet 3 -->
+          <div class="tab-pane fade" id="reseaux" role="tabpanel">
+            <div class="alert alert-info">
+              <h6><i class="fas fa-users me-2"></i> Communautés à rejoindre :</h6>
+              <div class="row">
+                <div class="col-md-6">
+                  <ul>
+                    <li><strong>Facebook :</strong> "Entrepreneurs Francophones"</li>
+                    <li><strong>LinkedIn :</strong> Groupe FinTech Africa</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li><strong>WhatsApp :</strong> "E-Commerce Nigeria"</li>
+                    <li><strong>Clubhouse :</strong> Salon "Innovation Sahara"</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <h6><i class="fas fa-calendar-check me-2"></i> Événements 2024 :</h6>
+            <ul>
+              <li><strong>Mars :</strong> AfricArena (Cape Town)</li>
+              <li><strong>Juin :</strong> Salon Finances Dakar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal">Fermer</button>
+        <a href="#" class="btn btn-info"><i class="fas fa-rocket me-2"></i> Démarrer mon Parcours</a>
       </div>
     </div>
   </div>
@@ -1012,6 +1436,36 @@
       score === 2 ? "✅ Expert en RH africains !" : "📚 Consultez notre guide pour améliorer vos pratiques";
     document.getElementById('quizResult').classList.remove('d-none');
   }
+</script>
+
+<!-- JavaScript -->
+<script>
+  // Gestion du bouton Voir Plus/Moins
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.getElementById('toggleButton');
+    const autresPratiques = document.getElementById('autresPratiques');
+    
+    autresPratiques.addEventListener('show.bs.collapse', function() {
+      toggleButton.innerHTML = 'Voir moins <i class="fas fa-chevron-up ms-2"></i>';
+    });
+    
+    autresPratiques.addEventListener('hide.bs.collapse', function() {
+      toggleButton.innerHTML = 'Voir les 15 autres pratiques <i class="fas fa-chevron-down ms-2"></i>';
+    });
+    
+    // Animation au scroll
+    const cards = document.querySelectorAll('#bonnes-pratiques .card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+      
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 500 + index * 100);
+    });
+  });
 </script>
 
 </body>
