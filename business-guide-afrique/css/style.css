@@ -1,0 +1,14 @@
+/* Custom Styles */
+.hero-section {
+    padding: 100px 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), url('../assets/afrique-business.jpg');
+    background-size: cover;
+}
+
+.card {
+    transition: transform 0.3s;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
