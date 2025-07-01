@@ -53,6 +53,26 @@
     margin-top: 1rem;
     font-size: 0.85rem;
   }
+  
+  
+  /* Style des modaux */
+#modalVente .list-group-item, #modalApprentissage .list-group-item {
+  transition: all 0.3s;
+}
+#modalVente .list-group-item:hover {
+  background-color: #fff9e6;
+  border-left: 3px solid #ffc107;
+}
+#modalApprentissage .nav-tabs .nav-link.active {
+  font-weight: 600;
+  border-bottom: 3px solid #0dcaf0;
+}
+#modalApprentissage .tab-pane {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+}
+
 </style>
 
 
@@ -597,58 +617,275 @@
     <div class="collapse" id="autresPratiques">
       <div class="row g-4 mt-2">
         <!-- Pratique 7 -->
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm hover-effect">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <span class="badge bg-primary mb-2">#7</span>
-                <i class="fas fa-fire-extinguisher text-danger"></i>
-              </div>
-              <h5 class="fw-bold">Gestion de crise</h5>
-              <p class="text-muted">3 fournisseurs alternatifs par produit clé.</p>
-              <div class="bonus-info">
-                <p class="mb-1"><strong>Cas :</strong> Zara Maroc pendant Covid</p>
-                <p class="mb-0"><strong>Survie :</strong> 92% vs 54% moyenne</p>
-              </div>
-            </div>
-          </div>
-        </div>
+	<!-- Pratique 7 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#7</span>
+        <i class="fas fa-fire-extinguisher text-danger"></i>
+      </div>
+      <h5 class="fw-bold">Gestion de crise</h5>
+      <p class="text-muted">3 fournisseurs alternatifs par produit clé.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Cas :</strong> Zara Maroc pendant Covid</p>
+        <p class="mb-0"><strong>Survie :</strong> 92% vs 54% moyenne</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!-- Pratique 8 -->
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm hover-effect">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <span class="badge bg-primary mb-2">#8</span>
-                <i class="fas fa-hand-holding-heart text-success"></i>
-              </div>
-              <h5 class="fw-bold">Protocoles culturels</h5>
-              <p class="text-muted">Offrir café/kola en Afrique de l'Ouest.</p>
-              <div class="bonus-info">
-                <p class="mb-1"><strong>Modèle :</strong> Dangote Nigeria</p>
-                <p class="mb-0"><strong>Efficacité :</strong> +70% de réussite</p>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- Pratique 8 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#8</span>
+        <i class="fas fa-hand-holding-heart text-success"></i>
+      </div>
+      <h5 class="fw-bold">Protocoles culturels</h5>
+      <p class="text-muted">Offrir café/kola en Afrique de l'Ouest.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Modèle :</strong> Dangote Nigeria</p>
+        <p class="mb-0"><strong>Efficacité :</strong> +70% de réussite</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-        <!-- Pratique 9 -->
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm hover-effect">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-start">
-                <span class="badge bg-primary mb-2">#9</span>
-                <i class="fas fa-calculator text-info"></i>
-              </div>
-              <h5 class="fw-bold">Comptabilité mobile</h5>
-              <p class="text-muted">Utiliser Wave (Sénégal) ou Kippa (Nigeria).</p>
-              <div class="bonus-info">
-                <p class="mb-1"><strong>Résultat :</strong> PME Lomé</p>
-                <p class="mb-0"><strong>Gain :</strong> +30% productivité</p>
-              </div>
-            </div>
-          </div>
-        </div>
+<!-- Pratique 9 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#9</span>
+        <i class="fas fa-calculator text-info"></i>
+      </div>
+      <h5 class="fw-bold">Comptabilité mobile</h5>
+      <p class="text-muted">Utiliser Wave (Sénégal) ou Kippa (Nigeria).</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Résultat :</strong> PME Lomé</p>
+        <p class="mb-0"><strong>Gain :</strong> +30% productivité</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 10 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#10</span>
+        <i class="fas fa-store text-primary"></i>
+      </div>
+      <h5 class="fw-bold">Marketing de rue</h5>
+      <p class="text-muted">Échantillons dans marchés 2x/mois.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Exemple :</strong> Nivea Afrique</p>
+        <p class="mb-0"><strong>Impact :</strong> +25% ventes</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 11 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#11</span>
+        <i class="fas fa-database text-secondary"></i>
+      </div>
+      <h5 class="fw-bold">Résilience digitale</h5>
+      <p class="text-muted">2 clouds + 1 disque dur physique.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Cas :</strong> Kinshasa Digital</p>
+        <p class="mb-0"><strong>Sécurité :</strong> 99.9% uptime</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 12 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#12</span>
+        <i class="fas fa-clock text-warning"></i>
+      </div>
+      <h5 class="fw-bold">Heures flexibles</h5>
+      <p class="text-muted">Adapter aux prières/cultures locales.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Exemple :</strong> Kano (Nigeria)</p>
+        <p class="mb-0"><strong>Satisfaction :</strong> +40%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 13 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#13</span>
+        <i class="fas fa-handshake text-success"></i>
+      </div>
+      <h5 class="fw-bold">Partenariats locaux</h5>
+      <p class="text-muted">Collaborer avec "mamans réseaux".</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Modèle :</strong> P&G Africa</p>
+        <p class="mb-0"><strong>Couverture :</strong> +60% rural</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 14 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#14</span>
+        <i class="fas fa-star-half-alt text-info"></i>
+      </div>
+      <h5 class="fw-bold">Feedback clients</h5>
+      <p class="text-muted">Système de rating par USSD.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Innovation :</strong> MTN Ghana</p>
+        <p class="mb-0"><strong>Réponses :</strong> 3x plus</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 15 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#15</span>
+        <i class="fas fa-exchange-alt text-danger"></i>
+      </div>
+      <h5 class="fw-bold">Gestion du change</h5>
+      <p class="text-muted">Convertir 20% en devise stable.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Stratégie :</strong> Importateurs RDC</p>
+        <p class="mb-0"><strong>Économie :</strong> -30% pertes</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 16 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#16</span>
+        <i class="fas fa-eye text-primary"></i>
+      </div>
+      <h5 class="fw-bold">Communication visuelle</h5>
+      <p class="text-muted">80% de posts avec images/vidéos.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Référence :</strong> Jumia CI</p>
+        <p class="mb-0"><strong>Engagement :</strong> 3x plus</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 17 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#17</span>
+        <i class="fas fa-people-arrows text-success"></i>
+      </div>
+      <h5 class="fw-bold">Mentorat inversé</h5>
+      <p class="text-muted">Juniors forment seniors 1h/semaine.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Pionnier :</strong> Ecobank</p>
+        <p class="mb-0"><strong>Adoption :</strong> 78% équipes</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 18 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#18</span>
+        <i class="fas fa-gavel text-warning"></i>
+      </div>
+      <h5 class="fw-bold">Veille réglementaire</h5>
+      <p class="text-muted">Alertes Chambre de Commerce.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Exemple :</strong> Taxe Instagram Sénégal</p>
+        <p class="mb-0"><strong>Évitement :</strong> 100K€ sauvegardés</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 19 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#19</span>
+        <i class="fas fa-language text-info"></i>
+      </div>
+      <h5 class="fw-bold">Langues locales</h5>
+      <p class="text-muted">5 phrases business clés.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Cas :</strong> Mawuli Ghana</p>
+        <p class="mb-0"><strong>Confiance :</strong> +65%</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 20 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#20</span>
+        <i class="fas fa-truck text-secondary"></i>
+      </div>
+      <h5 class="fw-bold">Solidarité sectorielle</h5>
+      <p class="text-muted">Mutualiser les coûts logistiques.</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Réussite :</strong> Cluster Kenya</p>
+        <p class="mb-0"><strong>Économie :</strong> -35% coûts</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pratique 21 -->
+<div class="col-md-4">
+  <div class="card h-100 border-0 shadow-sm hover-effect">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-start">
+        <span class="badge bg-primary mb-2">#21</span>
+        <i class="fas fa-chart-line text-danger"></i>
+      </div>
+      <h5 class="fw-bold">Auto-évaluation mensuelle</h5>
+      <p class="text-muted">Tableau de bord "AfriKPI".</p>
+      <div class="bonus-info">
+        <p class="mb-1"><strong>Métriques :</strong> 5 indicateurs clés</p>
+        <p class="mb-0"><strong>Utilisateurs :</strong> 15 000+</p>
+      </div>
+    </div>
+  </div>
+</div>
 
         <!-- [...] Continuez jusqu'à la pratique 21 -->
       </div>
