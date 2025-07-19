@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Méthodologie ActionCOACH</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #343a40;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    .module-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary-color);
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-outline-primary {
+      color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .simulation-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .process-step:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+
+    .process-step:after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background-color: var(--secondary-color);
+    }
+
+    .process-step:last-child:after {
+      display: none;
+    }
+
+    .highlight-box {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .linked-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .linked-module {
+      background-color: var(--light-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      border: 1px solid #ddd;
+    }
+
+    .tab-content {
+      padding: 1.5rem 0;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Animation pour les cartes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .module-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    /* Délai d'animation pour chaque carte */
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+    .module-card:nth-child(3) { animation-delay: 0.3s; }
+    .module-card:nth-child(4) { animation-delay: 0.4s; }
+    .module-card:nth-child(5) { animation-delay: 0.5s; }
+    .module-card:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+
+      .module-icon {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .methodology-step {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .methodology-step h4 {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 0.5rem;
+    }
+    
+    .growth-lever {
+      background: white;
+      border-left: 4px solid var(--accent-color);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 0 5px 5px 0;
+    }
+    
+    .role-card {
+      border-top: 3px solid var(--secondary-color);
+      transition: all 0.3s;
+    }
+    
+    .role-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-graph-up-arrow me-2"></i>ActionCOACH Méthodologie
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#methodologie">Méthodologie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#leviers">Leviers de Croissance</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#roles">Rôles Entrepreneur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#simulations">Simulations</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Développez votre entreprise avec la méthode ActionCOACH</h1>
+      <p class="lead mb-4">Découvrez les outils et stratégies éprouvés pour transformer votre entreprise</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#methodologie" class="btn btn-light btn-lg px-4">Explorer la méthode</a>
+        <a href="#simulations" class="btn btn-outline-light btn-lg px-4">Simulations interactives</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5">
+    <section id="methodologie" class="mb-5">
+      <h2 class="text-center mb-4">La Méthodologie ActionCOACH</h2>
+      
+      <div class="methodology-step">
+        <h4><i class="bi bi-clipboard2-pulse me-2"></i>Diagnostic d'entreprise</h4>
+        <p>Analyse complète de votre entreprise pour identifier les forces, faiblesses et opportunités d'amélioration.</p>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h5><i class="bi bi-check-circle me-2"></i>Éléments analysés :</h5>
+            <ul>
+              <li>Performance commerciale et marketing</li>
+              <li>Efficacité opérationnelle</li>
+              <li>Gestion financière et trésorerie</li>
+              <li>Culture d'entreprise et équipe</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-bar-chart me-2"></i>Outils :</h5>
+            <ul>
+              <li>Matrice SWOT</li>
+              <li>Analyse des processus clés</li>
+              <li>Benchmarking sectoriel</li>
+              <li>Analyse des données financières</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="methodology-step">
+        <h4><i class="bi bi-people-fill me-2"></i>Les 14 Points de Culture</h4>
+        <p>Cadre pour développer une culture d'entreprise forte et performante.</p>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h5><i class="bi bi-star me-2"></i>Exemples de points :</h5>
+            <ul>
+              <li>Engagement à l'excellence</li>
+              <li>Responsabilité personnelle</li>
+              <li>Communication ouverte</li>
+              <li>Amélioration continue</li>
+              <li>Résultats mesurables</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-gear me-2"></i>Mise en œuvre :</h5>
+            <ul>
+              <li>Ateliers d'équipe</li>
+              <li>Tableaux de suivi</li>
+              <li>Systèmes de reconnaissance</li>
+              <li>Intégration dans les processus RH</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="methodology-step">
+        <h4><i class="bi bi-graph-up-arrow me-2"></i>Stratégies d'accélération des profits</h4>
+        <p>Approche systématique pour augmenter la rentabilité de l'entreprise.</p>
+        <div class="row mt-3">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Augmenter le CA</h5>
+                <ul>
+                  <li>Stratégies de vente additionnelle</li>
+                  <li>Optimisation du mix produits</li>
+                  <li>Développement de nouveaux marchés</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Réduire les coûts</h5>
+                <ul>
+                  <li>Analyse des coûts variables/fixes</li>
+                  <li>Négociation fournisseurs</li>
+                  <li>Automatisation des processus</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Optimiser la trésorerie</h5>
+                <ul>
+                  <li>Gestion du BFR</li>
+                  <li>Politique de recouvrement</li>
+                  <li>Planification financière</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="methodology-step">
+        <h4><i class="bi bi-person-lines-fill me-2"></i>Coaching d'équipe</h4>
+        <p>Développement des compétences individuelles et collectives pour améliorer la performance.</p>
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <h5><i class="bi bi-check-circle me-2"></i>Approche :</h5>
+            <ul>
+              <li>Évaluation des compétences</li>
+              <li>Plans de développement personnalisés</li>
+              <li>Ateliers de team building</li>
+              <li>Mise en place de systèmes de motivation</li>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <h5><i class="bi bi-bar-chart me-2"></i>Résultats :</h5>
+            <ul>
+              <li>Augmentation de la productivité</li>
+              <li>Amélioration de la communication</li>
+              <li>Responsabilisation des collaborateurs</li>
+              <li>Rétention des talents</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="leviers" class="mb-5">
+      <h2 class="text-center mb-4">Les 5 Leviers de Croissance</h2>
+      <p class="text-center lead mb-4">La méthode ActionCOACH identifie 5 leviers fondamentaux pour développer votre chiffre d'affaires</p>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <div class="growth-lever">
+            <h4><i class="bi bi-people-fill me-2"></i>1. Prospects</h4>
+            <p>Augmentez le nombre de clients potentiels qui entrent dans votre entonnoir de vente.</p>
+            <ul>
+              <li>Stratégies d'acquisition</li>
+              <li>Marketing entrant/sortant</li>
+              <li>Partenariats stratégiques</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="growth-lever">
+            <h4><i class="bi bi-percent me-2"></i>2. Taux de conversion</h4>
+            <p>Transformez plus de prospects en clients.</p>
+            <ul>
+              <li>Processus de vente optimisé</li>
+              <li>Formation commerciale</li>
+              <li>Argumentaire efficace</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="growth-lever">
+            <h4><i class="bi bi-cart me-2"></i>3. Panier moyen</h4>
+            <p>Augmentez le montant moyen dépensé par vos clients.</p>
+            <ul>
+              <li>Vente croisée</li>
+              <li>Vente additionnelle</li>
+              <li>Packaging de produits</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="growth-lever">
+            <h4><i class="bi bi-repeat me-2"></i>4. Nombre de transactions</h4>
+            <p>Faites acheter vos clients plus fréquemment.</p>
+            <ul>
+              <li>Programmes de fidélisation</li>
+              <li>Relances stratégiques</li>
+              <li>Contenus engageants</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="growth-lever">
+            <h4><i class="bi bi-cash-stack me-2"></i>5. Marge bénéficiaire</h4>
+            <p>Optimisez vos coûts et prix pour maximiser la rentabilité.</p>
+            <ul>
+              <li>Analyse des coûts</li>
+              <li>Stratégie de prix</li>
+              <li>Efficacité opérationnelle</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="simulation-container mt-4">
+        <h4><i class="bi bi-calculator me-2"></i>Simulateur d'impact des leviers</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Chiffre d'affaires actuel (€)</label>
+              <input type="number" class="form-control" id="caActuel" value="100000">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Nombre de clients actuels</label>
+              <input type="number" class="form-control" id="clientsActuels" value="100">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Amélioration souhaitée (%)</label>
+              <input type="number" class="form-control" id="amelioration" value="10" min="1" max="100">
+            </div>
+            <button class="btn btn-primary" onclick="calculerImpact()">Calculer l'impact</button>
+          </div>
+        </div>
+        
+        <div id="resultatImpact" class="mt-4" style="display:none;">
+          <h5>Impact potentiel sur votre chiffre d'affaires :</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Levier</th>
+                  <th>Amélioration</th>
+                  <th>Nouveau CA</th>
+                  <th>Gain potentiel</th>
+                </tr>
+              </thead>
+              <tbody id="resultatsLevier">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roles" class="mb-5">
+      <h2 class="text-center mb-4">Les 4 Rôles de l'Entrepreneur</h2>
+      <p class="text-center lead mb-4">Pour réussir, un entrepreneur doit maîtriser ces 4 rôles clés</p>
+      
+      <div class="row">
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 role-card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-eye me-2"></i>Visionnaire</h5>
+            </div>
+            <div class="card-body">
+              <p>Définit la direction et l'avenir de l'entreprise.</p>
+              <ul>
+                <li>Stratégie à long terme</li>
+                <li>Mission et vision</li>
+                <li>Innovation</li>
+                <li>Culture d'entreprise</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 role-card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-person-gear me-2"></i>Manager</h5>
+            </div>
+            <div class="card-body">
+              <p>Organise et optimise les opérations quotidiennes.</p>
+              <ul>
+                <li>Processus et systèmes</li>
+                <li>Gestion d'équipe</li>
+                <li>Résolution de problèmes</li>
+                <li>Contrôle qualité</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 role-card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-tools me-2"></i>Technicien</h5>
+            </div>
+            <div class="card-body">
+              <p>Exécute le travail technique et opérationnel.</p>
+              <ul>
+                <li>Expertise métier</li>
+                <li>Production</li>
+                <li>Service client</li>
+                <li>Livraison</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3">
+          <div class="card h-100 role-card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Investisseur</h5>
+            </div>
+            <div class="card-body">
+              <p>Gère les aspects financiers et l'avenir de l'entreprise.</p>
+              <ul>
+                <li>Gestion financière</li>
+                <li>Investissements</li>
+                <li>Croissance externe</li>
+                <li>Plan de sortie</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="simulation-container mt-4">
+        <h4><i class="bi bi-person-badge me-2"></i>Analyse de vos rôles</h4>
+        <p>Évaluez votre répartition actuelle de temps entre ces 4 rôles :</p>
+        
+        <div class="row">
+          <div class="col-md-3">
+            <label class="form-label">Visionnaire (%)</label>
+            <input type="number" class="form-control role-input" id="visionnaire" min="0" max="100" value="20">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Manager (%)</label>
+            <input type="number" class="form-control role-input" id="manager" min="0" max="100" value="30">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Technicien (%)</label>
+            <input type="number" class="form-control role-input" id="technicien" min="0" max="100" value="40">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Investisseur (%)</label>
+            <input type="number" class="form-control role-input" id="investisseur" min="0" max="100" value="10">
+          </div>
+        </div>
+        
+        <div class="mt-3">
+          <button class="btn btn-primary" onclick="analyserRoles()">Analyser ma répartition</button>
+        </div>
+        
+        <div id="roleAnalysisResult" class="mt-3" style="display:none;">
+          <div class="alert alert-info">
+            <h5>Résultat de l'analyse :</h5>
+            <p id="roleFeedback"></p>
+            <div class="progress mt-2">
+              <div class="progress-bar bg-danger" role="progressbar" id="visionnaireBar"></div>
+              <div class="progress-bar bg-warning" role="progressbar" id="managerBar"></div>
+              <div class="progress-bar bg-primary" role="progressbar" id="technicienBar"></div>
+              <div class="progress-bar bg-success" role="progressbar" id="investisseurBar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulations" class="mb-5">
+      <h2 class="text-center mb-4">Simulations interactives</h2>
+
+      <ul class="nav nav-tabs justify-content-center mb-4" id="simulationTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="diagnostic-tab" data-bs-toggle="tab" data-bs-target="#diagnostic" type="button" role="tab">Diagnostic d'entreprise</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="culture-tab" data-bs-toggle="tab" data-bs-target="#culture" type="button" role="tab">Points de culture</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profit-tab" data-bs-toggle="tab" data-bs-target="#profit" type="button" role="tab">Accélération des profits</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="simulationTabContent">
+        <div class="tab-pane fade show active" id="diagnostic" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-clipboard2-pulse me-2"></i>Simulation de diagnostic d'entreprise</h3>
+            <p>Cette simulation vous guide à travers un diagnostic complet de votre entreprise.</p>
+            
+            <div class="process-step">
+              <h5>1. Analyse des ventes</h5>
+              <div class="mb-3">
+                <button class="btn btn-sm btn-outline-primary" onclick="startDiagnostic('sales')">Commencer l'analyse</button>
+                <div id="salesAnalysis" class="mt-3" style="display:none;">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="form-label">Chiffre d'affaires annuel (€)</label>
+                      <input type="number" class="form-control" id="caAnnuel">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Taux de croissance annuel (%)</label>
+                      <input type="number" class="form-control" id="tauxCroissance">
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2" onclick="analyzeSales()">Analyser</button>
+                </div>
+                <div id="salesResult" class="mt-3" style="display:none;"></div>
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <h5>2. Analyse marketing</h5>
+              <div class="mb-3">
+                <button class="btn btn-sm btn-outline-primary" id="marketingBtn" disabled onclick="startDiagnostic('marketing')">Commencer l'analyse</button>
+                <div id="marketingAnalysis" class="mt-3" style="display:none;">
+                  <div class="mb-3">
+                    <label class="form-label">Coût d'acquisition client (€)</label>
+                    <input type="number" class="form-control" id="cac">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Taux de conversion (%)</label>
+                    <input type="number" class="form-control" id="tauxConversion">
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="analyzeMarketing()">Analyser</button>
+                </div>
+                <div id="marketingResult" class="mt-3" style="display:none;"></div>
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <h5>3. Analyse financière</h5>
+              <div class="mb-3">
+                <button class="btn btn-sm btn-outline-primary" id="financeBtn" disabled onclick="startDiagnostic('finance')">Commencer l'analyse</button>
+                <div id="financeAnalysis" class="mt-3" style="display:none;">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label class="form-label">Marge brute (%)</label>
+                      <input type="number" class="form-control" id="margeBrute">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Délai de paiement clients (jours)</label>
+                      <input type="number" class="form-control" id="delaiPaiement">
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-sm mt-2" onclick="analyzeFinance()">Analyser</button>
+                </div>
+                <div id="financeResult" class="mt-3" style="display:none;"></div>
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <h5>4. Analyse de l'équipe</h5>
+              <div class="mb-3">
+                <button class="btn btn-sm btn-outline-primary" id="teamBtn" disabled onclick="startDiagnostic('team')">Commencer l'analyse</button>
+                <div id="teamAnalysis" class="mt-3" style="display:none;">
+                  <div class="mb-3">
+                    <label class="form-label">Taux de turnover (%)</label>
+                    <input type="number" class="form-control" id="turnover">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Satisfaction employés (1-10)</label>
+                    <input type="number" class="form-control" id="satisfaction" min="1" max="10">
+                  </div>
+                  <button class="btn btn-primary btn-sm" onclick="analyzeTeam()">Analyser</button>
+                </div>
+                <div id="teamResult" class="mt-3" style="display:none;"></div>
+              </div>
+            </div>
+            
+            <div class="process-step">
+              <h5>5. Synthèse et recommandations</h5>
+              <div class="mb-3">
+                <button class="btn btn-sm btn-outline-primary" id="recommendationBtn" disabled onclick="generateRecommendations()">Générer les recommandations</button>
+                <div id="recommendationResult" class="mt-3" style="display:none;"></div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <button class="btn btn-primary" onclick="resetDiagnostic()">Réinitialiser la simulation</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="culture" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-people-fill me-2"></i>Simulation des 14 Points de Culture</h3>
+            <p>Évaluez et améliorez la culture de votre entreprise selon les 14 points clés d'ActionCOACH.</p>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Sélectionnez un point de culture :</label>
+                  <select class="form-select" id="culturePoint">
+                    <option value="1">Engagement à l'excellence</option>
+                    <option value="2">Responsabilité personnelle</option>
+                    <option value="3">Le profit est sain</option>
+                    <option value="4">Les systèmes permettent la croissance</option>
+                    <option value="5">Tout est mesurable</option>
+                    <option value="6">Communication ouverte</option>
+                    <option value="7">L'équipe avant l'individu</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Notez votre entreprise (1-10) :</label>
+                  <input type="number" class="form-control" id="cultureScore" min="1" max="10" value="5">
+                </div>
+              </div>
+            </div>
+            
+            <button class="btn btn-primary" onclick="evaluateCulture()">Évaluer ce point</button>
+            
+            <div id="cultureEvaluationResult" class="mt-4" style="display:none;">
+              <div class="alert alert-success">
+                <h5>Résultat de l'évaluation :</h5>
+                <p id="cultureFeedback"></p>
+                <div class="progress mt-2">
+                  <div class="progress-bar" role="progressbar" id="cultureProgress"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <button class="btn btn-outline-primary" onclick="viewAllCulturePoints()">Voir tous les points de culture</button>
+              <div id="allCulturePoints" class="mt-3" style="display:none;">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Point de culture</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1. Engagement à l'excellence</td>
+                      <td>Recherche constante de la meilleure qualité dans toutes les activités</td>
+                    </tr>
+                    <tr>
+                      <td>2. Responsabilité personnelle</td>
+                      <td>Chacun assume la responsabilité de ses actions et résultats</td>
+                    </tr>
+                    <tr>
+                      <td>3. Le profit est sain</td>
+                      <td>Comprendre que la rentabilité permet de pérenniser l'entreprise</td>
+                    </tr>
+                    <tr>
+                      <td>4. Les systèmes permettent la croissance</td>
+                      <td>Mettre en place des processus reproductibles et évolutifs</td>
+                    </tr>
+                    <tr>
+                      <td>5. Tout est mesurable</td>
+                      <td>Suivre des indicateurs clés pour piloter la performance</td>
+                    </tr>
+                    <tr>
+                      <td>6. Communication ouverte</td>
+                      <td>Encourager le dialogue transparent à tous les niveaux</td>
+                    </tr>
+                    <tr>
+                      <td>7. L'équipe avant l'individu</td>
+                      <td>Privilégier la réussite collective aux succès individuels</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="profit" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-graph-up-arrow me-2"></i>Simulation d'accélération des profits</h3>
+            <p>Explorez comment améliorer votre rentabilité grâce aux stratégies ActionCOACH.</p>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Données actuelles :</h5>
+                <div class="mb-3">
+                  <label class="form-label">Chiffre d'affaires annuel (€)</label>
+                  <input type="number" class="form-control" id="currentRevenue" value="500000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Coûts variables (%)</label>
+                  <input type="number" class="form-control" id="variableCosts" value="40">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Coûts fixes (€)</label>
+                  <input type="number" class="form-control" id="fixedCosts" value="200000">
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <h5>Stratégies possibles :</h5>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="increasePrice" checked>
+                  <label class="form-check-label" for="increasePrice">Augmenter les prix de 5%</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="reduceCosts" checked>
+                  <label class="form-check-label" for="reduceCosts">Réduire les coûts variables de 3%</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" id="increaseVolume" checked>
+                  <label class="form-check-label" for="increaseVolume">Augmenter le volume de ventes de 8%</label>
+                </div>
+                <button class="btn btn-primary mt-2" onclick="calculateProfitImpact()">Calculer l'impact</button>
+              </div>
+            </div>
+            
+            <div id="profitImpactResult" class="mt-4" style="display:none;">
+              <h5>Impact sur votre rentabilité :</h5>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Scénario</th>
+                      <th>Chiffre d'affaires</th>
+                      <th>Coûts totaux</th>
+                      <th>Profit</th>
+                      <th>Marge bénéficiaire</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Actuel</td>
+                      <td id="currentRevenueDisplay"></td>
+                      <td id="currentCostsDisplay"></td>
+                      <td id="currentProfitDisplay"></td>
+                      <td id="currentMarginDisplay"></td>
+                    </tr>
+                    <tr class="table-success">
+                      <td>Avec stratégies</td>
+                      <td id="newRevenueDisplay"></td>
+                      <td id="newCostsDisplay"></td>
+                      <td id="newProfitDisplay"></td>
+                      <td id="newMarginDisplay"></td>
+                    </tr>
+                    <tr class="table-info">
+                      <td>Différence</td>
+                      <td id="revenueDiffDisplay"></td>
+                      <td id="costsDiffDisplay"></td>
+                      <td id="profitDiffDisplay"></td>
+                      <td id="marginDiffDisplay"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="alert alert-info mt-3">
+                <p id="profitStrategyAdvice"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">Portail Méthodologie ActionCOACH - Outil pédagogique</p>
+      <p class="mb-0">© 2023 - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Simulation data
+    let diagnosticState = {
+      salesAnalyzed: false,
+      marketingAnalyzed: false,
+      financeAnalyzed: false,
+      teamAnalyzed: false
+    };
+    
+    // Calculate impact of growth levers
+    function calculerImpact() {
+      const caActuel = parseFloat(document.getElementById('caActuel').value);
+      const clientsActuels = parseFloat(document.getElementById('clientsActuels').value);
+      const amelioration = parseFloat(document.getElementById('amelioration').value) / 100;
+      
+      const resultats = [
+        {
+          levier: "Prospects",
+          description: "Augmenter le nombre de clients potentiels",
+          nouveauCA: Math.round(caActuel * (1 + amelioration)),
+          gain: Math.round(caActuel * amelioration)
+        },
+        {
+          levier: "Taux de conversion",
+          description: "Convertir plus de prospects en clients",
+          nouveauCA: Math.round(caActuel * (1 + amelioration)),
+          gain: Math.round(caActuel * amelioration)
+        },
+        {
+          levier: "Panier moyen",
+          description: "Augmenter le montant moyen des achats",
+          nouveauCA: Math.round(caActuel * (1 + amelioration)),
+          gain: Math.round(caActuel * amelioration)
+        },
+        {
+          levier: "Nombre de transactions",
+          description: "Faire acheter vos clients plus souvent",
+          nouveauCA: Math.round(caActuel * (1 + amelioration)),
+          gain: Math.round(caActuel * amelioration)
+        },
+        {
+          levier: "Marge bénéficiaire",
+          description: "Améliorer votre rentabilité",
+          nouveauCA: caActuel,
+          gain: Math.round(caActuel * 0.05 * amelioration * 100) // Approximation
+        }
+      ];
+      
+      let html = '';
+      resultats.forEach(result => {
+        html += `
+          <tr>
+            <td><strong>${result.levier}</strong><br><small>${result.description}</small></td>
+            <td>${amelioration*100}%</td>
+            <td>${result.nouveauCA.toLocaleString()} €</td>
+            <td class="text-success">+${result.gain.toLocaleString()} €</td>
+          </tr>
+        `;
+      });
+      
+      document.getElementById('resultatsLevier').innerHTML = html;
+      document.getElementById('resultatImpact').style.display = 'block';
+    }
+    
+    // Analyze entrepreneur roles
+    function analyserRoles() {
+      const visionnaire = parseInt(document.getElementById('visionnaire').value);
+      const manager = parseInt(document.getElementById('manager').value);
+      const technicien = parseInt(document.getElementById('technicien').value);
+      const investisseur = parseInt(document.getElementById('investisseur').value);
+      
+      const total = visionnaire + manager + technicien + investisseur;
+      
+      if(total !== 100) {
+        alert("Le total doit faire 100%. Actuellement : " + total + "%");
+        return;
+      }
+      
+      let feedback = "";
+      
+      if(technicien > 40) {
+        feedback = "Vous passez trop de temps en mode Technicien. Cela peut limiter la croissance de votre entreprise. Essayez de déléguer davantage pour vous concentrer sur la stratégie et la gestion.";
+      } else if(manager < 20) {
+        feedback = "Vous ne consacrez pas assez de temps au management. Une entreprise a besoin de systèmes et de processus bien gérés pour croître durablement.";
+      } else if(visionnaire < 15) {
+        feedback = "Vous devriez accorder plus de temps à votre rôle de Visionnaire. Sans une vision claire, votre entreprise peut manquer de direction stratégique.";
+      } else if(investisseur < 10) {
+        feedback = "Pensez à consacrer plus de temps à votre rôle d'Investisseur. La gestion financière et la planification à long terme sont cruciales.";
+      } else {
+        feedback = "Votre répartition semble équilibrée. Continuez à travailler sur les 4 rôles pour maintenir une croissance harmonieuse de votre entreprise.";
+      }
+      
+      document.getElementById('roleFeedback').textContent = feedback;
+      document.getElementById('visionnaireBar').style.width = visionnaire + '%';
+      document.getElementById('visionnaireBar').setAttribute('aria-valuenow', visionnaire);
+      document.getElementById('managerBar').style.width = manager + '%';
+      document.getElementById('managerBar').setAttribute('aria-valuenow', manager);
+      document.getElementById('technicienBar').style.width = technicien + '%';
+      document.getElementById('technicienBar').setAttribute('aria-valuenow', technicien);
+      document.getElementById('investisseurBar').style.width = investisseur + '%';
+      document.getElementById('investisseurBar').setAttribute('aria-valuenow', investisseur);
+      
+      document.getElementById('roleAnalysisResult').style.display = 'block';
+    }
+    
+    // Diagnostic simulation functions
+    function startDiagnostic(area) {
+      document.getElementById(area + 'Analysis').style.display = 'block';
+    }
+    
+    function analyzeSales() {
+      const caAnnuel = parseFloat(document.getElementById('caAnnuel').value);
+      const tauxCroissance = parseFloat(document.getElementById('tauxCroissance').value);
+      
+      let analysis = "<div class='alert alert-success'><h5>Analyse des ventes :</h5>";
+      
+      if(tauxCroissance > 15) {
+        analysis += "<p>Votre croissance est <strong>excellente</strong> (+" + tauxCroissance + "%). Continuez sur cette lancée !</p>";
+      } else if(tauxCroissance > 5) {
+        analysis += "<p>Votre croissance est <strong>satisfaisante</strong> (+" + tauxCroissance + "%), mais pourrait être améliorée.</p>";
+      } else {
+        analysis += "<p>Votre croissance est <strong>trop faible</strong> (+" + tauxCroissance + "%). Il est temps d'agir.</p>";
+      }
+      
+      analysis += "<p>Opportunités :</p><ul>";
+      analysis += "<li>Développer de nouveaux canaux de vente</li>";
+      analysis += "<li>Améliorer la fidélisation client</li>";
+      analysis += "<li>Optimiser votre mix produits</li></ul></div>";
+      
+      document.getElementById('salesResult').innerHTML = analysis;
+      document.getElementById('salesResult').style.display = 'block';
+      diagnosticState.salesAnalyzed = true;
+      document.getElementById('marketingBtn').disabled = false;
+    }
+    
+    function analyzeMarketing() {
+      const cac = parseFloat(document.getElementById('cac').value);
+      const tauxConversion = parseFloat(document.getElementById('tauxConversion').value);
+      
+      let analysis = "<div class='alert alert-success'><h5>Analyse marketing :</h5>";
+      
+      if(cac > 200) {
+        analysis += "<p>Votre coût d'acquisition client est <strong>trop élevé</strong> (" + cac + "€).</p>";
+      } else if(cac > 100) {
+        analysis += "<p>Votre coût d'acquisition client est <strong>acceptable</strong> (" + cac + "€).</p>";
+      } else {
+        analysis += "<p>Votre coût d'acquisition client est <strong>excellent</strong> (" + cac + "€).</p>";
+      }
+      
+      if(tauxConversion < 5) {
+        analysis += "<p>Votre taux de conversion est <strong>trop faible</strong> (" + tauxConversion + "%).</p>";
+      } else if(tauxConversion < 15) {
+        analysis += "<p>Votre taux de conversion est <strong>moyen</strong> (" + tauxConversion + "%).</p>";
+      } else {
+        analysis += "<p>Votre taux de conversion est <strong>excellent</strong> (" + tauxConversion + "%).</p>";
+      }
+      
+      analysis += "<p>Recommandations :</p><ul>";
+      analysis += "<li>Optimiser votre funnel de vente</li>";
+      analysis += "<li>Tester de nouvelles campagnes marketing</li>";
+      analysis += "<li>Améliorer votre proposition de valeur</li></ul></div>";
+      
+      document.getElementById('marketingResult').innerHTML = analysis;
+      document.getElementById('marketingResult').style.display = 'block';
+      diagnosticState.marketingAnalyzed = true;
+      document.getElementById('financeBtn').disabled = false;
+    }
+    
+    function analyzeFinance() {
+      const margeBrute = parseFloat(document.getElementById('margeBrute').value);
+      const delaiPaiement = parseFloat(document.getElementById('delaiPaiement').value);
+      
+      let analysis = "<div class='alert alert-success'><h5>Analyse financière :</h5>";
+      
+      if(margeBrute < 20) {
+        analysis += "<p>Votre marge brute est <strong>trop faible</strong> (" + margeBrute + "%).</p>";
+      } else if(margeBrute < 40) {
+        analysis += "<p>Votre marge brute est <strong>acceptable</strong> (" + margeBrute + "%).</p>";
+      } else {
+        analysis += "<p>Votre marge brute est <strong>excellente</strong> (" + margeBrute + "%).</p>";
+      }
+      
+      if(delaiPaiement > 60) {
+        analysis += "<p>Vos délais de paiement sont <strong>trop longs</strong> (" + delaiPaiement + " jours).</p>";
+      } else if(delaiPaiement > 30) {
+        analysis += "<p>Vos délais de paiement sont <strong>normaux</strong> (" + delaiPaiement + " jours).</p>";
+      } else {
+        analysis += "<p>Vos délais de paiement sont <strong>bons</strong> (" + delaiPaiement + " jours).</p>";
+      }
+      
+      analysis += "<p>Actions possibles :</p><ul>";
+      analysis += "<li>Renégocier les prix avec les fournisseurs</li>";
+      analysis += "<li>Optimiser votre structure de coûts</li>";
+      analysis += "<li>Mettre en place des relances clients automatisées</li></ul></div>";
+      
+      document.getElementById('financeResult').innerHTML = analysis;
+      document.getElementById('financeResult').style.display = 'block';
+      diagnosticState.financeAnalyzed = true;
+      document.getElementById('teamBtn').disabled = false;
+    }
+    
+    function analyzeTeam() {
+      const turnover = parseFloat(document.getElementById('turnover').value);
+      const satisfaction = parseFloat(document.getElementById('satisfaction').value);
+      
+      let analysis = "<div class='alert alert-success'><h5>Analyse de l'équipe :</h5>";
+      
+      if(turnover > 20) {
+        analysis += "<p>Votre taux de turnover est <strong>trop élevé</strong> (" + turnover + "%).</p>";
+      } else if(turnover > 10) {
+        analysis += "<p>Votre taux de turnover est <strong>acceptable</strong> (" + turnover + "%).</p>";
+      } else {
+        analysis += "<p>Votre taux de turnover est <strong>excellent</strong> (" + turnover + "%).</p>";
+      }
+      
+      if(satisfaction < 5) {
+        analysis += "<p>La satisfaction de vos employés est <strong>trop faible</strong> (" + satisfaction + "/10).</p>";
+      } else if(satisfaction < 7) {
+        analysis += "<p>La satisfaction de vos employés est <strong>moyenne</strong> (" + satisfaction + "/10).</p>";
+      } else {
+        analysis += "<p>La satisfaction de vos employés est <strong>élevée</strong> (" + satisfaction + "/10).</p>";
+      }
+      
+      analysis += "<p>Pistes d'amélioration :</p><ul>";
+      analysis += "<li>Améliorer la communication interne</li>";
+      analysis += "<li>Mettre en place des programmes de formation</li>";
+      analysis += "<li>Renforcer la culture d'entreprise</li></ul></div>";
+      
+      document.getElementById('teamResult').innerHTML = analysis;
+      document.getElementById('teamResult').style.display = 'block';
+      diagnosticState.teamAnalyzed = true;
+      document.getElementById('recommendationBtn').disabled = false;
+    }
+    
+    function generateRecommendations() {
+      let recommendations = "<div class='alert alert-info'><h5>Synthèse du diagnostic :</h5>";
+      
+      recommendations += "<p>Sur la base de votre diagnostic, voici les 3 priorités pour améliorer votre entreprise :</p>";
+      recommendations += "<ol>";
+      recommendations += "<li><strong>Optimiser votre stratégie commerciale</strong> - Développez de nouveaux canaux de vente et améliorez votre taux de conversion</li>";
+      recommendations += "<li><strong>Renforcer votre gestion financière</strong> - Travaillez sur vos marges et votre trésorerie</li>";
+      recommendations += "<li><strong>Investir dans votre équipe</strong> - Une équipe motivée et compétente est la clé de la croissance</li>";
+      recommendations += "</ol>";
+      
+      recommendations += "<p>Pour aller plus loin :</p>";
+      recommendations += "<ul>";
+      recommendations += "<li>Mettre en place un tableau de bord de suivi</li>";
+      recommendations += "<li>Définir des objectifs SMART pour chaque domaine</li>";
+      recommendations += "<li>Planifier des revues trimestrielles</li>";
+      recommendations += "</ul></div>";
+      
+      document.getElementById('recommendationResult').innerHTML = recommendations;
+      document.getElementById('recommendationResult').style.display = 'block';
+    }
+    
+    function resetDiagnostic() {
+      diagnosticState = {
+        salesAnalyzed: false,
+        marketingAnalyzed: false,
+        financeAnalyzed: false,
+        teamAnalyzed: false
+      };
+      
+      document.getElementById('salesAnalysis').style.display = 'none';
+      document.getElementById('salesResult').style.display = 'none';
+      document.getElementById('marketingAnalysis').style.display = 'none';
+      document.getElementById('marketingResult').style.display = 'none';
+      document.getElementById('financeAnalysis').style.display = 'none';
+      document.getElementById('financeResult').style.display = 'none';
+      document.getElementById('teamAnalysis').style.display = 'none';
+      document.getElementById('teamResult').style.display = 'none';
+      document.getElementById('recommendationResult').style.display = 'none';
+      
+      document.getElementById('marketingBtn').disabled = true;
+      document.getElementById('financeBtn').disabled = true;
+      document.getElementById('teamBtn').disabled = true;
+      document.getElementById('recommendationBtn').disabled = true;
+    }
+    
+    // Culture evaluation
+    function evaluateCulture() {
+      const point = document.getElementById('culturePoint').value;
+      const score = parseInt(document.getElementById('cultureScore').value);
+      
+      const pointNames = {
+        "1": "Engagement à l'excellence",
+        "2": "Responsabilité personnelle",
+        "3": "Le profit est sain",
+        "4": "Les systèmes permettent la croissance",
+        "5": "Tout est mesurable",
+        "6": "Communication ouverte",
+        "7": "L'équipe avant l'individu"
+      };
+      
+      let feedback = "";
+      
+      if(score < 4) {
+        feedback = `Votre score pour "${pointNames[point]}" est faible (${score}/10). Ce point nécessite une attention immédiate.`;
+      } else if(score < 7) {
+        feedback = `Votre score pour "${pointNames[point]}" est acceptable (${score}/10), mais pourrait être amélioré.`;
+      } else {
+        feedback = `Félicitations ! Votre score pour "${pointNames[point]}" est excellent (${score}/10).`;
+      }
+      
+      feedback += "<br><br>Suggestions d'amélioration :";
+      
+      switch(point) {
+        case "1":
+          feedback += "<ul><li>Définir des standards de qualité clairs</li><li>Reconnaître et récompenser l'excellence</li></ul>";
+          break;
+        case "2":
+          feedback += "<ul><li>Mettre en place un système de responsabilisation</li><li>Encourager la prise d'initiative</li></ul>";
+          break;
+        case "3":
+          feedback += "<ul><li>Former l'équipe à la rentabilité</li><li>Partager les résultats financiers</li></ul>";
+          break;
+        case "4":
+          feedback += "<ul><li>Documenter les processus clés</li><li>Automatiser les tâches répétitives</li></ul>";
+          break;
+        case "5":
+          feedback += "<ul><li>Définir des KPI pour chaque poste</li><li>Mettre en place des tableaux de bord</li></ul>";
+          break;
+        case "6":
+          feedback += "<ul><li>Organiser des réunions régulières</li><li>Créer des canaux de communication ouverts</li></ul>";
+          break;
+        case "7":
+          feedback += "<ul><li>Promouvoir le travail d'équipe</li><li>Alignez les récompenses sur les résultats collectifs</li></ul>";
+          break;
+      }
+      
+      document.getElementById('cultureFeedback').innerHTML = feedback;
+      document.getElementById('cultureProgress').style.width = (score * 10) + '%';
+      document.getElementById('cultureProgress').setAttribute('aria-valuenow', score * 10);
+      document.getElementById('cultureProgress').textContent = score + '/10';
+      
+      document.getElementById('cultureEvaluationResult').style.display = 'block';
+    }
+    
+    function viewAllCulturePoints() {
+      const element = document.getElementById('allCulturePoints');
+      if(element.style.display === 'none') {
+        element.style.display = 'block';
+      } else {
+        element.style.display = 'none';
+      }
+    }
+    
+    // Profit acceleration simulation
+    function calculateProfitImpact() {
+      const currentRevenue = parseFloat(document.getElementById('currentRevenue').value);
+      const variableCosts = parseFloat(document.getElementById('variableCosts').value) / 100;
+      const fixedCosts = parseFloat(document.getElementById('fixedCosts').value);
+      
+      const increasePrice = document.getElementById('increasePrice').checked;
+      const reduceCosts = document.getElementById('reduceCosts').checked;
+      const increaseVolume = document.getElementById('increaseVolume').checked;
+      
+      let newRevenue = currentRevenue;
+      let newVariableRate = variableCosts;
+      
+      if(increasePrice && increaseVolume) {
+        newRevenue = currentRevenue * 1.05 * 1.08; // Price + volume increase
+      } else if(increasePrice) {
+        newRevenue = currentRevenue * 1.05;
+      } else if(increaseVolume) {
+        newRevenue = currentRevenue * 1.08;
+      }
+      
+      if(reduceCosts) {
+        newVariableRate = variableCosts * 0.97; // 3% reduction
+      }
+      
+      const currentCosts = (currentRevenue * variableCosts) + fixedCosts;
+      const currentProfit = currentRevenue - currentCosts;
+      const currentMargin = (currentProfit / currentRevenue) * 100;
+      
+      const newCosts = (newRevenue * newVariableRate) + fixedCosts;
+      const newProfit = newRevenue - newCosts;
+      const newMargin = (newProfit / newRevenue) * 100;
+      
+      // Display results
+      document.getElementById('currentRevenueDisplay').textContent = currentRevenue.toLocaleString() + " €";
+      document.getElementById('currentCostsDisplay').textContent = Math.round(currentCosts).toLocaleString() + " €";
+      document.getElementById('currentProfitDisplay').textContent = Math.round(currentProfit).toLocaleString() + " €";
+      document.getElementById('currentMarginDisplay').textContent = currentMargin.toFixed(1) + "%";
+      
+      document.getElementById('newRevenueDisplay').textContent = Math.round(newRevenue).toLocaleString() + " €";
+      document.getElementById('newCostsDisplay').textContent = Math.round(newCosts).toLocaleString() + " €";
+      document.getElementById('newProfitDisplay').textContent = Math.round(newProfit).toLocaleString() + " €";
+      document.getElementById('newMarginDisplay').textContent = newMargin.toFixed(1) + "%";
+      
+      document.getElementById('revenueDiffDisplay').textContent = "+" + Math.round(newRevenue - currentRevenue).toLocaleString() + " €";
+      document.getElementById('costsDiffDisplay').textContent = (newCosts - currentCosts > 0 ? "+" : "") + Math.round(newCosts - currentCosts).toLocaleString() + " €";
+      document.getElementById('profitDiffDisplay').textContent = "+" + Math.round(newProfit - currentProfit).toLocaleString() + " €";
+      document.getElementById('marginDiffDisplay').textContent = (newMargin - currentMargin > 0 ? "+" : "") + (newMargin - currentMargin).toFixed(1) + "%";
+      
+      // Generate advice
+      let advice = "En mettant en œuvre ces stratégies, vous pourriez augmenter votre profit de " + 
+                   Math.round(newProfit - currentProfit).toLocaleString() + "€ (" + 
+                   Math.round(((newProfit - currentProfit) / currentProfit * 100)) + "%). ";
+      
+      if(newMargin > currentMargin) {
+        advice += "Votre marge bénéficiaire passerait de " + currentMargin.toFixed(1) + "% à " + 
+                  newMargin.toFixed(1) + "%, une amélioration significative.";
+      } else {
+        advice += "Attention : bien que votre profit absolu augmente, votre marge diminue légèrement. " + 
+                  "Cela pourrait indiquer que votre croissance n'est pas suffisamment profitable.";
+      }
+      
+      document.getElementById('profitStrategyAdvice').textContent = advice;
+      document.getElementById('profitImpactResult').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
