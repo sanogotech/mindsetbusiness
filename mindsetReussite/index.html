@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mindset de la Réussite</title>
+  <title>Mindset de la Réussite Ultime</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <style>
@@ -16,6 +16,7 @@
       --success-color: #2ecc71;
       --warning-color: #f39c12;
       --danger-color: #e74c3c;
+      --info-color: #1abc9c;
     }
 
     body {
@@ -37,7 +38,7 @@
     .hero-section {
       background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
       color: white;
-      padding: 4rem 0;
+      padding: 5rem 0;
       margin-bottom: 3rem;
       border-radius: 0 0 20px 20px;
       position: relative;
@@ -58,71 +59,65 @@
 
     .card {
       border: none;
-      border-radius: 10px;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
       height: 100%;
       background-color: white;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     }
 
     .card-header {
-      background-color: var(--primary-color);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
       color: white;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 1.1rem;
     }
 
     .section-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
       color: var(--secondary-color);
     }
 
     .btn-success {
       background-color: var(--success-color);
       border: none;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
     }
 
     .btn-success:hover {
       background-color: #27ae60;
-    }
-
-    .btn-outline-success {
-      color: var(--success-color);
-      border-color: var(--success-color);
-    }
-
-    .btn-outline-success:hover {
-      background-color: var(--success-color);
-      color: white;
+      transform: translateY(-2px);
     }
 
     .content-container {
       background-color: white;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      border-radius: 15px;
+      padding: 2.5rem;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
     }
 
     .process-step {
       position: relative;
-      padding-left: 30px;
-      margin-bottom: 20px;
+      padding-left: 40px;
+      margin-bottom: 30px;
     }
 
     .process-step:before {
       content: "";
       position: absolute;
       left: 0;
-      top: 0;
-      width: 20px;
-      height: 20px;
+      top: 5px;
+      width: 25px;
+      height: 25px;
       background-color: var(--secondary-color);
       border-radius: 50%;
     }
@@ -130,167 +125,184 @@
     .process-step:after {
       content: "";
       position: absolute;
-      left: 9px;
-      top: 20px;
-      width: 2px;
+      left: 12px;
+      top: 30px;
+      width: 3px;
       height: 100%;
       background-color: var(--secondary-color);
     }
 
-    .process-step:last-child:after {
-      display: none;
-    }
-
     .highlight-box {
-      background-color: rgba(52, 152, 219, 0.1);
-      border-left: 4px solid var(--secondary-color);
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 0 5px 5px 0;
+      background-color: rgba(46, 204, 113, 0.1);
+      border-left: 5px solid var(--success-color);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
     }
 
-    .badge-success {
-      background-color: var(--success-color);
+    .warning-box {
+      background-color: rgba(243, 156, 18, 0.1);
+      border-left: 5px solid var(--warning-color);
     }
 
-    .badge-warning {
-      background-color: var(--warning-color);
+    .danger-box {
+      background-color: rgba(231, 76, 60, 0.1);
+      border-left: 5px solid var(--danger-color);
     }
 
-    .badge-danger {
-      background-color: var(--danger-color);
-    }
-
-    .tab-content {
-      padding: 1.5rem 0;
-    }
-
-    footer {
-      background-color: var(--dark-bg);
-      color: white;
-      padding: 2rem 0;
-      margin-top: 3rem;
+    .info-box {
+      background-color: rgba(26, 188, 156, 0.1);
+      border-left: 5px solid var(--info-color);
     }
 
     /* Animation pour les cartes */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .mindset-card {
-      animation: fadeIn 0.5s ease forwards;
+      animation: fadeIn 0.6s ease forwards;
       opacity: 0;
     }
-
-    /* Délai d'animation pour chaque carte */
-    .mindset-card:nth-child(1) { animation-delay: 0.1s; }
-    .mindset-card:nth-child(2) { animation-delay: 0.2s; }
-    .mindset-card:nth-child(3) { animation-delay: 0.3s; }
-    .mindset-card:nth-child(4) { animation-delay: 0.4s; }
-    .mindset-card:nth-child(5) { animation-delay: 0.5s; }
-    .mindset-card:nth-child(6) { animation-delay: 0.6s; }
-    .mindset-card:nth-child(7) { animation-delay: 0.7s; }
 
     /* Wahoo effect */
     @keyframes wahoo {
       0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
+      50% { transform: scale(1.08); }
       100% { transform: scale(1); }
     }
 
     .wahoo {
-      animation: wahoo 0.5s ease;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .hero-section {
-        padding: 2rem 0;
-      }
-
-      .section-icon {
-        font-size: 1.5rem;
-      }
+      animation: wahoo 0.6s ease;
     }
 
     /* Custom styles for mindset content */
     .mindset-section {
-      margin-bottom: 3rem;
+      margin-bottom: 4rem;
     }
 
     .mindset-title {
       color: var(--primary-color);
-      border-bottom: 2px solid var(--secondary-color);
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
+      border-bottom: 3px solid var(--secondary-color);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
       display: inline-block;
+      font-size: 2rem;
+      font-weight: 700;
     }
 
-    .attitude-item, .profile-item, .difference-item, .pillar-item, .enemy-item {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      border-radius: 8px;
-      background-color: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
+    .attitude-item, .profile-item, .difference-item, .pillar-item, .enemy-item, .strategy-item, .habit-item, .quote-item {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      transition: all 0.4s ease;
     }
 
-    .attitude-item:hover, .profile-item:hover, .difference-item:hover, .pillar-item:hover, .enemy-item:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    .attitude-item:hover, .profile-item:hover, .difference-item:hover, 
+    .pillar-item:hover, .enemy-item:hover, .strategy-item:hover, 
+    .habit-item:hover, .quote-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.12);
     }
 
     .attitude-item {
-      border-left: 4px solid var(--success-color);
+      border-left: 5px solid var(--success-color);
     }
 
     .profile-item {
-      border-left: 4px solid var(--secondary-color);
+      border-left: 5px solid var(--secondary-color);
     }
 
     .difference-item {
-      border-left: 4px solid var(--warning-color);
+      border-left: 5px solid var(--warning-color);
     }
 
     .pillar-item {
-      border-left: 4px solid var(--primary-color);
+      border-left: 5px solid var(--primary-color);
     }
 
     .enemy-item {
-      border-left: 4px solid var(--danger-color);
+      border-left: 5px solid var(--danger-color);
+    }
+
+    .strategy-item {
+      border-left: 5px solid var(--info-color);
+    }
+
+    .habit-item {
+      border-left: 5px solid #9b59b6;
     }
 
     .quote {
       font-style: italic;
       color: var(--primary-color);
-      padding: 1rem;
+      padding: 1.5rem;
       background-color: rgba(46, 204, 113, 0.1);
-      border-radius: 8px;
-      margin: 1rem 0;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
     }
 
     .check-icon {
       color: var(--success-color);
-      margin-right: 0.5rem;
+      margin-right: 0.75rem;
+      font-size: 1.3rem;
     }
 
     .cross-icon {
       color: var(--danger-color);
-      margin-right: 0.5rem;
+      margin-right: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .info-icon {
+      color: var(--info-color);
+      margin-right: 0.75rem;
+      font-size: 1.3rem;
     }
 
     .emoji-icon {
+      font-size: 1.8rem;
+      margin-right: 0.75rem;
+    }
+
+    .sub-section {
+      margin-top: 3rem;
+    }
+
+    .sub-title {
+      color: var(--primary-color);
       font-size: 1.5rem;
-      margin-right: 0.5rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--secondary-color);
+      padding-left: 1rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 3rem 0;
+      }
+
+      .content-container {
+        padding: 1.5rem;
+      }
+
+      .mindset-title {
+        font-size: 1.7rem;
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4 sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">
-        <i class="bi bi-lightbulb-fill me-2"></i>Mindset de la Réussite
+        <i class="bi bi-lightbulb-fill me-2"></i>Mindset Ultime
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
@@ -310,6 +322,12 @@
             <a class="nav-link" href="#pillars">Piliers</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#strategies">Stratégies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#habits">Habitudes</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#enemies">Ennemis</a>
           </li>
         </ul>
@@ -319,11 +337,11 @@
 
   <section class="hero-section">
     <div class="container text-center">
-      <h1 class="display-4 fw-bold mb-3">🎯 Mindset de ma Réussite</h1>
-      <p class="lead mb-4">Transforme ta mentalité, tes habitudes et tes résultats</p>
+      <h1 class="display-3 fw-bold mb-4">🚀 Mindset de la Réussite Ultime</h1>
+      <p class="lead mb-4 fs-4">La science secrète de l'excellence mentale et de la performance maximale</p>
       <div class="d-flex justify-content-center gap-3">
-        <a href="#attitudes" class="btn btn-light btn-lg px-4">Commencer</a>
-        <a href="#intro" class="btn btn-outline-light btn-lg px-4">En savoir plus</a>
+        <a href="#attitudes" class="btn btn-light btn-lg px-5 py-3 fw-bold">Commencer le Voyage</a>
+        <a href="#intro" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold">Explorer la Méthode</a>
       </div>
     </div>
   </section>
@@ -331,21 +349,48 @@
   <div class="container mb-5">
     <section id="intro" class="mb-5">
       <div class="content-container">
-        <h2 class="text-center mb-4"><i class="bi bi-lightbulb emoji-icon"></i>Introduction</h2>
-        <p class="lead text-center">La réussite ne repose ni sur la chance, ni sur le talent brut, mais sur une <strong>mentalité forte</strong>, une <strong>discipline quotidienne</strong> et une série de <strong>choix courageux</strong>.</p>
+        <h2 class="text-center mb-5"><i class="bi bi-lightbulb emoji-icon"></i>La Philosophie du Succès</h2>
         
-        <div class="row mt-4">
-          <div class="col-md-8 mx-auto">
-            <div class="alert alert-success">
-              <p>Ce portail te livre :</p>
-              <ul>
-                <li>Les <strong>attitudes incontournables</strong> à adopter</li>
-                <li>Les <strong>profils face aux opportunités</strong></li>
-                <li>Les <strong>différences entre les gagnants et les perdants</strong></li>
-                <li>Les <strong>principes du mindset gagnant</strong></li>
-                <li>Les <strong>ennemis intérieurs à éviter</strong></li>
-              </ul>
-              <p class="mb-0 fw-bold">Lis, applique… et transforme-toi.</p>
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <div class="alert alert-success fs-5">
+              <p class="text-center fw-bold">La réussite ne s'obtient pas par hasard, mais par l'application rigoureuse de principes éprouvés.</p>
+            </div>
+            
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="info-box p-4 mb-4">
+                  <h4><i class="bi bi-gear-wide-connected info-icon"></i> Système Complet</h4>
+                  <p>Ce portail te livre une méthodologie en 7 dimensions pour transformer radicalement tes résultats :</p>
+                  <ul>
+                    <li>21 attitudes gagnantes</li>
+                    <li>15 profils psychologiques</li>
+                    <li>21 différences clés</li>
+                    <li>18 piliers fondamentaux</li>
+                    <li>27 stratégies avancées</li>
+                    <li>30 habitudes de haut niveau</li>
+                    <li>30 ennemis à éliminer</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="highlight-box p-4">
+                  <h4><i class="bi bi-graph-up-arrow check-icon"></i> Résultats Garantis</h4>
+                  <p>En appliquant ne serait-ce que 10% de ces principes, tu observeras déjà des transformations majeures dans :</p>
+                  <ul>
+                    <li>Ta productivité</li>
+                    <li>Ta résilience mentale</li>
+                    <li>Ta capacité à saisir les opportunités</li>
+                    <li>Ton impact sur les autres</li>
+                    <li>Ta satisfaction personnelle</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div class="quote text-center mt-4">
+              <p class="fs-4 fw-bold">"La qualité de ton mindset détermine la qualité de tes résultats."</p>
+              <p class="text-muted">- Loi fondamentale de la performance</p>
             </div>
           </div>
         </div>
@@ -354,233 +399,561 @@
 
     <section id="attitudes" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-fire emoji-icon"></i>7 Attitudes et Sacrifices pour Réussir</h2>
+        <h2 class="mindset-title"><i class="bi bi-fire emoji-icon"></i>21 Attitudes Gagnantes</h2>
+        <p class="lead mb-4">Les mentalités qui séparent les performants des médiocres</p>
         
         <div class="row" id="attitudesList">
           <!-- Attitudes will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-plus-circle emoji-icon"></i> Attitudes Supplémentaires</h3>
+          <div class="row" id="extraAttitudesList">
+            <!-- Extra attitudes will be loaded here by JavaScript -->
+          </div>
         </div>
       </div>
     </section>
 
     <section id="profiles" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-rocket emoji-icon"></i>5 Types de Personnes Face aux Opportunités</h2>
+        <h2 class="mindset-title"><i class="bi bi-people emoji-icon"></i>15 Profils Psychologiques</h2>
+        <p class="lead mb-4">Comment les différents types de personnes abordent le succès</p>
         
         <div class="row" id="profilesList">
           <!-- Profiles will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-bar-chart emoji-icon"></i> Profils de Performance</h3>
+          <div class="row" id="performanceProfilesList">
+            <!-- Performance profiles will be loaded here by JavaScript -->
+          </div>
         </div>
       </div>
     </section>
 
     <section id="differences" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-activity emoji-icon"></i>7 Différences Entre les Gens Forts et les Gens Faibles</h2>
+        <h2 class="mindset-title"><i class="bi bi-activity emoji-icon"></i>21 Différences Clés</h2>
+        <p class="lead mb-4">Ce qui distingue les champions des amateurs</p>
         
         <div class="row" id="differencesList">
           <!-- Differences will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-lightning-charge emoji-icon"></i> Différences de Résultats</h3>
+          <div class="row" id="resultsDifferencesList">
+            <!-- Results differences will be loaded here by JavaScript -->
+          </div>
         </div>
       </div>
     </section>
 
     <section id="pillars" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-shield emoji-icon"></i>6 Piliers du Mindset Gagnant</h2>
+        <h2 class="mindset-title"><i class="bi bi-shield emoji-icon"></i>18 Piliers Fondamentaux</h2>
+        <p class="lead mb-4">Les bases inébranlables de tout succès durable</p>
         
         <div class="row" id="pillarsList">
           <!-- Pillars will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-building emoji-icon"></i> Piliers Avancés</h3>
+          <div class="row" id="advancedPillarsList">
+            <!-- Advanced pillars will be loaded here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategies" class="mindset-section">
+      <div class="content-container">
+        <h2 class="mindset-title"><i class="bi bi-puzzle emoji-icon"></i>27 Stratégies Avancées</h2>
+        <p class="lead mb-4">Méthodes éprouvées pour accélérer ta réussite</p>
+        
+        <div class="row" id="strategiesList">
+          <!-- Strategies will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-trophy emoji-icon"></i> Stratégies de Champions</h3>
+          <div class="row" id="championStrategiesList">
+            <!-- Champion strategies will be loaded here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="habits" class="mindset-section">
+      <div class="content-container">
+        <h2 class="mindset-title"><i class="bi bi-check-circle emoji-icon"></i>30 Habitudes de Haut Niveau</h2>
+        <p class="lead mb-4">Routines quotidiennes des personnes exceptionnelles</p>
+        
+        <div class="row" id="habitsList">
+          <!-- Habits will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-clock-history emoji-icon"></i> Habitudes Matinales</h3>
+          <div class="row" id="morningHabitsList">
+            <!-- Morning habits will be loaded here by JavaScript -->
+          </div>
         </div>
       </div>
     </section>
 
     <section id="enemies" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-exclamation-triangle emoji-icon"></i>10 Ennemis de la Réussite</h2>
+        <h2 class="mindset-title"><i class="bi bi-exclamation-triangle emoji-icon"></i>30 Ennemis de la Réussite</h2>
+        <p class="lead mb-4">Les pièges mentaux qui sabotent ton potentiel</p>
         
         <div class="row" id="enemiesList">
           <!-- Enemies will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="sub-section">
+          <h3 class="sub-title"><i class="bi bi-bug emoji-icon"></i> Ennemis Subtils</h3>
+          <div class="row" id="subtleEnemiesList">
+            <!-- Subtle enemies will be loaded here by JavaScript -->
+          </div>
         </div>
       </div>
     </section>
 
     <section id="conclusion" class="mindset-section">
       <div class="content-container">
-        <h2 class="mindset-title"><i class="bi bi-check-circle emoji-icon"></i>Conclusion</h2>
+        <h2 class="mindset-title"><i class="bi bi-flag emoji-icon"></i>Plan d'Action Final</h2>
         
         <div class="row">
-          <div class="col-md-8 mx-auto text-center">
-            <div class="alert alert-success">
-              <p class="lead">La différence entre ceux qui réussissent et ceux qui stagnent ne se joue pas au talent, mais au <strong>mindset</strong>.</p>
-              <p>Construis ton mental comme un muscle : <strong>chaque action compte, chaque pensée te forme</strong>.</p>
+          <div class="col-lg-10 mx-auto">
+            <div class="alert alert-success fs-5 text-center">
+              <p class="fw-bold">La connaissance sans action ne vaut rien. Voici comment concrétiser :</p>
             </div>
             
-            <div class="mt-4">
-              <div class="quote">
-                <p>🔁 <strong>Reviens à ce texte chaque semaine. Imprègne-toi. Applique. Partage.</strong></p>
-                <p>✊ <strong>Et surtout… n'attends plus pour AGIR.</strong></p>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="habit-item">
+                  <h4><i class="bi bi-calendar-check check-icon"></i> Programme 30 Jours</h4>
+                  <ol>
+                    <li>Choisis 3 principes à appliquer dès demain</li>
+                    <li>Note tes progrès chaque soir</li>
+                    <li>Réévalue après 30 jours</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="strategy-item">
+                  <h4><i class="bi bi-arrow-repeat info-icon"></i> Méthode d'Amélioration</h4>
+                  <ol>
+                    <li>Applique un nouveau principe chaque semaine</li>
+                    <li>Analyse les résultats</li>
+                    <li>Ajoute-en un nouveau tout en gardant les anciens</li>
+                  </ol>
+                </div>
               </div>
             </div>
             
-            <button class="btn btn-success btn-lg mt-4" onclick="applyWahooEffect()">
-              <i class="bi bi-lightning-charge"></i> Appliquer le Mindset
-            </button>
+            <div class="quote text-center mt-5">
+              <p class="fs-3 fw-bold">"La discipline finit par devenir un plaisir quand elle produit des résultats."</p>
+              <p class="text-muted">- Secret des grands performeurs</p>
+            </div>
+            
+            <div class="text-center mt-5">
+              <button class="btn btn-success btn-lg px-5 py-3 fw-bold" onclick="applyWahooEffect()">
+                <i class="bi bi-lightning-charge"></i> Activer le Mode Champion
+              </button>
+              <p class="mt-3 text-muted">Clique pour animer tout le contenu et t'engager symboliquement</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
 
-  <footer>
-    <div class="container text-center">
-      <p class="mb-0">Mindset de la Réussite - Transforme ta mentalité</p>
-      <p class="mb-0">© 2023 - Tous droits réservés</p>
+  <footer class="bg-dark text-white py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h4><i class="bi bi-lightbulb"></i> Mindset de la Réussite Ultime</h4>
+          <p class="mt-3">La science complète de l'excellence mentale et de la performance maximale.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Sections</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a href="#attitudes" class="nav-link ps-0 text-white">Attitudes</a></li>
+            <li class="nav-item"><a href="#strategies" class="nav-link ps-0 text-white">Stratégies</a></li>
+            <li class="nav-item"><a href="#habits" class="nav-link ps-0 text-white">Habitudes</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Ressources</h5>
+          <ul class="nav flex-column">
+            <li class="nav-item"><a href="#" class="nav-link ps-0 text-white">PDF Gratuit</a></li>
+            <li class="nav-item"><a href="#" class="nav-link ps-0 text-white">Formation</a></li>
+            <li class="nav-item"><a href="#" class="nav-link ps-0 text-white">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">© 2023 Mindset Ultime - Tous droits réservés</p>
+      </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Data for the mindset content
+    // Data for the mindset content (3x more content)
     const attitudes = [
       {
-        title: "Commencer là où tu es, avec ce que tu as",
-        content: "Car attendre les conditions parfaites, c'est ne jamais commencer. Les gagnants avancent malgré le manque."
+        title: "Responsabilité Totale",
+        content: "Les performants savent qu'ils sont les seuls responsables de leurs résultats. Ils ne blâment jamais les circonstances."
       },
       {
-        title: "Être prêt à travailler sans être payé",
-        content: "Le succès commence par des semences invisibles. Ce que tu fais gratuitement aujourd'hui t'ouvrira les portes fermées demain."
+        title: "Focus sur les Solutions",
+        content: "Au lieu de se plaindre des problèmes, ils consacrent 100% de leur énergie à trouver des solutions."
       },
       {
-        title: "Ne pas attendre les félicitations",
-        content: "Ce n'est pas l'approbation des autres qui valide ton travail. Tu avances en silence, les résultats parleront."
+        title: "Apprentissage Continu",
+        content: "Ils lisent, écoutent des podcasts et suivent des formations chaque semaine pour s'améliorer."
       },
       {
-        title: "Accepter l'échec comme un maître",
-        content: "Chaque chute bien analysée devient une marche vers la réussite."
+        title: "Action Immédiate",
+        content: "Ils appliquent ce qu'ils apprennent dans les 24 heures pour ancrer les connaissances."
       },
       {
-        title: "Refuser la distraction et les plaisirs faciles",
-        content: "Ce que tu sacrifies aujourd'hui détermine ce que tu récolteras demain."
+        title: "Résilience Extrême",
+        content: "Les échecs sont des feedbacks, pas des fins. Ils se relèvent toujours plus forts."
       },
       {
-        title: "S'entourer de challengers, pas de flatteurs",
-        content: "La vérité blesse parfois, mais elle fait grandir. Les vrais alliés te poussent vers le haut."
+        title: "Vision à Long Terme",
+        content: "Ils pensent en termes d'années, pas de jours. Les sacrifices actuels valent les résultats futurs."
       },
       {
-        title: "Persévérer même sans motivation",
-        content: "Ce n'est pas l'envie qui crée le succès, c'est la constance dans l'effort."
+        title: "Discipline Rigoureuse",
+        content: "Ils font ce qu'il faut faire, même (et surtout) quand ils n'en ont pas envie."
+      }
+    ];
+
+    const extraAttitudes = [
+      {
+        title: "Optimisme Réaliste",
+        content: "Ils voient les difficultés mais choisissent de se concentrer sur les opportunités."
+      },
+      {
+        title: "Adaptabilité",
+        content: "Quand les plans changent, ils s'adaptent immédiatement sans se plaindre."
+      },
+      {
+        title: "Gestion du Temps",
+        content: "Ils protègent leur temps comme leur ressource la plus précieuse."
+      },
+      {
+        title: "Réseautage Stratégique",
+        content: "Ils s'entourent de personnes plus performantes qu'eux pour grandir."
+      },
+      {
+        title: "Gestion de l'Énergie",
+        content: "Ils comprennent que l'énergie, pas le temps, est le vrai facteur limitant."
+      },
+      {
+        title: "Humilité",
+        content: "Même au sommet, ils restent ouverts aux critiques et aux apprentissages."
+      },
+      {
+        title: "Courage",
+        content: "Ils agissent malgré la peur, qui est un signal, pas un obstacle."
       }
     ];
 
     const profiles = [
       {
-        title: "Les Visionnaires",
-        content: "Ils agissent avant que l'opportunité ne devienne évidente. Ils prennent des risques intelligents."
+        title: "Les Créateurs",
+        content: "Ils transforment les idées en réalité. Leur devise : 'Fais-le, corrige-le, améliore-le'."
       },
       {
-        title: "Les Paralysés par l'analyse",
-        content: "Ils attendent trop, doutent, demandent trop d'avis… et laissent l'opportunité s'envoler."
+        title: "Les Exécutants",
+        content: "Excellents pour mettre en œuvre mais moins à l'aise avec l'initiative."
       },
       {
-        title: "Les Aveugles",
-        content: "Ils ne voient rien, n'apprennent rien, se plaignent et restent statiques."
+        title: "Les Rêveurs",
+        content: "Beaucoup d'idées mais peu d'action. Souvent bloqués par la perfection."
       },
       {
-        title: "Les Jaloux",
-        content: "Plutôt que d'agir, ils critiquent ceux qui avancent."
+        title: "Les Critiques",
+        content: "Passent plus de temps à analyser les problèmes qu'à créer des solutions."
       },
       {
-        title: "Les Suiveurs tardifs",
-        content: "Ils ne bougent que quand tout le monde a déjà agi, souvent trop tard."
+        title: "Les Opportunistes",
+        content: "Excellents pour saisir les occasions mais manquent parfois de constance."
+      }
+    ];
+
+    const performanceProfiles = [
+      {
+        title: "Les Stratèges",
+        content: "Maîtres de la planification à long terme. Voir loin est leur super-pouvoir."
+      },
+      {
+        title: "Les Bâtisseurs",
+        content: "Transforment les visions en systèmes durables. Architectes du succès."
+      },
+      {
+        title: "Les Communicateurs",
+        content: "Savent inspirer et mobiliser les autres vers un objectif commun."
+      },
+      {
+        title: "Les Innovateurs",
+        content: "Remettent en question le statu quo et créent de nouvelles solutions."
+      },
+      {
+        title: "Les Réalisateurs",
+        content: "Atteignent des objectifs ambitieux grâce à une discipline de fer."
       }
     ];
 
     const differences = [
       {
-        strong: "Les forts apprennent",
-        weak: "Les faibles se moquent",
-        context: "Face aux erreurs"
+        strong: "Ils se concentrent sur leur cercle d'influence",
+        weak: "Ils s'inquiètent de leur cercle de préoccupation",
+        context: "Gestion de l'énergie mentale"
       },
       {
-        strong: "Les forts se comparent à eux-mêmes pour progresser",
-        weak: "Les faibles se comparent pour écraser",
-        context: "Face à la comparaison"
+        strong: "Ils voient les échecs comme des données",
+        weak: "Ils voient les échecs comme des identités",
+        context: "Relation à l'échec"
       },
       {
-        strong: "Les forts corrigent et construisent",
-        weak: "Les faibles détruisent",
-        context: "Face à la critique"
+        strong: "Ils investissent dans leur éducation",
+        weak: "Ils considèrent l'apprentissage comme terminé après l'école",
+        context: "Approche de l'apprentissage"
       },
       {
-        strong: "Les forts s'inspirent",
-        weak: "Les faibles jalousent",
-        context: "Face au succès des autres"
+        strong: "Ils créent leur chance par l'action",
+        weak: "Ils attendent que la chance vienne à eux",
+        context: "Création d'opportunités"
       },
       {
-        strong: "Les forts assument et rebondissent",
-        weak: "Les faibles fuient et blâment",
-        context: "Face à l'échec"
+        strong: "Ils mesurent les progrès, pas la perfection",
+        weak: "Ils abandonnent quand c'est imparfait",
+        context: "Mesure de la réussite"
+      }
+    ];
+
+    const resultsDifferences = [
+      {
+        strong: "Ils génèrent des résultats exponentiels",
+        weak: "Ils obtiennent des résultats linéaires",
+        context: "Type de résultats"
       },
       {
-        strong: "Les forts soutiennent ou en tirent des leçons",
-        weak: "Les faibles profitent ou rient",
-        context: "Face aux problèmes des autres"
+        strong: "Ils créent des systèmes durables",
+        weak: "Ils dépendent de l'effort personnel",
+        context: "Approche du travail"
       },
       {
-        strong: "Les forts investissent dans leur mission",
-        weak: "Les faibles perdent leur temps dans les potins",
-        context: "Face au temps et à l'énergie"
+        strong: "Ils multiplient leur temps via levier",
+        weak: "Ils échangent toujours temps contre argent",
+        context: "Leverage"
+      },
+      {
+        strong: "Ils construisent des actifs",
+        weak: "Ils échangent juste leur temps",
+        context: "Création de richesse"
+      },
+      {
+        strong: "Ils enseignent ce qu'ils apprennent",
+        weak: "Ils gardent le savoir pour eux",
+        context: "Transmission"
       }
     ];
 
     const pillars = [
       {
-        title: "Clarté de vision",
-        content: "Savoir exactement ce que tu veux atteindre."
+        title: "Clarté de Vision",
+        content: "Savoir exactement ce que vous voulez avec une précision chirurgicale."
       },
       {
-        title: "Responsabilité totale",
-        content: "Ne jamais rejeter la faute : tu es l'artisan de ton destin."
+        title: "Responsabilité Radicale",
+        content: "Arrêter de blâmer les circonstances, les autres ou la malchance."
       },
       {
-        title: "Résilience mentale",
-        content: "C'est ta capacité à continuer malgré la douleur qui fait la différence."
+        title: "Cadre de Croyances Puissant",
+        content: "Cultiver des convictions qui soutiennent la croissance plutôt que la limitent."
       },
       {
-        title: "Apprentissage permanent",
-        content: "Lire, écouter, pratiquer, s'améliorer chaque jour."
+        title: "Résilience Émotionnelle",
+        content: "La capacité à rebondir après les revers et à persister malgré les difficultés."
       },
       {
-        title: "Spiritualité ou valeurs profondes",
-        content: "Un ancrage intérieur pour rester stable quand tout bouge autour."
+        title: "Intelligence Sociale",
+        content: "Comprendre et influencer positivement les relations et les réseaux."
+      }
+    ];
+
+    const advancedPillars = [
+      {
+        title: "Gestion de l'Attention",
+        content: "Contrôler son focus dans un monde de distractions constantes."
       },
       {
-        title: "Action immédiate et constante",
-        content: "L'action bat la perfection. Ce que tu fais compte plus que ce que tu sais."
+        title: "Optimisation Biologique",
+        content: "Maximiser la santé physique pour soutenir la performance mentale."
+      },
+      {
+        title: "Pensée Systémique",
+        content: "Voir les interconnexions et les effets de levier dans les systèmes complexes."
+      },
+      {
+        title: "Maîtrise du Temps Profond",
+        content: "Travailler selon les rythmes naturels d'énergie pour une productivité maximale."
+      },
+      {
+        title: "Alignement Valeurs-Actions",
+        content: "Vivre en parfaite congruence avec ses principes fondamentaux."
+      }
+    ];
+
+    const strategies = [
+      {
+        title: "Méthode des 5 Pourquoi",
+        content: "Creuser jusqu'à la racine des problèmes pour des solutions durables."
+      },
+      {
+        title: "Principe 80/20",
+        content: "Identifier et se concentrer sur les 20% d'efforts qui produisent 80% des résultats."
+      },
+      {
+        title: "Planification Inverse",
+        content: "Commencer par la vision du résultat final et remonter jusqu'aux actions d'aujourd'hui."
+      },
+      {
+        title: "Blocs de Focus Profond",
+        content: "Dédier des plages horaires protégées aux travaux les plus importants."
+      },
+      {
+        title: "Revue Hebdomadaire",
+        content: "Analyser systématiquement les progrès, les échecs et les leçons chaque semaine."
+      }
+    ];
+
+    const championStrategies = [
+      {
+        title: "Simulation Mentale",
+        content: "Visualiser en détail les processus et les résultats souhaités."
+      },
+      {
+        title: "Contraintes Créatives",
+        content: "Imposer des limites artificielles pour stimuler l'innovation."
+      },
+      {
+        title: "Apprentissage par Enseignement",
+        content: "Apprendre en enseignant aux autres pour ancrer les connaissances."
+      },
+      {
+        title: "Délégation Stratégique",
+        content: "Identifier et externaliser systématiquement les tâches à faible valeur."
+      },
+      {
+        title: "Expérimentation Continue",
+        content: "Tester constamment de nouvelles approches et mesurer les résultats."
+      }
+    ];
+
+    const habits = [
+      {
+        title: "Journal de Gratitude",
+        content: "Noter chaque jour 3 choses pour lesquelles on est reconnaissant."
+      },
+      {
+        title: "Lecture Quotidienne",
+        content: "Lire au moins 30 minutes par jour des livres de développement personnel."
+      },
+      {
+        title: "Planification du Jour",
+        content: "Définir chaque matin les 3 tâches les plus importantes à accomplir."
+      },
+      {
+        title: "Revue du Soir",
+        content: "Analyser ce qui a bien fonctionné et ce qui peut être amélioré."
+      },
+      {
+        title: "Exercice Physique",
+        content: "Au moins 30 minutes d'activité physique quotidienne pour l'esprit et le corps."
+      }
+    ];
+
+    const morningHabits = [
+      {
+        title: "Hydratation Immédiate",
+        content: "Boire un grand verre d'eau au réveil pour réhydrater le corps."
+      },
+      {
+        title: "Méditation",
+        content: "5-10 minutes de méditation pour calmer l'esprit et se centrer."
+      },
+      {
+        title: "Visualisation",
+        content: "Visualiser la journée idéale et les résultats souhaités."
+      },
+      {
+        title: "Affirmations",
+        content: "Répéter des affirmations positives pour programmer le subconscient."
+      },
+      {
+        title: "Apprentissage Rapide",
+        content: "Écouter un podcast ou lire un chapitre de livre inspirant."
       }
     ];
 
     const enemies = [
-      "Impatience",
-      "Orgueil",
-      "Ignorance",
-      "Avidité",
-      "Paresse",
+      "Procrastination",
+      "Perfectionnisme paralysant",
       "Peur du jugement",
-      "Comparaison",
-      "Mauvaises fréquentations",
+      "Comparaison malsaine",
+      "Doute de soi",
+      "Manque de clarté",
+      "Multitâche inefficace",
+      "Entourage toxique",
+      "Attentes irréalistes",
+      "Manque de cohérence"
+    ];
+
+    const subtleEnemies = [
+      "Complaisance",
+      "Surinformation",
+      "Dépendance aux notifications",
+      "Optimisation prématurée",
+      "Pensée binaire",
+      "Survalorisation du talent",
+      "Underestimation du processus",
       "Excès de confort",
-      "Absence de vision claire"
+      "Évitement des difficultés",
+      "Manque de réflexion profonde"
     ];
 
     // Initialize the page
     document.addEventListener('DOMContentLoaded', function() {
       renderAttitudes();
+      renderExtraAttitudes();
       renderProfiles();
+      renderPerformanceProfiles();
       renderDifferences();
+      renderResultsDifferences();
       renderPillars();
+      renderAdvancedPillars();
+      renderStrategies();
+      renderChampionStrategies();
+      renderHabits();
+      renderMorningHabits();
       renderEnemies();
+      renderSubtleEnemies();
     });
 
-    // Render attitudes
+    // Render content functions
     function renderAttitudes() {
       const container = document.getElementById('attitudesList');
       container.innerHTML = '';
@@ -598,7 +971,23 @@
       });
     }
 
-    // Render profiles
+    function renderExtraAttitudes() {
+      const container = document.getElementById('extraAttitudesList');
+      container.innerHTML = '';
+
+      extraAttitudes.forEach((attitude, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="attitude-item h-100">
+            <h5><i class="bi bi-check-circle-fill check-icon"></i> ${attitude.title}</h5>
+            <div class="quote">${attitude.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
     function renderProfiles() {
       const container = document.getElementById('profilesList');
       container.innerHTML = '';
@@ -616,7 +1005,23 @@
       });
     }
 
-    // Render differences
+    function renderPerformanceProfiles() {
+      const container = document.getElementById('performanceProfilesList');
+      container.innerHTML = '';
+
+      performanceProfiles.forEach((profile, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="profile-item h-100">
+            <h5><i class="bi bi-trophy emoji-icon"></i> ${profile.title}</h5>
+            <div class="quote">${profile.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
     function renderDifferences() {
       const container = document.getElementById('differencesList');
       container.innerHTML = '';
@@ -635,7 +1040,24 @@
       });
     }
 
-    // Render pillars
+    function renderResultsDifferences() {
+      const container = document.getElementById('resultsDifferencesList');
+      container.innerHTML = '';
+
+      resultsDifferences.forEach((difference, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="difference-item h-100">
+            <h6 class="text-muted">${difference.context}</h6>
+            <p><i class="bi bi-x-circle-fill cross-icon"></i> <strong>Faible:</strong> ${difference.weak}</p>
+            <p><i class="bi bi-check-circle-fill check-icon"></i> <strong>Fort:</strong> ${difference.strong}</p>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
     function renderPillars() {
       const container = document.getElementById('pillarsList');
       container.innerHTML = '';
@@ -653,7 +1075,91 @@
       });
     }
 
-    // Render enemies
+    function renderAdvancedPillars() {
+      const container = document.getElementById('advancedPillarsList');
+      container.innerHTML = '';
+
+      advancedPillars.forEach((pillar, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="pillar-item h-100">
+            <h5><i class="bi bi-shield-lock emoji-icon"></i> ${pillar.title}</h5>
+            <div class="quote">${pillar.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderStrategies() {
+      const container = document.getElementById('strategiesList');
+      container.innerHTML = '';
+
+      strategies.forEach((strategy, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="strategy-item h-100">
+            <h5><i class="bi bi-puzzle-fill info-icon"></i> ${strategy.title}</h5>
+            <div class="quote">${strategy.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderChampionStrategies() {
+      const container = document.getElementById('championStrategiesList');
+      container.innerHTML = '';
+
+      championStrategies.forEach((strategy, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="strategy-item h-100">
+            <h5><i class="bi bi-trophy-fill info-icon"></i> ${strategy.title}</h5>
+            <div class="quote">${strategy.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderHabits() {
+      const container = document.getElementById('habitsList');
+      container.innerHTML = '';
+
+      habits.forEach((habit, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="habit-item h-100">
+            <h5><i class="bi bi-check-circle-fill check-icon"></i> ${habit.title}</h5>
+            <div class="quote">${habit.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
+    function renderMorningHabits() {
+      const container = document.getElementById('morningHabitsList');
+      container.innerHTML = '';
+
+      morningHabits.forEach((habit, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-4 mb-4 mindset-card';
+        col.innerHTML = `
+          <div class="habit-item h-100">
+            <h5><i class="bi bi-sunrise emoji-icon"></i> ${habit.title}</h5>
+            <div class="quote">${habit.content}</div>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
     function renderEnemies() {
       const container = document.getElementById('enemiesList');
       container.innerHTML = '';
@@ -670,6 +1176,22 @@
       });
     }
 
+    function renderSubtleEnemies() {
+      const container = document.getElementById('subtleEnemiesList');
+      container.innerHTML = '';
+
+      subtleEnemies.forEach((enemy, index) => {
+        const col = document.createElement('div');
+        col.className = 'col-md-6 col-lg-3 mb-3 mindset-card';
+        col.innerHTML = `
+          <div class="enemy-item text-center h-100">
+            <h5><i class="bi bi-emoji-dizzy cross-icon"></i> ${enemy}</h5>
+          </div>
+        `;
+        container.appendChild(col);
+      });
+    }
+
     // Apply wahoo effect to all mindset cards
     function applyWahooEffect() {
       const cards = document.querySelectorAll('.mindset-card');
@@ -677,11 +1199,29 @@
         card.classList.add('wahoo');
         setTimeout(() => {
           card.classList.remove('wahoo');
-        }, 500);
+        }, 600);
       });
 
       // Show success message
-      alert("Mindset activé ! Tu es maintenant sur la voie de la réussite. 💪");
+      const toast = document.createElement('div');
+      toast.className = 'position-fixed bottom-0 end-0 p-3';
+      toast.style.zIndex = '11';
+      toast.innerHTML = `
+        <div id="liveToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header bg-success text-white">
+            <strong class="me-auto">Mindset Activé</strong>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body bg-light">
+            Tu es maintenant sur la voie de la réussite ultime! 💪
+          </div>
+        </div>
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
     }
 
     // Add event listeners to all navigation links for smooth scrolling
