@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide des Objectifs Multidimensionnels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --color-primary: #6a11cb;
+            --color-secondary: #2575fc;
+            --color-learning: #00b09b;
+            --color-performance: #ff8a00;
+            --color-development: #667eea;
+            --color-strategic: #0f2027;
+            --color-behavioral: #654ea3;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-attachment: fixed;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .goal-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background: white;
+        }
+        
+        .goal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .goal-header {
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+        
+        .goal-1 { background: linear-gradient(135deg, var(--color-learning) 0%, #96c93d 100%); }
+        .goal-2 { background: linear-gradient(135deg, var(--color-performance) 0%, #e52e71 100%); }
+        .goal-3 { background: linear-gradient(135deg, var(--color-development) 0%, #764ba2 100%); }
+        .goal-4 { background: linear-gradient(135deg, var(--color-strategic) 0%, #2c5364 100%); }
+        .goal-5 { background: linear-gradient(135deg, var(--color-behavioral) 0%, #eaafc8 100%); }
+        
+        .example-card {
+            border-left: 4px solid;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        
+        .example-card:hover {
+            transform: translateX(5px);
+        }
+        
+        .example-learning { border-left-color: var(--color-learning); }
+        .example-performance { border-left-color: var(--color-performance); }
+        .example-development { border-left-color: var(--color-development); }
+        .example-strategic { border-left-color: var(--color-strategic); }
+        .example-behavioral { border-left-color: var(--color-behavioral); }
+        
+        .example-badge {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 50px;
+            margin-right: 5px;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            cursor: pointer;
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            font-weight: 600;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 50px;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            transition: all 0.2s ease;
+        }
+        
+        .checklist-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .checklist-item input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.3);
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section py-5">
+        <div class="container text-center py-4">
+            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInDown">🧭 Guide des Objectifs Multidimensionnels</h1>
+            <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">Combinez différents types d'objectifs pour maximiser votre réussite</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <!-- Introduction -->
+        <section class="row mb-5 fade-in-section">
+            <div class="col-lg-8 mx-auto">
+                <div class="goal-card">
+                    <div class="goal-header" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                        <h2 class="h3 mb-0">✨ Introduction</h2>
+                    </div>
+                    <div class="goal-body p-4">
+                        <p>Dans la vie personnelle ou professionnelle, on avance mieux quand on sait <strong>où on va et pourquoi</strong>. Mais attention : <strong>tous les objectifs ne se ressemblent pas</strong> ! Certains visent la <strong>connaissance</strong>, d'autres la <strong>performance</strong>, le <strong>changement</strong>, la <strong>vision long terme</strong> ou même l'<strong>évolution personnelle</strong>.</p>
+                        
+                        <div class="d-flex justify-content-center mt-4">
+                            <ul class="nav nav-pills mb-4" id="goalTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="learning-tab" data-bs-toggle="pill" data-bs-target="#learning" type="button" role="tab">Apprentissage</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="performance-tab" data-bs-toggle="pill" data-bs-target="#performance" type="button" role="tab">Performance</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="development-tab" data-bs-toggle="pill" data-bs-target="#development" type="button" role="tab">Développement</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="strategic-tab" data-bs-toggle="pill" data-bs-target="#strategic" type="button" role="tab">Stratégiques</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="behavioral-tab" data-bs-toggle="pill" data-bs-target="#behavioral" type="button" role="tab">Comportementaux</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Tab Content -->
+        <div class="tab-content" id="goalTabsContent">
+            <!-- Learning Goals -->
+            <div class="tab-pane fade show active" id="learning" role="tabpanel" aria-labelledby="learning-tab">
+                <section class="mb-5 fade-in-section">
+                    <div class="goal-card">
+                        <div class="goal-header goal-1">
+                            <h2 class="h3 mb-0">📚 Objectifs d'Apprentissage</h2>
+                            <p class="mb-0 opacity-75">Acquérir de nouvelles connaissances, compétences ou méthodes</p>
+                        </div>
+                        <div class="goal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5">✅ Avantages</h3>
+                                    <ul>
+                                        <li>Développe les connaissances et compétences</li>
+                                        <li>Prépare à mieux gérer de nouvelles situations</li>
+                                        <li>Encourage la curiosité et la progression continue</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">❌ Inconvénients</h3>
+                                    <ul>
+                                        <li>Résultats difficiles à mesurer rapidement</li>
+                                        <li>Risque de rester dans la théorie sans application</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5">⚠️ Dérives fréquentes</h3>
+                                    <ul>
+                                        <li>Accumulation de connaissances sans mise en pratique</li>
+                                        <li>"Formationnite" - faire des formations sans objectif clair</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">💡 Bonnes pratiques</h3>
+                                    <ul>
+                                        <li>Appliquer immédiatement ce qu'on apprend</li>
+                                        <li>Se fixer des objectifs concrets d'application</li>
+                                        <li>Mettre en place des tests réguliers</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 class="h5 mt-4">📌 Exemples concrets</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-card example-learning">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(0, 176, 155, 0.1); color: var(--color-learning);">Professionnel</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Maîtriser Excel avancé</h4>
+                                        <p class="small mb-0">Apprendre les tableaux croisés dynamiques et les macros pour automatiser les rapports mensuels</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-learning">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(0, 176, 155, 0.1); color: var(--color-learning);">Personnel</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Apprendre une langue</h4>
+                                        <p class="small mb-0">Atteindre le niveau B2 en espagnol pour voyager en Amérique du Sud</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-card example-learning">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(0, 176, 155, 0.1); color: var(--color-learning);">Santé</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Comprendre la nutrition</h4>
+                                        <p class="small mb-0">Apprendre les bases de la nutrition sportive pour améliorer ses performances</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-learning">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(0, 176, 155, 0.1); color: var(--color-learning);">Développement</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Formation en gestion du temps</h4>
+                                        <p class="small mb-0">Suivre un cours sur les méthodes GTD pour mieux organiser son travail</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Performance Goals -->
+            <div class="tab-pane fade" id="performance" role="tabpanel" aria-labelledby="performance-tab">
+                <section class="mb-5 fade-in-section">
+                    <div class="goal-card">
+                        <div class="goal-header goal-2">
+                            <h2 class="h3 mb-0">🎯 Objectifs de Performance</h2>
+                            <p class="mb-0 opacity-75">Atteindre des résultats concrets et mesurables</p>
+                        </div>
+                        <div class="goal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5">✅ Avantages</h3>
+                                    <ul>
+                                        <li>Clairs, concrets et faciles à suivre</li>
+                                        <li>Source de motivation et de challenge</li>
+                                        <li>Permet de mesurer précisément les progrès</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">❌ Inconvénients</h3>
+                                    <ul>
+                                        <li>Peut créer du stress ou une pression excessive</li>
+                                        <li>Focus sur le résultat au détriment de la qualité</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5">⚠️ Dérives fréquentes</h3>
+                                    <ul>
+                                        <li>Tricher ou déformer les résultats</li>
+                                        <li>Négliger l'éthique ou l'humain pour atteindre l'objectif</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">💡 Bonnes pratiques</h3>
+                                    <ul>
+                                        <li>Utiliser la méthode SMART pour les formuler</li>
+                                        <li>Prévoir des récompenses et des pauses</li>
+                                        <li>Considérer l'impact humain des objectifs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 class="h5 mt-4">📌 Exemples concrets</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-card example-performance">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(255, 138, 0, 0.1); color: var(--color-performance);">Ventes</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Augmenter les ventes</h4>
+                                        <p class="small mb-0">Atteindre 50 000€ de CA mensuel d'ici 6 mois</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-performance">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(255, 138, 0, 0.1); color: var(--color-performance);">Sport</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Performance sportive</h4>
+                                        <p class="small mb-0">Courir un semi-marathon en moins de 1h50</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-card example-performance">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(255, 138, 0, 0.1); color: var(--color-performance);">Productivité</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Réduire les délais</h4>
+                                        <p class="small mb-0">Diminuer le temps de traitement des commandes à 24h maximum</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-performance">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(255, 138, 0, 0.1); color: var(--color-performance);">Finances</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Économies</h4>
+                                        <p class="small mb-0">Épargner 5000€ d'ici la fin de l'année</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Development Goals -->
+            <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
+                <section class="mb-5 fade-in-section">
+                    <div class="goal-card">
+                        <div class="goal-header goal-3">
+                            <h2 class="h3 mb-0">🌱 Objectifs de Développement</h2>
+                            <p class="mb-0 opacity-75">Faire évoluer ses capacités et son potentiel</p>
+                        </div>
+                        <div class="goal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5">✅ Avantages</h3>
+                                    <ul>
+                                        <li>Améliore la confiance et l'autonomie</li>
+                                        <li>Favorise le bien-être à long terme</li>
+                                        <li>Renforce l'adaptabilité aux changements</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">❌ Inconvénients</h3>
+                                    <ul>
+                                        <li>Évolution souvent lente et progressive</li>
+                                        <li>Difficile à mesurer objectivement</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5">⚠️ Dérives fréquentes</h3>
+                                    <ul>
+                                        <li>Objectifs trop vagues ou ambitieux</li>
+                                        <li>Vouloir tout changer simultanément</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">💡 Bonnes pratiques</h3>
+                                    <ul>
+                                        <li>Se concentrer sur 1-2 axes à la fois</li>
+                                        <li>Tenir un journal de progression</li>
+                                        <li>Se faire accompagner par un mentor</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 class="h5 mt-4">📌 Exemples concrets</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-card example-development">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(102, 126, 234, 0.1); color: var(--color-development);">Leadership</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Développer son leadership</h4>
+                                        <p class="small mb-0">Devenir plus inspirant pour son équipe et mieux déléguer</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-development">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(102, 126, 234, 0.1); color: var(--color-development);">Créativité</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Stimuler sa créativité</h4>
+                                        <p class="small mb-0">Développer sa pensée latérale pour résoudre des problèmes complexes</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-card example-development">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(102, 126, 234, 0.1); color: var(--color-development);">Confiance</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Renforcer sa confiance</h4>
+                                        <p class="small mb-0">Surmonter le syndrome de l'imposteur en milieu professionnel</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-development">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(102, 126, 234, 0.1); color: var(--color-development);">Équilibre</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Trouver l'équilibre</h4>
+                                        <p class="small mb-0">Mieux concilier vie professionnelle et vie personnelle</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Strategic Goals -->
+            <div class="tab-pane fade" id="strategic" role="tabpanel" aria-labelledby="strategic-tab">
+                <section class="mb-5 fade-in-section">
+                    <div class="goal-card">
+                        <div class="goal-header goal-4">
+                            <h2 class="h3 mb-0">🏁 Objectifs Stratégiques</h2>
+                            <p class="mb-0 opacity-75">Définir une vision et une direction à long terme</p>
+                        </div>
+                        <div class="goal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5">✅ Avantages</h3>
+                                    <ul>
+                                        <li>Donne du sens et une direction claire</li>
+                                        <li>Oriente les priorités et les décisions</li>
+                                        <li>Mobilise sur le long terme</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">❌ Inconvénients</h3>
+                                    <ul>
+                                        <li>Résultats peu visibles à court terme</li>
+                                        <li>Difficile de maintenir la motivation</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5">⚠️ Dérives fréquentes</h3>
+                                    <ul>
+                                        <li>Rester dans la vision sans passage à l'action</li>
+                                        <li>Manque de planification opérationnelle</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">💡 Bonnes pratiques</h3>
+                                    <ul>
+                                        <li>Découper en étapes intermédiaires</li>
+                                        <li>Visualiser régulièrement l'objectif final</li>
+                                        <li>Adapter la stratégie aux retours terrain</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 class="h5 mt-4">📌 Exemples concrets</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-card example-strategic">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(15, 32, 39, 0.1); color: var(--color-strategic);">Carrière</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Évolution professionnelle</h4>
+                                        <p class="small mb-0">Devenir expert reconnu dans son domaine d'ici 5 ans</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-strategic">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(15, 32, 39, 0.1); color: var(--color-strategic);">Entrepreneuriat</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Lancer son entreprise</h4>
+                                        <p class="small mb-0">Créer une société viable dans le secteur des énergies renouvelables</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-card example-strategic">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(15, 32, 39, 0.1); color: var(--color-strategic);">Vie personnelle</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Projet de vie</h4>
+                                        <p class="small mb-0">S'installer à l'étranger pour une expérience internationale enrichissante</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-strategic">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(15, 32, 39, 0.1); color: var(--color-strategic);">Finances</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Indépendance financière</h4>
+                                        <p class="small mb-0">Atteindre la liberté financière d'ici 15 ans grâce à des investissements</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Behavioral Goals -->
+            <div class="tab-pane fade" id="behavioral" role="tabpanel" aria-labelledby="behavioral-tab">
+                <section class="mb-5 fade-in-section">
+                    <div class="goal-card">
+                        <div class="goal-header goal-5">
+                            <h2 class="h3 mb-0">🧠 Objectifs Comportementaux</h2>
+                            <p class="mb-0 opacity-75">Modifier ou améliorer ses attitudes et réactions</p>
+                        </div>
+                        <div class="goal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="h5">✅ Avantages</h3>
+                                    <ul>
+                                        <li>Impact direct sur les relations</li>
+                                        <li>Améliore l'intelligence émotionnelle</li>
+                                        <li>Mène à une vraie transformation</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">❌ Inconvénients</h3>
+                                    <ul>
+                                        <li>Difficile à quantifier et mesurer</li>
+                                        <li>Nécessite un travail profond sur soi</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="h5">⚠️ Dérives fréquentes</h3>
+                                    <ul>
+                                        <li>Jouer un rôle sans vrai changement</li>
+                                        <li>Se décourager face aux rechutes</li>
+                                    </ul>
+                                    
+                                    <h3 class="h5">💡 Bonnes pratiques</h3>
+                                    <ul>
+                                        <li>Travailler un comportement à la fois</li>
+                                        <li>Demander des feedbacks réguliers</li>
+                                        <li>Pratiquer l'auto-observation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h3 class="h5 mt-4">📌 Exemples concrets</h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="example-card example-behavioral">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(101, 78, 163, 0.1); color: var(--color-behavioral);">Communication</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Écoute active</h4>
+                                        <p class="small mb-0">Pratiquer une écoute véritable sans interrompre son interlocuteur</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-behavioral">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(101, 78, 163, 0.1); color: var(--color-behavioral);">Émotions</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Gestion de la colère</h4>
+                                        <p class="small mb-0">Apprendre à reconnaître et canaliser ses émotions fortes</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="example-card example-behavioral">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(101, 78, 163, 0.1); color: var(--color-behavioral);">Attitude</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Positivité</h4>
+                                        <p class="small mb-0">Développer une attitude plus constructive face aux défis</p>
+                                    </div>
+                                    
+                                    <div class="example-card example-behavioral">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="example-badge" style="background-color: rgba(101, 78, 163, 0.1); color: var(--color-behavioral);">Relations</span>
+                                        </div>
+                                        <h4 class="h6 mb-1">Assertivité</h4>
+                                        <p class="small mb-0">Exprimer ses besoins clairement tout en respectant autrui</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- Action Plan -->
+        <section class="row mb-5 fade-in-section">
+            <div class="col-lg-8 mx-auto">
+                <div class="goal-card">
+                    <div class="goal-header" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                        <h2 class="h3 mb-0">📝 Mon Plan d'Action</h2>
+                        <p class="mb-0 opacity-75">Définissez vos objectifs multidimensionnels</p>
+                    </div>
+                    <div class="goal-body p-4">
+                        <form>
+                            <div class="mb-4">
+                                <label for="mainGoal" class="form-label fw-bold">Quel est votre objectif principal ?</label>
+                                <input type="text" class="form-control" id="mainGoal" placeholder="Ex: Devenir un meilleur leader, Perdre du poids, Lancer mon entreprise...">
+                            </div>
+                            
+                            <h4 class="h5 mb-3">Décomposez votre objectif en dimensions :</h4>
+                            
+                            <div class="mb-4 p-3 border rounded">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <span class="me-2">📚</span> Apprentissage
+                                </label>
+                                <input type="text" class="form-control mb-2" placeholder="Quoi apprendre ?">
+                                <textarea class="form-control" rows="2" placeholder="Comment l'appliquer concrètement ?"></textarea>
+                            </div>
+                            
+                            <div class="mb-4 p-3 border rounded">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <span class="me-2">🎯</span> Performance
+                                </label>
+                                <input type="text" class="form-control mb-2" placeholder="Quels résultats mesurables ?">
+                                <div class="d-flex align-items-center">
+                                    <span class="me-2 small">0%</span>
+                                    <input type="range" class="form-range flex-grow-1" style="max-width: 80%;">
+                                    <span class="ms-2 small">100%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4 p-3 border rounded">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <span class="me-2">🌱</span> Développement
+                                </label>
+                                <input type="text" class="form-control mb-2" placeholder="Quelle qualité développer ?">
+                                <textarea class="form-control" rows="2" placeholder="Comment le développer ?"></textarea>
+                            </div>
+                            
+                            <div class="mb-4 p-3 border rounded">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <span class="me-2">🏁</span> Stratégique
+                                </label>
+                                <input type="text" class="form-control mb-2" placeholder="Vision à long terme ?">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="strategicCheck">
+                                    <label class="form-check-label" for="strategicCheck">Est-ce aligné avec mes valeurs ?</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4 p-3 border rounded">
+                                <label class="form-label fw-bold d-flex align-items-center">
+                                    <span class="me-2">🧠</span> Comportemental
+                                </label>
+                                <input type="text" class="form-control mb-2" placeholder="Quel comportement modifier/adopter ?">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="behaviorCheck">
+                                    <label class="form-check-label" for="behaviorCheck">Puis-je le pratiquer quotidiennement ?</label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-gradient w-100">Enregistrer mon plan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Checklist -->
+        <section class="row mb-5 fade-in-section">
+            <div class="col-lg-8 mx-auto">
+                <div class="goal-card">
+                    <div class="goal-header" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+                        <h2 class="h3 mb-0">✅ Checklist de Suivi</h2>
+                        <p class="mb-0 opacity-75">Suivez vos progrès sur chaque dimension</p>
+                    </div>
+                    <div class="goal-body p-4">
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check1">
+                            <label class="form-check-label" for="check1">J'ai identifié au moins un objectif pour chaque dimension</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check2">
+                            <label class="form-check-label" for="check2">Mes objectifs sont SMART (spécifiques, mesurables, etc.)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check3">
+                            <label class="form-check-label" for="check3">J'ai prévu des moments d'évaluation réguliers</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check4">
+                            <label class="form-check-label" for="check4">J'ai identifié des ressources pour m'aider (livres, personnes, formations)</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check5">
+                            <label class="form-check-label" for="check5">Je sais comment célébrer mes petites victoires</label>
+                        </div>
+                        <div class="checklist-item">
+                            <input class="form-check-input" type="checkbox" id="check6">
+                            <label class="form-check-label" for="check6">J'ai prévu comment ajuster si nécessaire</label>
+                        </div>
+                        
+                        <div class="progress mt-4">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                        </div>
+                        <p class="text-end mt-2 mb-0 text-muted">Progression globale</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Button -->
+    <div class="floating-btn animate__animated animate__bounceIn animate__delay-3s">
+        💡
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animate elements when they come into view
+        const fadeElements = document.querySelectorAll('.fade-in-section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+        
+        // Update checklist progress
+        const checkboxes = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+        const progressBar = document.querySelector('.progress-bar');
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const checked = document.querySelectorAll('.checklist-item input[type="checkbox"]:checked').length;
+                const total = checkboxes.length;
+                const progress = Math.round((checked / total) * 100);
+                
+                progressBar.style.width = progress + '%';
+                progressBar.setAttribute('aria-valuenow', progress);
+                progressBar.textContent = progress + '%';
+            });
+        });
+    </script>
+</body>
+</html>
