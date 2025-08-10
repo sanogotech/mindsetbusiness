@@ -1,5 +1,7 @@
 # 🚀 Guide Complet – Construire une **Entreprise Rentable qui Tourne Sans Vous** 🔥
 
+- https://vm.tiktok.com/ZMA14vFdU/
+
 ## **1. Introduction – Le Mythe et la Réalité**
 
 Beaucoup rêvent d’avoir un business qui continue à générer de l’argent même en leur absence.
