@@ -124,5 +124,3 @@ En appliquant ces méthodes, vous passez de **salarié de votre propre boîte**�
 
 ---
 
-Si tu veux, je peux maintenant te préparer **un canevas d’implémentation sur 90 jours** avec un **plan détaillé semaine par semaine** pour transformer une entreprise dépendante en entreprise autonome.
-Souhaitez-vous que je vous le prépare ?
