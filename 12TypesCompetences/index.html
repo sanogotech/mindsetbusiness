@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail des Compétences Professionnelles</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #343a40;
+      --creative-color: #9b59b6;
+      --physical-color: #e67e22;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    .skill-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-creative {
+      background-color: var(--creative-color);
+      color: white;
+    }
+
+    .btn-creative:hover {
+      background-color: #8e44ad;
+      color: white;
+    }
+
+    .btn-physical {
+      background-color: var(--physical-color);
+      color: white;
+    }
+
+    .btn-physical:hover {
+      background-color: #d35400;
+      color: white;
+    }
+
+    .highlight-box {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .creative-highlight {
+      background-color: rgba(155, 89, 182, 0.1);
+      border-left: 4px solid var(--creative-color);
+    }
+
+    .physical-highlight {
+      background-color: rgba(230, 126, 34, 0.1);
+      border-left: 4px solid var(--physical-color);
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .process-step:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+
+    .process-step:after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background-color: var(--secondary-color);
+    }
+
+    .process-step:last-child:after {
+      display: none;
+    }
+
+    .skill-badge {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-hard {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .badge-soft {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .badge-mad {
+      background-color: #f1c40f;
+      color: #2c3e50;
+    }
+
+    .badge-spiritual {
+      background-color: #2ecc71;
+      color: white;
+    }
+
+    .badge-cognitive {
+      background-color: #9b59b6;
+      color: white;
+    }
+
+    .badge-social {
+      background-color: #1abc9c;
+      color: white;
+    }
+
+    .badge-transferable {
+      background-color: #34495e;
+      color: white;
+    }
+
+    .badge-managerial {
+      background-color: #16a085;
+      color: white;
+    }
+
+    .badge-linguistic {
+      background-color: #27ae60;
+      color: white;
+    }
+
+    .badge-digital {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    .badge-artistic {
+      background-color: #8e44ad;
+      color: white;
+    }
+
+    .badge-physical {
+      background-color: #e67e22;
+      color: white;
+    }
+
+    .skill-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .skill-card:nth-child(1) { animation-delay: 0.1s; }
+    .skill-card:nth-child(2) { animation-delay: 0.2s; }
+    .skill-card:nth-child(3) { animation-delay: 0.3s; }
+    .skill-card:nth-child(4) { animation-delay: 0.4s; }
+    .skill-card:nth-child(5) { animation-delay: 0.5s; }
+    .skill-card:nth-child(6) { animation-delay: 0.6s; }
+    .skill-card:nth-child(7) { animation-delay: 0.7s; }
+    .skill-card:nth-child(8) { animation-delay: 0.8s; }
+    .skill-card:nth-child(9) { animation-delay: 0.9s; }
+    .skill-card:nth-child(10) { animation-delay: 1.0s; }
+    .skill-card:nth-child(11) { animation-delay: 1.1s; }
+    .skill-card:nth-child(12) { animation-delay: 1.2s; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+
+      .skill-icon {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-award me-2"></i>Portail des Compétences
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#types">Types de Compétences</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#developpement">Développement</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#evaluation">Évaluation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#ressources">Ressources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#quiz">Quiz</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Maîtrisez les 12 Types de Compétences Clés</h1>
+      <p class="lead mb-4">Découvrez comment développer et valoriser vos compétences techniques, comportementales et créatives pour réussir professionnellement</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#types" class="btn btn-light btn-lg px-4">Explorer les compétences</a>
+        <a href="#evaluation" class="btn btn-outline-light btn-lg px-4">Évaluer vos skills</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5">
+    <section class="mb-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="mb-4">Pourquoi développer ses compétences ?</h2>
+          <p class="lead">Dans un monde professionnel en constante évolution, la maîtrise de compétences variées est essentielle pour s'adapter, innover et progresser dans sa carrière.</p>
+          <div class="d-flex justify-content-center mt-4">
+            <div class="px-4 text-center">
+              <i class="bi bi-graph-up-arrow fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Progression</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-people fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Collaboration</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-lightbulb fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Innovation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="types" class="mb-5">
+      <h2 class="text-center mb-4">Les 12 Types de Compétences</h2>
+      
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Hard Skills -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-tools me-2"></i>
+              <h5 class="mb-0">🛠️ Hard Skills</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Compétences techniques spécifiques, mesurables</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-hard">Programmation</span>
+                <span class="skill-badge badge-hard">Comptabilité</span>
+                <span class="skill-badge badge-hard">Analyse de données</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('hard')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Soft Skills -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-chat-square-text me-2"></i>
+              <h5 class="mb-0">💬 Soft Skills</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Compétences comportementales et relationnelles</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-soft">Communication</span>
+                <span class="skill-badge badge-soft">Empathie</span>
+                <span class="skill-badge badge-soft">Adaptabilité</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('soft')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mad Skills -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-stars me-2"></i>
+              <h5 class="mb-0">🚀 Mad Skills</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Talents uniques ou très rares</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-mad">Improvisation</span>
+                <span class="skill-badge badge-mad">Calcul mental</span>
+                <span class="skill-badge badge-mad">Mémoire exceptionnelle</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('mad')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Spirituelles -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-heart me-2"></i>
+              <h5 class="mb-0">🌟 Compétences Spirituelles</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Capacités liées à la dimension spirituelle</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-spiritual">Méditation</span>
+                <span class="skill-badge badge-spiritual">Résilience</span>
+                <span class="skill-badge badge-spiritual">Intégrité</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('spiritual')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Cognitives -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-cpu me-2"></i>
+              <h5 class="mb-0">🧠 Compétences Cognitives</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Aptitudes intellectuelles et analytiques</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-cognitive">Pensée critique</span>
+                <span class="skill-badge badge-cognitive">Résolution de problèmes</span>
+                <span class="skill-badge badge-cognitive">Créativité</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('cognitive')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Sociales -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-people me-2"></i>
+              <h5 class="mb-0">🤝 Compétences Sociales</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Capacités à interagir efficacement</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-social">Travail d'équipe</span>
+                <span class="skill-badge badge-social">Négociation</span>
+                <span class="skill-badge badge-social">Leadership</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('social')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Transversales -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-arrow-left-right me-2"></i>
+              <h5 class="mb-0">🔄 Compétences Transversales</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Utiles dans de nombreux métiers</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-transferable">Gestion du temps</span>
+                <span class="skill-badge badge-transferable">Polyvalence</span>
+                <span class="skill-badge badge-transferable">Adaptation</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('transferable')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Managériales -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-diagram-3 me-2"></i>
+              <h5 class="mb-0">📊 Compétences Managériales</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Capacités à diriger et organiser</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-managerial">Planification</span>
+                <span class="skill-badge badge-managerial">Délégation</span>
+                <span class="skill-badge badge-managerial">Gestion de projet</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('managerial')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Linguistiques -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-translate me-2"></i>
+              <h5 class="mb-0">🌐 Compétences Linguistiques</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Maîtrise des langues et communication</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-linguistic">Anglais</span>
+                <span class="skill-badge badge-linguistic">Espagnol</span>
+                <span class="skill-badge badge-linguistic">Communication interculturelle</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('linguistic')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Numériques -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-laptop me-2"></i>
+              <h5 class="mb-0">💻 Compétences Numériques</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Maîtrise des outils digitaux</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-digital">Programmation</span>
+                <span class="skill-badge badge-digital">Cybersécurité</span>
+                <span class="skill-badge badge-digital">Analyse de données</span>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="showSkillDetails('digital')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Artistiques -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-palette me-2"></i>
+              <h5 class="mb-0">🎨 Compétences Artistiques</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Aptitudes créatives et expressives</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-artistic">Dessin</span>
+                <span class="skill-badge badge-artistic">Design</span>
+                <span class="skill-badge badge-artistic">Écriture créative</span>
+              </div>
+              <button class="btn btn-creative btn-sm" onclick="showSkillDetails('artistic')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Compétences Physiques -->
+        <div class="col">
+          <div class="card h-100 skill-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-activity me-2"></i>
+              <h5 class="mb-0">💪 Compétences Physiques</h5>
+            </div>
+            <div class="card-body">
+              <p class="mb-3"><strong>Capacités corporelles et motrices</strong></p>
+              <div class="mb-3">
+                <span class="skill-badge badge-physical">Endurance</span>
+                <span class="skill-badge badge-physical">Coordination</span>
+                <span class="skill-badge badge-physical">Habileté manuelle</span>
+              </div>
+              <button class="btn btn-physical btn-sm" onclick="showSkillDetails('physical')">
+                <i class="bi bi-info-circle me-1"></i>Voir les détails
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="developpement" class="mb-5">
+      <h2 class="text-center mb-4">Développement des Compétences</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal-bookmark me-2"></i>
+              <h5 class="mb-0">Stratégies de développement</h5>
+            </div>
+            <div class="card-body">
+              <div class="process-step">
+                <h5>1. Auto-évaluation</h5>
+                <p>Identifier vos forces et axes d'amélioration à travers des tests et retours.</p>
+              </div>
+              <div class="process-step">
+                <h5>2. Fixation d'objectifs SMART</h5>
+                <p>Définir des objectifs Spécifiques, Mesurables, Atteignables, Réalistes et Temporels.</p>
+              </div>
+              <div class="process-step">
+                <h5>3. Plan d'apprentissage</h5>
+                <p>Créer un plan structuré avec des ressources et échéances.</p>
+              </div>
+              <div class="process-step">
+                <h5>4. Mise en pratique</h5>
+                <p>Appliquer les compétences dans des situations réelles ou simulées.</p>
+              </div>
+              <div class="process-step">
+                <h5>5. Réflexion et ajustement</h5>
+                <p>Analyser les progrès et adapter la stratégie si nécessaire.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-lightbulb me-2"></i>
+              <h5 class="mb-0">Méthodes efficaces</h5>
+            </div>
+            <div class="card-body">
+              <div class="highlight-box">
+                <p><strong>Pour les Hard Skills :</strong></p>
+                <ul>
+                  <li>Formations certifiantes</li>
+                  <li>Projets pratiques</li>
+                  <li>Tutoriels en ligne</li>
+                  <li>Mentorat technique</li>
+                </ul>
+              </div>
+              
+              <div class="creative-highlight highlight-box mt-3">
+                <p><strong>Pour les Soft Skills :</strong></p>
+                <ul>
+                  <li>Jeux de rôle</li>
+                  <li>Feedback 360°</li>
+                  <li>Ateliers collaboratifs</li>
+                  <li>Observation de modèles</li>
+                </ul>
+              </div>
+              
+              <div class="physical-highlight highlight-box mt-3">
+                <p><strong>Pour les Compétences Physiques :</strong></p>
+                <ul>
+                  <li>Entraînement régulier</li>
+                  <li>Exercices spécifiques</li>
+                  <li>Technique et répétition</li>
+                  <li>Coaching personnalisé</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header d-flex align-items-center">
+          <i class="bi bi-graph-up me-2"></i>
+          <h5 class="mb-0">Matrice de progression</h5>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th>Compétence</th>
+                  <th>Niveau actuel</th>
+                  <th>Objectif</th>
+                  <th>Progression</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Communication</td>
+                  <td>Intermédiaire</td>
+                  <td>Avancé</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 65%">65%</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Gestion de projet</td>
+                  <td>Débutant</td>
+                  <td>Intermédiaire</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 30%">30%</div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Analyse de données</td>
+                  <td>Avancé</td>
+                  <td>Expert</td>
+                  <td>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 85%">85%</div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn btn-primary mt-3" onclick="showDetails('progress-matrix')">
+            <i class="bi bi-plus-circle me-1"></i>Ajouter une compétence
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="evaluation" class="mb-5">
+      <h2 class="text-center mb-4">Évaluation des Compétences</h2>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-clipboard-check me-2"></i>
+              <h5 class="mb-0">Auto-évaluation</h5>
+            </div>
+            <div class="card-body">
+              <p>Évaluez vos compétences sur une échelle de 1 à 5 :</p>
+              
+              <div class="mb-3">
+                <label class="form-label">Communication :</label>
+                <input type="range" class="form-range" min="1" max="5" step="1" id="communicationSkill">
+                <div class="d-flex justify-content-between">
+                  <small>1 - Débutant</small>
+                  <small>3 - Intermédiaire</small>
+                  <small>5 - Expert</small>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Résolution de problèmes :</label>
+                <input type="range" class="form-range" min="1" max="5" step="1" id="problemSolvingSkill">
+                <div class="d-flex justify-content-between">
+                  <small>1 - Débutant</small>
+                  <small>3 - Intermédiaire</small>
+                  <small>5 - Expert</small>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label">Gestion du temps :</label>
+                <input type="range" class="form-range" min="1" max="5" step="1" id="timeManagementSkill">
+                <div class="d-flex justify-content-between">
+                  <small>1 - Débutant</small>
+                  <small>3 - Intermédiaire</small>
+                  <small>5 - Expert</small>
+                </div>
+              </div>
+              
+              <button class="btn btn-primary" onclick="evaluateSkills()">
+                <i class="bi bi-check-circle me-1"></i>Valider l'évaluation
+              </button>
+              
+              <div id="evaluationResult" class="mt-3" style="display: none;">
+                <div class="alert alert-success">
+                  <h6>Résultats de votre évaluation :</h6>
+                  <ul id="skillResultsList"></ul>
+                  <p class="mb-0">Consultez nos ressources pour améliorer vos compétences.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-people me-2"></i>
+              <h5 class="mb-0">Évaluation 360°</h5>
+            </div>
+            <div class="card-body">
+              <p>L'évaluation 360° permet d'obtenir des retours de différentes personnes (collègues, managers, collaborateurs).</p>
+              
+              <div class="highlight-box">
+                <p><strong>Avantages :</strong></p>
+                <ul>
+                  <li>Vision complète de vos compétences</li>
+                  <li>Identification des points aveugles</li>
+                  <li>Alignement entre votre perception et celle des autres</li>
+                </ul>
+              </div>
+              
+              <div class="mt-3">
+                <h6>Demander des feedbacks :</h6>
+                <div class="mb-3">
+                  <label class="form-label">Email du feedbackeur :</label>
+                  <input type="email" class="form-control" placeholder="email@exemple.com">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Relation :</label>
+                  <select class="form-select">
+                    <option>Collègue</option>
+                    <option>Manager</option>
+                    <option>Collaborateur</option>
+                    <option>Client</option>
+                  </select>
+                </div>
+                <button class="btn btn-outline-primary">
+                  <i class="bi bi-send me-1"></i>Envoyer la demande
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ressources" class="mb-5">
+      <h2 class="text-center mb-4">Ressources pour le développement</h2>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Formations en ligne</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Coursera
+                  <span class="badge bg-primary rounded-pill">Populaire</span>
+                </li>
+                <li class="list-group-item">Udemy</li>
+                <li class="list-group-item">LinkedIn Learning</li>
+                <li class="list-group-item">edX</li>
+                <li class="list-group-item">OpenClassrooms</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Livres recommandés</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">"Soft Skills" - John Sonmez</li>
+                <li class="list-group-item">"Deep Work" - Cal Newport</li>
+                <li class="list-group-item">"Atomic Habits" - James Clear</li>
+                <li class="list-group-item">"Emotional Intelligence 2.0" - Travis Bradberry</li>
+                <li class="list-group-item">"The 7 Habits of Highly Effective People" - Stephen Covey</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Outils pratiques</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <h6>Gestion de projet</h6>
+              <ul>
+                <li>Trello</li>
+                <li>Asana</li>
+                <li>Notion</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h6>Développement perso</h6>
+              <ul>
+                <li>Headspace (méditation)</li>
+                <li>Duolingo (langues)</li>
+                <li>Brilliant (compétences techniques)</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h6>Productivité</h6>
+              <ul>
+                <li>Forest (concentration)</li>
+                <li>Todoist (tâches)</li>
+                <li>RescueTime (suivi du temps)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="mb-5">
+      <h2 class="text-center mb-4">Quiz sur les Compétences</h2>
+      
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <i class="bi bi-question-circle me-2"></i>
+          <h5 class="mb-0">Testez vos connaissances</h5>
+        </div>
+        <div class="card-body">
+          <div id="quizContainer">
+            <h5>Question 1/5</h5>
+            <p class="lead">Quelle est la principale caractéristique des Hard Skills ?</p>
+            
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="quizQuestion1" id="q1option1">
+              <label class="form-check-label" for="q1option1">
+                Elles sont liées à la personnalité
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="quizQuestion1" id="q1option2">
+              <label class="form-check-label" for="q1option2">
+                Elles sont spécifiques et mesurables
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="radio" name="quizQuestion1" id="q1option3">
+              <label class="form-check-label" for="q1option3">
+                Elles sont innées et ne peuvent être apprises
+              </label>
+            </div>
+            
+            <div class="d-flex justify-content-between mt-4">
+              <button class="btn btn-outline-secondary" disabled>Précédent</button>
+              <button class="btn btn-primary">Suivant</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">Portail des Compétences Professionnelles - Outil pédagogique</p>
+      <p class="mb-0">© 2023 - Tous droits réservés</p>
+    </div>
+  </footer>
+
+  <!-- Modal for details -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Détails de la compétence</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="detailsModalContent">
+          Chargement...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Modal for details
+    const detailsModal = new bootstrap.Modal(document.getElementById('detailsModal'));
+    const detailsModalTitle = document.getElementById('detailsModalLabel');
+    const detailsModalContent = document.getElementById('detailsModalContent');
+
+    function showSkillDetails(skillType) {
+      let title = '';
+      let content = '';
+
+      switch(skillType) {
+        case 'hard':
+          title = '🛠️ Hard Skills (Compétences techniques)';
+          content = `
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Définition</h5>
+                <p>Compétences spécifiques, mesurables, acquises par la formation ou l'expérience pratique.</p>
+                
+                <h5 class="mt-4">Exemples</h5>
+                <ul>
+                  <li>Programmation informatique (Python, Java)</li>
+                  <li>Maîtrise de logiciels (Excel, Photoshop)</li>
+                  <li>Compétences en comptabilité</li>
+                  <li>Mécanique automobile</li>
+                  <li>Chirurgie médicale</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Importance</h5>
+                <p>Essentielles pour effectuer des tâches techniques précises dans un domaine spécifique.</p>
+                
+                <h5 class="mt-4">Comment les développer</h5>
+                <ol>
+                  <li>Formations spécialisées</li>
+                  <li>Pratique régulière</li>
+                  <li>Certifications professionnelles</li>
+                  <li>Projets concrets</li>
+                  <li>Mentorat avec des experts</li>
+                </ol>
+              </div>
+            </div>
+          `;
+          break;
+        case 'soft':
+          title = '💬 Soft Skills (Compétences comportementales)';
+          content = `
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Définition</h5>
+                <p>Compétences liées à la personnalité, aux relations humaines et à la gestion de soi.</p>
+                
+                <h5 class="mt-4">Exemples</h5>
+                <ul>
+                  <li>Communication efficace</li>
+                  <li>Gestion du stress</li>
+                  <li>Empathie</li>
+                  <li>Écoute active</li>
+                  <li>Esprit d'équipe</li>
+                  <li>Créativité</li>
+                  <li>Adaptabilité</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Importance</h5>
+                <p>Déterminantes pour la réussite professionnelle et les relations interpersonnelles.</p>
+                
+                <h5 class="mt-4">Comment les développer</h5>
+                <ol>
+                  <li>Pratique consciente dans diverses situations</li>
+                  <li>Feedback régulier</li>
+                  <li>Formation en intelligence émotionnelle</li>
+                  <li>Observation de modèles positifs</li>
+                  <li>Réflexion et auto-évaluation</li>
+                </ol>
+              </div>
+            </div>
+          `;
+          break;
+        case 'spiritual':
+          title = '🌟 Compétences Spirituelles';
+          content = `
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Définition</h5>
+                <p>Capacités liées à la dimension spirituelle, éthique, et au bien-être intérieur.</p>
+                
+                <h5 class="mt-4">Exemples</h5>
+                <ul>
+                  <li>Gestion du stress par la méditation</li>
+                  <li>Développement de la patience</li>
+                  <li>Intégrité</li>
+                  <li>Résilience psychologique</li>
+                  <li>Pratiques de protection spirituelle</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Spécificités islamiques</h5>
+                <ul>
+                  <li><strong>Roqya :</strong> pratique de protection spirituelle par la lecture de versets du Coran</li>
+                  <li><strong>Gestion des influences :</strong> méthodes pour se protéger contre le mauvais œil, envoutement</li>
+                  <li><strong>Pratiques quotidiennes :</strong> prières, invocations, gestes de protection</li>
+                </ul>
+                
+                <h5 class="mt-4">Importance</h5>
+                <p>Aide à la stabilité émotionnelle, clarté morale et résistance face aux difficultés.</p>
+              </div>
+            </div>
+          `;
+          break;
+      }
+
+      detailsModalTitle.textContent = title;
+      detailsModalContent.innerHTML = content;
+      detailsModal.show();
+    }
+
+    function showDetails(detailType) {
+      let title = '';
+      let content = '';
+
+      switch(detailType) {
+        case 'progress-matrix':
+          title = 'Matrice de progression des compétences';
+          content = `
+            <p>La matrice de progression vous permet de suivre votre développement sur différentes compétences clés.</p>
+            
+            <h5 class="mt-4">Comment l'utiliser :</h5>
+            <ol>
+              <li>Listez les compétences que vous souhaitez développer</li>
+              <li>Évaluez votre niveau actuel (1-5)</li>
+              <li>Définissez un objectif à atteindre</li>
+              <li>Mettez à jour régulièrement votre progression</li>
+              <li>Adaptez vos efforts en fonction des résultats</li>
+            </ol>
+            
+            <div class="alert alert-info mt-4">
+              <p><strong>Astuce :</strong> Concentrez-vous sur 2-3 compétences à la fois pour une progression optimale.</p>
+            </div>
+          `;
+          break;
+      }
+
+      detailsModalTitle.textContent = title;
+      detailsModalContent.innerHTML = content;
+      detailsModal.show();
+    }
+
+    function evaluateSkills() {
+      const communication = document.getElementById('communicationSkill').value;
+      const problemSolving = document.getElementById('problemSolvingSkill').value;
+      const timeManagement = document.getElementById('timeManagementSkill').value;
+      
+      const resultList = document.getElementById('skillResultsList');
+      resultList.innerHTML = `
+        <li><strong>Communication :</strong> ${getLevelDescription(communication)}</li>
+        <li><strong>Résolution de problèmes :</strong> ${getLevelDescription(problemSolving)}</li>
+        <li><strong>Gestion du temps :</strong> ${getLevelDescription(timeManagement)}</li>
+      `;
+      
+      document.getElementById('evaluationResult').style.display = 'block';
+    }
+    
+    function getLevelDescription(level) {
+      switch(level) {
+        case '1': return 'Débutant - Besoin de développement important';
+        case '2': return 'Basique - Compétence en développement';
+        case '3': return 'Intermédiaire - Niveau opérationnel';
+        case '4': return 'Avancé - Bonne maîtrise';
+        case '5': return 'Expert - Niveau de référence';
+        default: return 'Non évalué';
+      }
+    }
+  </script>
+</body>
+</html>
