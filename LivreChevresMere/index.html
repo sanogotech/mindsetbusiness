@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Chèvre de ma Mère - Éducation Financière pour l'Afrique</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #343a40;
+      --finance-green: #27ae60;
+      --african-orange: #e67e22;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--african-orange) 0%, var(--primary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1489&q=80');
+      opacity: 0.15;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    .finance-card .card-header {
+      background-color: var(--finance-green);
+    }
+
+    .culture-card .card-header {
+      background-color: var(--african-orange);
+    }
+
+    .module-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary-color);
+    }
+
+    .btn-primary {
+      background-color: var(--finance-green);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #219653;
+    }
+
+    .btn-culture {
+      background-color: var(--african-orange);
+      color: white;
+    }
+
+    .btn-culture:hover {
+      background-color: #d35400;
+      color: white;
+    }
+
+    .btn-outline-primary {
+      color: var(--finance-green);
+      border-color: var(--finance-green);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--finance-green);
+      color: white;
+    }
+
+    .simulation-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .process-step:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: var(--finance-green);
+      border-radius: 50%;
+    }
+
+    .process-step:after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background-color: var(--finance-green);
+    }
+
+    .process-step:last-child:after {
+      display: none;
+    }
+
+    .data-table {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .data-table th {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .highlight-box {
+      background-color: rgba(39, 174, 96, 0.1);
+      border-left: 4px solid var(--finance-green);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .culture-highlight {
+      background-color: rgba(230, 126, 34, 0.1);
+      border-left: 4px solid var(--african-orange);
+    }
+
+    .linked-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .linked-module {
+      background-color: var(--light-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      border: 1px solid #ddd;
+    }
+
+    .tab-content {
+      padding: 1.5rem 0;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Animation pour les cartes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .module-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    /* Délai d'animation pour chaque carte */
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+    .module-card:nth-child(3) { animation-delay: 0.3s; }
+    .module-card:nth-child(4) { animation-delay: 0.4s; }
+    .module-card:nth-child(5) { animation-delay: 0.5s; }
+    .module-card:nth-child(6) { animation-delay: 0.6s; }
+    .module-card:nth-child(7) { animation-delay: 0.7s; }
+
+    /* Financial board styles */
+    .financial-board {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+    }
+
+    .financial-column {
+      min-width: 300px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .financial-column-header {
+      font-weight: bold;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ddd;
+      text-align: center;
+    }
+
+    .financial-card {
+      background-color: white;
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      cursor: grab;
+    }
+
+    .financial-card:active {
+      cursor: grabbing;
+    }
+
+    .financial-card h6 {
+      margin-bottom: 0.5rem;
+    }
+
+    .financial-card p {
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .financial-card .badge {
+      font-size: 0.7rem;
+    }
+
+    .progress-chart {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: 300px;
+      position: relative;
+    }
+
+    .chart-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: #666;
+      font-style: italic;
+    }
+
+    .proverb-card {
+      border-left: 4px solid var(--african-orange);
+      background-color: rgba(230, 126, 34, 0.1);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .proverb-text {
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+
+    .proverb-origin {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+
+      .module-icon {
+        font-size: 1.5rem;
+      }
+
+      .financial-board {
+        flex-direction: column;
+      }
+
+      .financial-column {
+        min-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-cash-coin me-2"></i>La Chèvre de ma Mère
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#concepts">Concepts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#niveaux">7 Niveaux</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#simulations">Simulations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cas-pratiques">Cas pratiques</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#outils">Outils</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#ressources">Ressources</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="container text-center position-relative">
+      <h1 class="display-4 fw-bold mb-3">Libérez votre potentiel financier</h1>
+      <p class="lead mb-4">Découvrez comment transformer vos croyances et adopter des pratiques financières durables adaptées au contexte africain</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#concepts" class="btn btn-light btn-lg px-4">Commencer l'apprentissage</a>
+        <a href="#simulations" class="btn btn-outline-light btn-lg px-4">Essayer les simulations</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5">
+    <section class="mb-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="mb-4">Pourquoi l'éducation financière en Afrique ?</h2>
+          <p class="lead">"La Chèvre de ma Mère" révèle comment nos croyances et traditions influencent notre rapport à l'argent. Ce portail vous guide pour concilier sagesse africaine et pratiques financières modernes.</p>
+          <div class="d-flex justify-content-center mt-4">
+            <div class="px-4 text-center">
+              <i class="bi bi-lightbulb fs-1 text-warning"></i>
+              <p class="mt-2 fw-bold">Mentalité</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-currency-exchange fs-1 text-success"></i>
+              <p class="mt-2 fw-bold">Pratiques</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-people fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Communauté</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="concepts" class="mb-5">
+      <h2 class="text-center mb-4">Concepts clés du livre</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card h-100 finance-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal-bookmark me-2"></i>
+              <h5 class="mb-0">La métaphore de la chèvre</h5>
+            </div>
+            <div class="card-body">
+              <p>La chèvre symbolise les actifs familiaux souvent sous-utilisés ou mal compris, que l'on hésite à vendre ou investir.</p>
+              <div class="highlight-box">
+                <p><strong>Leçons :</strong></p>
+                <ul>
+                  <li>Reconnaître la valeur des actifs familiaux</li>
+                  <li>Apprendre à les faire fructifier</li>
+                  <li>Transformer les traditions en opportunités</li>
+                </ul>
+              </div>
+              <button class="btn btn-primary btn-sm mt-3" onclick="showDetails('chevre')">
+                <i class="bi bi-info-circle me-1"></i>Voir les exemples
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100 culture-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-diagram-3 me-2"></i>
+              <h5 class="mb-0">Croyances limitantes</h5>
+            </div>
+            <div class="card-body">
+              <p>Les obstacles à la richesse ne sont pas seulement financiers, mais aussi mentaux et culturels.</p>
+              <div class="culture-highlight">
+                <p><strong>Croyances à dépasser :</strong></p>
+                <ul>
+                  <li>"L'argent est mauvais"</li>
+                  <li>"On ne vend pas les biens familiaux"</li>
+                  <li>"La richesse est un péché"</li>
+                  <li>"Je ne mérite pas de réussir"</li>
+                </ul>
+              </div>
+              <button class="btn btn-culture btn-sm mt-3" onclick="showDetails('croyances')">
+                <i class="bi bi-info-circle me-1"></i>Voir les solutions
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card h-100 finance-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-arrow-repeat me-2"></i>
+              <h5 class="mb-0">Actifs vs Passifs</h5>
+            </div>
+            <div class="card-body">
+              <p><strong>Actif :</strong> Ce qui met de l'argent dans votre poche (poulailler, champ, boutique)</p>
+              <p><strong>Passif :</strong> Ce qui retire de l'argent (téléphone à crédit, dépenses festives)</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-cash-stack me-2"></i>
+              <h5 class="mb-0">Budget africain</h5>
+            </div>
+            <div class="card-body">
+              <p>Planification des revenus et dépenses adaptée au contexte familial africain.</p>
+              <p>Inclure les obligations familiales tout en épargnant et investissant.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card h-100 culture-card">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-people me-2"></i>
+              <h5 class="mb-0">Dépendance familiale</h5>
+            </div>
+            <div class="card-body">
+              <p>Réussir financièrement peut créer des tensions si on aide mal la famille.</p>
+              <p>Solution : Investir dans des actifs productifs pour la famille plutôt que donner de l'argent.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="niveaux" class="mb-5">
+      <h2 class="text-center mb-4">Les 7 niveaux financiers</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center" style="background-color: var(--finance-green);">
+              <i class="bi bi-kanban me-2"></i>
+              <h5 class="mb-0">Progression financière</h5>
+            </div>
+            <div class="card-body">
+              <p>Le livre identifie 7 niveaux financiers, chacun avec ses caractéristiques et stratégies de progression.</p>
+              
+              <div class="highlight-box mt-3">
+                <p><strong>Comment progresser :</strong></p>
+                <ul>
+                  <li>Identifier votre niveau actuel</li>
+                  <li>Appliquer les bonnes pratiques spécifiques</li>
+                  <li>Suivre les métriques clés</li>
+                  <li>S'inspirer des sagesses africaines</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center" style="background-color: var(--finance-green);">
+              <i class="bi bi-graph-up me-2"></i>
+              <h5 class="mb-0">Testez votre niveau</h5>
+            </div>
+            <div class="card-body">
+              <p>Découvrez votre niveau financier actuel avec notre quiz interactif.</p>
+              <div class="proverb-card mt-3">
+                <p class="proverb-text">"Celui qui ne sait pas où il va doit retourner d'où il vient."</p>
+                <p class="proverb-origin">- Proverbe africain</p>
+              </div>
+              <button class="btn btn-primary w-100 mt-3" onclick="startLevelTest()">
+                <i class="bi bi-patch-question me-1"></i>Faire le test maintenant
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center" style="background-color: #e74c3c; color: white;">
+              <i class="bi bi-emoji-frown me-2"></i>
+              <h5 class="mb-0">Niveau 1 - Pauvre absolu</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Mentalité :</strong> Vit au jour le jour</li>
+                <li class="list-group-item"><strong>Action :</strong> Noter toutes les dépenses</li>
+                <li class="list-group-item"><strong>Métrique :</strong> % épargne = 0%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center" style="background-color: #f39c12; color: white;">
+              <i class="bi bi-emoji-neutral me-2"></i>
+              <h5 class="mb-0">Niveau 3 - Endetté</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Mentalité :</strong> Vit à crédit</li>
+                <li class="list-group-item"><strong>Action :</strong> Éviter dettes consommation</li>
+                <li class="list-group-item"><strong>Métrique :</strong> Dette/revenu < 30%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center" style="background-color: #27ae60; color: white;">
+              <i class="bi bi-emoji-smile me-2"></i>
+              <h5 class="mb-0">Niveau 7 - Riche/Libre</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Mentalité :</strong> Génère des revenus importants</li>
+                <li class="list-group-item"><strong>Action :</strong> Mentorat, philanthropie</li>
+                <li class="list-group-item"><strong>Métrique :</strong> Revenus passifs > 100% dépenses</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulations" class="mb-5">
+      <h2 class="text-center mb-4">Simulations interactives</h2>
+
+      <ul class="nav nav-tabs justify-content-center mb-4" id="simulationTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="budget-tab" data-bs-toggle="tab" data-bs-target="#budget" type="button" role="tab">Budget familial</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="investissement-tab" data-bs-toggle="tab" data-bs-target="#investissement" type="button" role="tab">Micro-investissement</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="niveau-tab" data-bs-toggle="tab" data-bs-target="#niveau" type="button" role="tab">Progression de niveau</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="simulationTabContent">
+        <div class="tab-pane fade show active" id="budget" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-wallet2 me-2"></i>Simulation de budget familial</h3>
+            <p>Cette simulation vous permet de créer un budget réaliste adapté au contexte africain, en tenant compte des obligations familiales et des opportunités d'investissement.</p>
+            
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <h5>Revenus</h5>
+                <div class="mb-3">
+                  <label class="form-label">Salaire principal</label>
+                  <input type="number" class="form-control" id="salaire" value="150000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Revenus secondaires</label>
+                  <input type="number" class="form-control" id="revenus-secondaires" value="30000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Revenus des actifs</label>
+                  <input type="number" class="form-control" id="revenus-actifs" value="20000">
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <h5>Dépenses</h5>
+                <div class="mb-3">
+                  <label class="form-label">Nécessités (nourriture, logement)</label>
+                  <input type="number" class="form-control" id="necessites" value="80000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Obligations familiales</label>
+                  <input type="number" class="form-control" id="famille" value="30000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Dépenses personnelles</label>
+                  <input type="number" class="form-control" id="personnel" value="20000">
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-center mt-4">
+              <button class="btn btn-primary" onclick="calculerBudget()">
+                <i class="bi bi-calculator me-1"></i>Calculer mon budget
+              </button>
+            </div>
+            
+            <div class="progress-chart mt-4" id="budgetResult" style="display: none;">
+              <div class="chart-placeholder">
+                <h5>Résultats de votre budget</h5>
+                <div class="mb-3">
+                  <p>Total revenus: <span id="total-revenus" class="fw-bold">200 000 FCFA</span></p>
+                  <p>Total dépenses: <span id="total-depenses" class="fw-bold">130 000 FCFA</span></p>
+                  <p>Épargne possible: <span id="epargne" class="fw-bold text-success">70 000 FCFA</span></p>
+                </div>
+                <div class="progress mb-3" style="height: 30px;">
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 35%" id="epargne-bar">Épargne 35%</div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" id="necessites-bar">Nécessités 40%</div>
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" id="famille-bar">Famille 15%</div>
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 10%" id="personnel-bar">Personnel 10%</div>
+                </div>
+                <div class="proverb-card">
+                  <p class="proverb-text">"Qui épargne a toujours."</p>
+                  <p class="proverb-origin">- Proverbe africain</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="investissement" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-graph-up-arrow me-2"></i>Simulation de micro-investissement</h3>
+            <p>Cette simulation montre comment un petit investissement régulier peut croître grâce aux intérêts composés, même avec un capital initial modeste.</p>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Capital initial (FCFA)</label>
+                  <input type="number" class="form-control" id="capital-initial" value="50000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Épargne mensuelle (FCFA)</label>
+                  <input type="number" class="form-control" id="epargne-mensuelle" value="10000">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Taux d'intérêt annuel (%)</label>
+                  <input type="number" class="form-control" id="taux-interet" value="12">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Durée (années)</label>
+                  <input type="number" class="form-control" id="duree" value="5">
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-center mt-4">
+              <button class="btn btn-primary" onclick="calculerInvestissement()">
+                <i class="bi bi-calculator me-1"></i>Calculer la croissance
+              </button>
+            </div>
+            
+            <div class="progress-chart mt-4" id="investissementResult" style="display: none;">
+              <div class="chart-placeholder">
+                <h5>Résultats de votre investissement</h5>
+                <div class="mb-3">
+                  <p>Total investi: <span id="total-investi" class="fw-bold">650 000 FCFA</span></p>
+                  <p>Valeur finale: <span id="valeur-finale" class="fw-bold text-success">1 250 000 FCFA</span></p>
+                  <p>Bénéfice: <span id="benefice" class="fw-bold text-success">600 000 FCFA</span></p>
+                </div>
+                <canvas id="investissementChart" height="200"></canvas>
+                <div class="proverb-card mt-3">
+                  <p class="proverb-text">"Même la plus petite graine peut donner un grand arbre."</p>
+                  <p class="proverb-origin">- Proverbe africain</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="niveau" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-bar-chart-steps me-2"></i>Simulation de progression financière</h3>
+            <p>Cette simulation vous montre comment progresser d'un niveau financier à l'autre en appliquant les principes du livre.</p>
+
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Niveau actuel</label>
+                  <select class="form-select" id="niveau-actuel">
+                    <option value="1">1 - Pauvre absolu</option>
+                    <option value="2">2 - Pauvre moderne</option>
+                    <option value="3" selected>3 - Endetté</option>
+                    <option value="4">4 - Survivant</option>
+                    <option value="5">5 - Indépendant</option>
+                    <option value="6">6 - Investisseur</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Revenus mensuels (FCFA)</label>
+                  <input type="number" class="form-control" id="revenus-mensuels" value="150000">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label class="form-label">Revenus passifs actuels (FCFA)</label>
+                  <input type="number" class="form-control" id="revenus-passifs" value="20000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">% épargné chaque mois</label>
+                  <input type="number" class="form-control" id="pourcentage-epargne" value="10">
+                </div>
+              </div>
+            </div>
+            
+            <div class="d-flex justify-content-center mt-4">
+              <button class="btn btn-primary" onclick="simulerProgression()">
+                <i class="bi bi-calculator me-1"></i>Simuler ma progression
+              </button>
+            </div>
+            
+            <div class="progress-chart mt-4" id="progressionResult" style="display: none;">
+              <div class="chart-placeholder">
+                <h5>Votre chemin vers la liberté financière</h5>
+                <div class="mb-3">
+                  <p>Niveau actuel: <span id="niveau-actuel-text" class="fw-bold">3 - Endetté</span></p>
+                  <p>Prochain niveau atteignable dans: <span id="temps-progression" class="fw-bold text-success">18 mois</span></p>
+                  <p>Actions recommandées:</p>
+                  <ul id="actions-recommandees">
+                    <li>Réduire les dettes de consommation</li>
+                    <li>Épargner 20% au lieu de 10%</li>
+                    <li>Investir dans un premier actif (poulailler, recharge mobile)</li>
+                  </ul>
+                </div>
+                <div class="progress mb-3" style="height: 30px;">
+                  <div class="progress-bar bg-danger" role="progressbar" style="width: 15%">Niveau 1</div>
+                  <div class="progress-bar bg-warning" role="progressbar" style="width: 15%">Niveau 2</div>
+                  <div class="progress-bar bg-info" role="progressbar" style="width: 20%">Niveau 3</div>
+                  <div class="progress-bar bg-primary" role="progressbar" style="width: 20%">Niveau 4</div>
+                  <div class="progress-bar bg-success" role="progressbar" style="width: 30%">Niveau 5+</div>
+                </div>
+                <div class="proverb-card">
+                  <p class="proverb-text">"Petit à petit, l'oiseau fait son nid."</p>
+                  <p class="proverb-origin">- Proverbe africain</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="cas-pratiques" class="mb-5">
+      <h2 class="text-center mb-4">Cas pratiques africains</h2>
+      
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-house me-2"></i>
+              <h5 class="mb-0">Gestion d'un commerce familial</h5>
+            </div>
+            <div class="card-body">
+              <p>Un petit commerce alimentaire en famille avec des revenus irréguliers et des tensions sur l'utilisation des bénéfices.</p>
+              <p><strong>Solution :</strong> Séparer comptes perso/pro, épargne automatique, réinvestissement clair.</p>
+              <button class="btn btn-primary btn-sm mt-2" onclick="showCaseStudy('commerce')">
+                <i class="bi bi-journal-text me-1"></i>Voir l'étude de cas
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-tree me-2"></i>
+              <h5 class="mb-0">Valorisation d'un terrain familial</h5>
+            </div>
+            <div class="card-body">
+              <p>Un terrain hérité inutilisé avec des désaccords familiaux sur son utilisation.</p>
+              <p><strong>Solution :</strong> Projet agricole collectif avec parts claires, ou location professionnelle.</p>
+              <button class="btn btn-primary btn-sm mt-2" onclick="showCaseStudy('terrain')">
+                <i class="bi bi-journal-text me-1"></i>Voir l'étude de cas
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-coin me-2"></i>
+              <h5 class="mb-0">Épargne collective (tontine)</h5>
+            </div>
+            <div class="card-body">
+              <p>Une tontine traditionnelle dont les fonds sont toujours utilisés pour des dépenses (mariages, funérailles).</p>
+              <p><strong>Solution :</strong> Tontine d'investissement avec achat d'actifs productifs.</p>
+              <button class="btn btn-primary btn-sm mt-2" onclick="showCaseStudy('tontine')">
+                <i class="bi bi-journal-text me-1"></i>Voir l'étude de cas
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-phone me-2"></i>
+              <h5 class="mb-0">Micro-entreprise de recharge mobile</h5>
+            </div>
+            <div class="card-body">
+              <p>Un jeune diplômé sans emploi veut créer une activité génératrice de revenus avec peu de capital.</p>
+              <p><strong>Solution :</strong> Business plan, réinvestissement des profits, diversification.</p>
+              <button class="btn btn-primary btn-sm mt-2" onclick="showCaseStudy('recharge')">
+                <i class="bi bi-journal-text me-1"></i>Voir l'étude de cas
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outils" class="mb-5">
+      <h2 class="text-center mb-4">Outils pratiques</h2>
+      
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal me-2"></i>
+              <h5 class="mb-0">Modèles à télécharger</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Budget familial
+                  <a href="#" class="badge bg-primary rounded-pill">Télécharger</a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Suivi des actifs
+                  <a href="#" class="badge bg-primary rounded-pill">Télécharger</a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Business plan simple
+                  <a href="#" class="badge bg-primary rounded-pill">Télécharger</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-phone me-2"></i>
+              <h5 class="mb-0">Applications mobiles</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Money Lover - Gestion budget</li>
+                <li class="list-group-item">Wave - Comptabilité simple</li>
+                <li class="list-group-item">Farmcrowdy - Investissement agricole</li>
+                <li class="list-group-item">Cowrywise - Épargne et investissement</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-calculator me-2"></i>
+              <h5 class="mb-0">Calculateurs</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Intérêts d'emprunt</li>
+                <li class="list-group-item">Rentabilité d'un élevage</li>
+                <li class="list-group-item">Retour sur investissement</li>
+                <li class="list-group-item">Seuil de rentabilité</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ressources" class="mb-5">
+      <h2 class="text-center mb-4">Ressources supplémentaires</h2>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Livres recommandés</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">"Père riche, père pauvre" - Robert Kiyosaki</li>
+                <li class="list-group-item">"L'homme le plus riche de Babylone" - George Clason</li>
+                <li class="list-group-item">"Tes pas financiers" - Yves Doumen</li>
+                <li class="list-group-item">"Les secrets d'un esprit millionnaire" - T. Harv Eker</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Formations</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Cours d'éducation financière - ABC Money</li>
+                <li class="list-group-item">Gestion de micro-entreprise - Institut Akendewa</li>
+                <li class="list-group-item">Investissement immobilier en Afrique - Africa Land</li>
+                <li class="list-group-item">Agriculture rentable - Agri Academy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Réseaux et communautés</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <h6>En ligne</h6>
+              <ul>
+                <li>Groupe Facebook "Investisseurs Africains"</li>
+                <li>Forum NairaLand (finance)</li>
+                <li>LinkedIn Group "African Entrepreneurs"</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h6>Rencontres</h6>
+              <ul>
+                <li>Meetup "Finance pour Tous"</li>
+                <li>Salon de la micro-entreprise</li>
+                <li>Conférence "Investir en Afrique"</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <h6>Institutions</h6>
+              <ul>
+                <li>Microfinance locales</li>
+                <li>Chambres de commerce</li>
+                <li>Programmes gouvernementaux</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-0">La Chèvre de ma Mère - Portail d'éducation financière pour l'Afrique</p>
+      <p class="mb-0">© 2023 - Inspiré par l'œuvre de Ricardo Kaniama</p>
+    </div>
+  </footer>
+
+  <!-- Modal for details -->
+  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="detailsModalLabel">Détails</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="detailsModalContent">
+          Chargement...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Show details in modal
+    function showDetails(type) {
+      let title = '';
+      let content = '';
+
+      switch(type) {
+        case 'chevre':
+          title = 'La métaphore de la chèvre';
+          content = `
+            <h5>Exemples concrets de "chèvres" dans les familles africaines :</h5>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header bg-light">
+                    <h6>Actifs sous-utilisés</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul>
+                      <li>Terrains non exploités</li>
+                      <li>Bâtiments inoccupés</li>
+                      <li>Équipements agricoles rarement utilisés</li>
+                      <li>Savoir-faire familial non monétisé</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header bg-light">
+                    <h6>Opportunités manquées</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul>
+                      <li>Refus de vendre pour investir ailleurs</li>
+                      <li>Pas de location des biens</li>
+                      <li>Pas de mise en valeur</li>
+                      <li>Conflits familiaux sur l'utilisation</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="alert alert-info mt-3">
+              <p><strong>Solution :</strong> Identifier ces "chèvres", évaluer leur potentiel, et les faire travailler pour générer des revenus.</p>
+            </div>
+            
+            <div class="proverb-card mt-3">
+              <p class="proverb-text">"Une chèvre attachée ne broute que là où elle est."</p>
+              <p class="proverb-origin">- Proverbe africain</p>
+            </div>
+          `;
+          break;
+        case 'croyances':
+          title = 'Dépasser les croyances limitantes';
+          content = `
+            <h5>Croyances limitantes et comment les transformer :</h5>
+            <table class="table mt-3">
+              <thead>
+                <tr>
+                  <th>Croyance</th>
+                  <th>Impact</th>
+                  <th>Transformation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>"L'argent est mauvais"</td>
+                  <td>Évite la richesse, culpabilité</td>
+                  <td>"L'argent est un outil, c'est son usage qui compte"</td>
+                </tr>
+                <tr>
+                  <td>"On ne vend pas les biens familiaux"</td>
+                  <td>Actifs improductifs</td>
+                  <td>"Un bien qui rapporte honore les ancêtres"</td>
+                </tr>
+                <tr>
+                  <td>"Je ne mérite pas de réussir"</td>
+                  <td>Auto-sabotage</td>
+                  <td>"Ma réussite bénéficiera à toute la famille"</td>
+                </tr>
+                <tr>
+                  <td>"Les riches sont malhonnêtes"</td>
+                  <td>Rejet de la richesse</td>
+                  <td>"Beaucoup de riches créent des emplois et de la valeur"</td>
+                </tr>
+              </tbody>
+            </table>
+            
+            <div class="proverb-card mt-3">
+              <p class="proverb-text">"Celui qui dort sur ses rêves ne se réveille jamais riche."</p>
+              <p class="proverb-origin">- Proverbe africain</p>
+            </div>
+          `;
+          break;
+        case 'commerce':
+          title = 'Cas pratique : Commerce familial';
+          content = `
+            <h5>Situation initiale :</h5>
+            <p>La famille Diallo tient un petit commerce alimentaire à Dakar. Les revenus sont irréguliers et servent à :</p>
+            <ul>
+              <li>Dépenses quotidiennes</li>
+              <li>Frais scolaires des enfants</li>
+              <li>Aides à la famille élargie</li>
+              <li>Dépenses imprévues</li>
+            </ul>
+            <p><strong>Problèmes :</strong> Pas d'épargne, tensions sur l'utilisation de l'argent, pas de croissance du commerce.</p>
+            
+            <h5 class="mt-4">Solutions appliquées :</h5>
+            <ol>
+              <li><strong>Séparation des comptes :</strong> Compte pro pour le commerce, compte perso pour la famille</li>
+              <li><strong>Épargne automatique :</strong> 10% des revenus virés sur un compte inaccessible</li>
+              <li><strong>Budget familial :</strong> Décidé en conseil de famille chaque mois</li>
+              <li><strong>Réinvestissement :</strong> 20% des profits réinvestis dans le commerce</li>
+              <li><strong>Formation :</strong> Cours de gestion pour les enfants impliqués</li>
+            </ol>
+            
+            <h5 class="mt-4">Résultats après 1 an :</h5>
+            <ul>
+              <li>Chiffre d'affaires augmenté de 40%</li>
+              <li>Épargne de 500 000 FCFA accumulée</li>
+              <li>Moins de tensions familiales</li>
+              <li>Achat d'un congélateur pour diversifier</li>
+            </ul>
+            
+            <div class="proverb-card mt-3">
+              <p class="proverb-text">"Aide ton frère à pêcher plutôt qu'à lui donner le poisson."</p>
+              <p class="proverb-origin">- Proverbe africain</p>
+            </div>
+          `;
+          break;
+      }
+
+      document.getElementById('detailsModalLabel').textContent = title;
+      document.getElementById('detailsModalContent').innerHTML = content;
+      var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+      modal.show();
+    }
+
+    function showCaseStudy(caseId) {
+      let title = '';
+      let content = '';
+
+      switch(caseId) {
+        case 'commerce':
+          title = 'Gestion d\'un commerce familial';
+          content = `
+            <h5>Situation initiale :</h5>
+            <p>La famille Diallo tient un petit commerce alimentaire à Dakar depuis 5 ans. Les revenus mensuels varient entre 200 000 et 400 000 FCFA. L'argent est géré de façon informelle :</p>
+            <ul>
+              <li>Pas de séparation entre argent du commerce et argent familial</li>
+              <li>Dépenses prioritaires : nourriture, loyer, école</li>
+              <li>Le reste est utilisé pour aider la famille élargie ou dépenses sociales</li>
+              <li>Aucun réinvestissement dans le commerce</li>
+              <li>Tensions fréquentes sur l'utilisation de l'argent</li>
+            </ul>
+            
+            <h5 class="mt-4">Diagnostic :</h5>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header bg-light">
+                    <h6>Problèmes identifiés</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul>
+                      <li>Pas de visibilité sur les finances</li>
+                      <li>Pas d'épargne pour les imprévus</li>
+                      <li>Commerce stagne depuis 2 ans</li>
+                      <li>Conflits familiaux récurrents</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card mb-3">
+                  <div class="card-header bg-light">
+                    <h6>Opportunités</h6>
+                  </div>
+                  <div class="card-body">
+                    <ul>
+                      <li>Emplacement stratégique du commerce</li>
+                      <li>Clientèle fidèle</li>
+                      <li>3 enfants en âge d'aider</li>
+                      <li>Demande pour produits frais</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <h5 class="mt-4">Plan d'action :</h5>
+            <ol>
+              <li><strong>Séparation des comptes :</strong>
+                <ul>
+                  <li>Ouverture d'un compte bancaire dédié au commerce</li>
+                  <li>Versement fixe de 150 000 FCFA/mois pour les dépenses familiales</li>
+                </ul>
+              </li>
+              <li><strong>Épargne automatique :</strong>
+                <ul>
+                  <li>10% des recettes virés sur un compte épargne bloqué</li>
+                  <li>Objectif : fonds d'urgence de 1 000 000 FCFA</li>
+                </ul>
+              </li>
+              <li><strong>Budget familial :</strong>
+                <ul>
+                  <li>Réunion mensuelle avec tous les adultes</li>
+                  <li>Décision collective sur les dépenses</li>
+                  <li>Plafond pour les aides familiales</li>
+                </ul>
+              </li>
+              <li><strong>Réinvestissement :</strong>
+                <ul>
+                  <li>20% des profits réinvestis chaque trimestre</li>
+                  <li>Premier achat : congélateur pour vendre des produits surgelés</li>
+                  <li>Formation en gestion pour les deux enfants aînés</li>
+                </ul>
+              </li>
+            </ol>
+            
+            <h5 class="mt-4">Résultats :</h5>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Indicateur</th>
+                    <th>Avant</th>
+                    <th>Après 1 an</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Chiffre d'affaires mensuel</td>
+                    <td>300 000 FCFA</td>
+                    <td>420 000 FCFA (+40%)</td>
+                  </tr>
+                  <tr>
+                    <td>Épargne accumulée</td>
+                    <td>0 FCFA</td>
+                    <td>500 000 FCFA</td>
+                  </tr>
+                  <tr>
+                    <td>Nombre de produits</td>
+                    <td>50</td>
+                    <td>85 (+70%)</td>
+                  </tr>
+                  <tr>
+                    <td>Conflits familiaux</td>
+                    <td>3-4/mois</td>
+                    <td>1/mois</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="proverb-card mt-3">
+              <p class="proverb-text">"Qui veut aller vite marche seul, qui veut aller loin marche avec les autres."</p>
+              <p class="proverb-origin">- Proverbe africain</p>
+            </div>
+          `;
+          break;
+      }
+
+      document.getElementById('detailsModalLabel').textContent = title;
+      document.getElementById('detailsModalContent').innerHTML = content;
+      var modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+      modal.show();
+    }
+
+    // Simulation functions
+    function calculerBudget() {
+      const salaire = parseFloat(document.getElementById('salaire').value) || 0;
+      const revenusSecondaires = parseFloat(document.getElementById('revenus-secondaires').value) || 0;
+      const revenusActifs = parseFloat(document.getElementById('revenus-actifs').value) || 0;
+      
+      const necessites = parseFloat(document.getElementById('necessites').value) || 0;
+      const famille = parseFloat(document.getElementById('famille').value) || 0;
+      const personnel = parseFloat(document.getElementById('personnel').value) || 0;
+      
+      const totalRevenus = salaire + revenusSecondaires + revenusActifs;
+      const totalDepenses = necessites + famille + personnel;
+      const epargne = totalRevenus - totalDepenses;
+      
+      // Update results
+      document.getElementById('total-revenus').textContent = totalRevenus.toLocaleString('fr-FR') + ' FCFA';
+      document.getElementById('total-depenses').textContent = totalDepenses.toLocaleString('fr-FR') + ' FCFA';
+      document.getElementById('epargne').textContent = epargne.toLocaleString('fr-FR') + ' FCFA';
+      
+      // Calculate percentages
+      const pctEpargne = (epargne / totalRevenus) * 100;
+      const pctNecessites = (necessites / totalRevenus) * 100;
+      const pctFamille = (famille / totalRevenus) * 100;
+      const pctPersonnel = (personnel / totalRevenus) * 100;
+      
+      // Update progress bars
+      document.getElementById('epargne-bar').style.width = pctEpargne + '%';
+      document.getElementById('epargne-bar').textContent = `Épargne ${pctEpargne.toFixed(0)}%`;
+      
+      document.getElementById('necessites-bar').style.width = pctNecessites + '%';
+      document.getElementById('necessites-bar').textContent = `Nécessités ${pctNecessites.toFixed(0)}%`;
+      
+      document.getElementById('famille-bar').style.width = pctFamille + '%';
+      document.getElementById('famille-bar').textContent = `Famille ${pctFamille.toFixed(0)}%`;
+      
+      document.getElementById('personnel-bar').style.width = pctPersonnel + '%';
+      document.getElementById('personnel-bar').textContent = `Personnel ${pctPersonnel.toFixed(0)}%`;
+      
+      // Show results
+      document.getElementById('budgetResult').style.display = 'block';
+    }
+
+    function calculerInvestissement() {
+      const capitalInitial = parseFloat(document.getElementById('capital-initial').value) || 0;
+      const epargneMensuelle = parseFloat(document.getElementById('epargne-mensuelle').value) || 0;
+      const tauxInteret = parseFloat(document.getElementById('taux-interet').value) || 0;
+      const duree = parseFloat(document.getElementById('duree').value) || 0;
+      
+      const tauxMensuel = tauxInteret / 100 / 12;
+      const nbMois = duree * 12;
+      
+      // Calculate future value
+      let futureValue = capitalInitial * Math.pow(1 + tauxMensuel, nbMois);
+      futureValue += epargneMensuelle * (Math.pow(1 + tauxMensuel, nbMois) - 1) / tauxMensuel * (1 + tauxMensuel);
+      
+      const totalInvesti = capitalInitial + (epargneMensuelle * nbMois);
+      const benefice = futureValue - totalInvesti;
+      
+      // Update results
+      document.getElementById('total-investi').textContent = totalInvesti.toLocaleString('fr-FR') + ' FCFA';
+      document.getElementById('valeur-finale').textContent = futureValue.toLocaleString('fr-FR', {maximumFractionDigits: 0}) + ' FCFA';
+      document.getElementById('benefice').textContent = benefice.toLocaleString('fr-FR', {maximumFractionDigits: 0}) + ' FCFA';
+      
+      // Create chart
+      createInvestmentChart(capitalInitial, epargneMensuelle, tauxInteret, duree);
+      
+      // Show results
+      document.getElementById('investissementResult').style.display = 'block';
+    }
+
+    function createInvestmentChart(capitalInitial, epargneMensuelle, tauxInteret, duree) {
+      const ctx = document.getElementById('investissementChart').getContext('2d');
+      
+      const labels = [];
+      const dataInvesti = [];
+      const dataValeur = [];
+      
+      const tauxMensuel = tauxInteret / 100 / 12;
+      let investiTotal = capitalInitial;
+      let valeurTotal = capitalInitial;
+      
+      for (let year = 1; year <= duree; year++) {
+        labels.push(`Année ${year}`);
+        
+        // Calculate for each month of the year
+        for (let month = 1; month <= 12; month++) {
+          investiTotal += epargneMensuelle;
+          valeurTotal = valeurTotal * (1 + tauxMensuel) + epargneMensuelle * (1 + tauxMensuel);
+        }
+        
+        dataInvesti.push(investiTotal);
+        dataValeur.push(valeurTotal);
+      }
+      
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Total investi',
+              data: dataInvesti,
+              borderColor: '#3498db',
+              backgroundColor: 'rgba(52, 152, 219, 0.1)',
+              fill: true
+            },
+            {
+              label: 'Valeur investissement',
+              data: dataValeur,
+              borderColor: '#27ae60',
+              backgroundColor: 'rgba(39, 174, 96, 0.1)',
+              fill: true
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return value.toLocaleString('fr-FR') + ' FCFA';
+                }
+              }
+            }
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (label) label += ': ';
+                  label += context.raw.toLocaleString('fr-FR') + ' FCFA';
+                  return label;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function simulerProgression() {
+      const niveauActuel = parseInt(document.getElementById('niveau-actuel').value);
+      const revenusMensuels = parseFloat(document.getElementById('revenus-mensuels').value) || 0;
+      const revenusPassifs = parseFloat(document.getElementById('revenus-passifs').value) || 0;
+      const pourcentageEpargne = parseFloat(document.getElementById('pourcentage-epargne').value) || 0;
+      
+      // Calculate time to next level
+      let tempsProgression = '';
+      let actions = [];
+      
+      switch(niveauActuel) {
+        case 1: // Pauvre absolu
+          tempsProgression = '6 mois';
+          actions = [
+            "Commencer à noter toutes les dépenses",
+            "Épargner ne serait-ce que 5% des revenus",
+            "Identifier des micro-opportunités de revenus"
+          ];
+          break;
+        case 2: // Pauvre moderne
+          tempsProgression = '12 mois';
+          actions = [
+            "Épargner systématiquement 10% des revenus",
+            "Éviter les dettes de consommation",
+            "Créer une source de revenus secondaire"
+          ];
+          break;
+        case 3: // Endetté
+          tempsProgression = '18 mois';
+          actions = [
+            "Réduire les dettes de consommation",
+            "Augmenter l'épargne à 20%",
+            "Investir dans un premier actif (poulailler, recharge mobile)"
+          ];
+          break;
+        // Add other cases...
+      }
+      
+      // Update results
+      document.getElementById('niveau-actuel-text').textContent = `${niveauActuel} - ${getNiveauName(niveauActuel)}`;
+      document.getElementById('temps-progression').textContent = tempsProgression;
+      
+      const actionsList = document.getElementById('actions-recommandees');
+      actionsList.innerHTML = '';
+      actions.forEach(action => {
+        const li = document.createElement('li');
+        li.textContent = action;
+        actionsList.appendChild(li);
+      });
+      
+      // Show results
+      document.getElementById('progressionResult').style.display = 'block';
+    }
+
+    function getNiveauName(niveau) {
+      const niveaux = {
+        1: "Pauvre absolu",
+        2: "Pauvre moderne",
+        3: "Endetté",
+        4: "Survivant",
+        5: "Indépendant",
+        6: "Investisseur",
+        7: "Riche/Libre"
+      };
+      return niveaux[niveau] || "";
+    }
+
+    function startLevelTest() {
+      alert("Cette fonctionnalité serait implémentée avec un quiz complet dans une version finale.");
+      // Redirection vers une page de quiz détaillée
+    }
+  </script>
+</body>
+</html>
