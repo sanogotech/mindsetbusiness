@@ -1,4 +1,5 @@
-# 📚 TOP 21 Livres pour un **Mindset Game Changer & Growth**
+
+# 📚 TOP 25 Livres pour un Mindset “Game Changer & Growth”
 
 ## 1️⃣ **Mindset & Psychologie de la réussite**
 
@@ -91,4 +92,49 @@ Ces **21 livres couvrent 7 piliers** essentiels :
 
 👉 Lire ces ouvrages, c’est comme avoir une **formation complète en growth mindset et leadership de vie**.
 
+
+---
+
+## ✅ Ajouts pour compléter la liste
+
+22. **“Niaque” — David Laroche**
+    👉 Développer la détermination, le courage et l’action massive pour atteindre ses objectifs.
+
+23. **“Grit: The Power of Passion and Perseverance” — Angela Duckworth**
+    👉 La persévérance et la passion comme clés de réussite à long terme.
+
+24. **“The Miracle Morning” — Hal Elrod**
+    👉 Routine matinale pour booster l’énergie, la discipline et la productivité.
+
+25. **“Principles: Life and Work” — Ray Dalio**
+    👉 Les principes pour prendre de meilleures décisions et construire une vie structurée.
+
+---
+
+# ⏱ Plan de lecture pratique : 4 semaines x 4h/semaine
+
+**Objectif** : intégrer les concepts, réfléchir à son mindset et passer à l’action.
+
+| Semaine | Livres à lire / focus                                           | Objectif pratique (1h par livre)                                                                                                 |
+| ------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| 1       | Mindset, Atomic Habits, Niake                                   | Identifier ses croyances limitantes, commencer à créer des routines positives, définir un objectif “niaque”                      |
+| 2       | Deep Work, The One Thing, Grit                                  | Expérimenter la concentration profonde, prioriser son action, tester la persévérance sur un mini-projet                          |
+| 3       | Leaders Eat Last, Dare to Lead, Emotional Intelligence 2.0      | Analyser ses relations, travailler l’intelligence émotionnelle et le leadership autour de ses proches ou collègues               |
+| 4       | Start With Why, The First 20 Hours, Miracle Morning, Principles | Clarifier sa vision, se fixer un plan d’action d’apprentissage rapide, créer une routine quotidienne et des principes personnels |
+
+**Méthode pratique pour chaque session de 4h** :
+
+1. **Lecture active** (2h) : surligner idées clés, noter questions et réflexions.
+2. **Synthèse et mindmap** (1h) : visualiser les concepts et les connexions.
+3. **Action / exercice concret** (1h) : appliquer une idée immédiatement dans la vie ou le travail.
+
+---
+
+💡 **Astuce bonus** : tu peux combiner lecture + carnet de “niaque” : chaque jour noter
+
+* ✅ 1 action audacieuse faite
+* 💪 1 défi surmonté
+* 🌟 1 idée à expérimenter
+
+---
 
