@@ -1,4 +1,3 @@
-
 # 💡 **La vraie richesse**, c’est **augmenter ses revenus sans augmenter ses dépenses fixes**.
 
 ##  Synthese
