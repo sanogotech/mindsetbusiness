@@ -2,15 +2,15 @@
 
 ##  Synthese
 
-🧭 Applique la règle **50/30/20** : 50 % besoins, 30 % plaisirs, 20 % épargne/investissements.
-💳 Sépare tes comptes (fixe, plaisir, épargne).
-📈 Garde le même style de vie quand ton revenu augmente.
-💼 Crée 3 sources de revenus mini.
-📚 Forme-toi pour augmenter ta valeur.
-💰 Épargne automatiquement dès que tu reçois ton salaire.
-🚫 Évite les dettes inutiles.
-🏗️ Investis tôt, même peu.
-🔥 Vise la liberté : que ton argent travaille pendant que tu dors.
+- 🧭 Applique la règle **50/30/20** : 50 % besoins, 30 % plaisirs, 20 % épargne/investissements.
+- 💳 Sépare tes comptes (fixe, plaisir, épargne).
+- 📈 Garde le même style de vie quand ton revenu augmente.
+- 💼 Crée 3 sources de revenus mini.
+- 📚 Forme-toi pour augmenter ta valeur.
+- 💰 Épargne automatiquement dès que tu reçois ton salaire.
+- 🚫 Évite les dettes inutiles.
+- 🏗️ Investis tôt, même peu.
+- 🔥 Vise la liberté : que ton argent travaille pendant que tu dors.
 
 
 # > 💡 **"La richesse, ce n’est pas gagner plus, c’est garder plus — en augmentant ses revenus sans augmenter ses dépenses fixes."**
